@@ -124,21 +124,3 @@ $ sudo chkconfig --del mysql
 ```
 然后按照安装mysql的步骤再安装一次即可。
 
-
-Q2
----
-[增加php模块的方法](http://blog.csdn.net/grunmin/article/details/9468639)
-像wecenter之类需要服务器支持mysqli或者pdo模块，然而在上述安装过程中并无相关方面的配置，因此可以通过phpize来增加所需模块。  
-以pdo为例，首先
-```
-$ cd /usr/local/php-5.***/ext/pdo  #进入源码包的pdo目录
-$ /usr/local/php/bin/phpize  #运行phpize命令
-$ ./configure --enable-pdo --with-php-config=/usr/local/php/bin/php-config
-$ make
-$ sudo make install
-```
-成功后可以看到创建的pdo.so文件位于/usr/local/php/lib/php/extension/no-debug-non-zts-*******/,复制pdo.so到/usr/local/php/ext下(没有目录则创建一个)
-```
-$ sudo vi /usr/local/php/lib/php.ini
-```
-在加载模块(一堆extension处 第980行)加上一行extension=pdo.so 修改extension_dir="/usr/local/php/ext" (第819行),重启apache即可。
