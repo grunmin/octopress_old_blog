@@ -220,7 +220,7 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 </span><span class='line'>$ sudo ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/local/mysql
 </span><span class='line'>$ make
 </span><span class='line'>$ sudo make install
-</span><span class='line'>$ sudo cp /usr/local/php___/php.ini-__ /usr/local/lib/php.ini  </span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>$ sudo cp /usr/local/php___/php.ini-__ /usr/local/php/lib/php.ini  </span></code></pre></td></tr></table></div></figure>
 
 
 <p>修改httpd.conf 添加AddType application/x-httpd-php .php<br/>
@@ -260,6 +260,32 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 
 
 <p>然后按照安装mysql的步骤再安装一次即可。</p>
+
+<h2>Q2</h2>
+
+<p><a href="http://blog.51yip.com/php/177.html">增加php模块的方法</a>
+像wecenter之类需要服务器支持mysqli或者pdo模块，然而在上述安装过程中并无相关方面的配置，因此可以通过phpize来增加所需模块。<br/>
+以pdo为例，首先</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /usr/local/php-5.***/ext/pdo  #进入源码包的pdo目录
+</span><span class='line'>$ /usr/local/php/bin/phpize  #运行phpize命令
+</span><span class='line'>$ ./configure --enable-pdo --with-php-config=/usr/local/php/bin/php-config
+</span><span class='line'>$ make
+</span><span class='line'>$ sudo make install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>成功后可以看到创建的pdo.so文件位于/usr/local/php/lib/php/extension/no-debug-non-zts-*******/,复制pdo.so到/usr/local/php/ext下(没有目录则创建一个)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo vi /usr/local/php/lib/php.ini</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在加载模块(一堆extension处 第980行)加上一行extension=pdo.so 修改extension_dir=&ldquo;/usr/local/php/ext&rdquo; (第819行),重启apache即可。</p>
 </div>
 
 
