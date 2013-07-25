@@ -260,32 +260,6 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 
 
 <p>然后按照安装mysql的步骤再安装一次即可。</p>
-
-<h2>Q2</h2>
-
-<p><a href="http://blog.csdn.net/grunmin/article/details/9468639">增加php模块的方法</a>
-像wecenter之类需要服务器支持mysqli或者pdo模块，然而在上述安装过程中并无相关方面的配置，因此可以通过phpize来增加所需模块。<br/>
-以pdo为例，首先</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /usr/local/php-5.***/ext/pdo  #进入源码包的pdo目录
-</span><span class='line'>$ /usr/local/php/bin/phpize  #运行phpize命令
-</span><span class='line'>$ ./configure --enable-pdo --with-php-config=/usr/local/php/bin/php-config
-</span><span class='line'>$ make
-</span><span class='line'>$ sudo make install</span></code></pre></td></tr></table></div></figure>
-
-
-<p>成功后可以看到创建的pdo.so文件位于/usr/local/php/lib/php/extension/no-debug-non-zts-*******/,复制pdo.so到/usr/local/php/ext下(没有目录则创建一个)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo vi /usr/local/php/lib/php.ini</span></code></pre></td></tr></table></div></figure>
-
-
-<p>在加载模块(一堆extension处 第980行)加上一行extension=pdo.so 修改extension_dir=&ldquo;/usr/local/php/ext&rdquo; (第819行),重启apache即可。</p>
 </div>
 
 
@@ -328,6 +302,8 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
         <a class="basic-alignment left" href="/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/" title="Previous Post: 为知笔记使用笔记(1)-启动方式">&laquo; 为知笔记使用笔记(1)-启动方式</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/" title="Next Post: Fedora安装wecenter笔记">Fedora安装wecenter笔记 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -339,6 +315,10 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/">Fedora安装wecenter笔记</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/">Fedora安装lamp环境笔记</a>
