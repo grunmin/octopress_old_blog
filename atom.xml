@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-07-25T14:27:03+08:00</updated>
+  <updated>2013-07-25T14:38:21+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -188,7 +188,7 @@
 
 <h2>Q2</h2>
 
-<p><a href="http://blog.51yip.com/php/177.html">增加php模块的方法</a>
+<p><a href="http://blog.csdn.net/grunmin/article/details/9468639">增加php模块的方法</a>
 像wecenter之类需要服务器支持mysqli或者pdo模块，然而在上述安装过程中并无相关方面的配置，因此可以通过phpize来增加所需模块。<br/>
 以pdo为例，首先</p>
 
