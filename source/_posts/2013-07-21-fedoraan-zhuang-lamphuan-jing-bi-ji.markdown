@@ -77,7 +77,7 @@ $ sudo /usr/local/mysql/bin/mysqlshow
 $ sudo /usr/local/mysql/bin/mysqladmin -u root -p password [password]
 $ sudo /usr/local/mysql/bin/mysql -u root -p
 ```
-此时进入mysql命令界面  
+[password]可以不输入，上面两个命令是修改密码用，此时进入mysql命令界面  
 ```
 mysql> delete from mysql.user where host='localhost' and user='';
 mysql> flush privileges;
@@ -102,4 +102,24 @@ sudo /usr/local/apache2/bin/apachectl restart
 ```
 tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs
 ```
-即可
+到此全部完成
+
+
+
+
+
+Q1
+---
+如果测试mysql时没有显示版本信息等界面，而是显示Can't connect to local MySQL server through socket '/tmp/mysql.sock'(2)则极有可能是mysql没有安装成功。解决办法是删除系统自带的mysql服务，
+```
+$ rpm -qa | grep mysql
+```
+若有输出结果，则直接用rpm -e删除之，再输入
+```
+$ chkconfig --list | grep -i mysql
+```
+检查mysql服务，有的话再删除之
+```
+$ sudo chkconfig --del mysql
+```
+然后按照安装mysql的步骤再安装一次即可。
