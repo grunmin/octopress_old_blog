@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-07-21T17:39:44+08:00</updated>
+  <updated>2013-07-25T12:37:15+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -126,7 +126,7 @@
 </span><span class='line'>$ sudo /usr/local/mysql/bin/mysql -u root -p</span></code></pre></td></tr></table></div></figure>
 
 
-<p>此时进入mysql命令界面</p>
+<p>[password]可以不输入，上面两个命令是修改密码用，此时进入mysql命令界面</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -162,7 +162,29 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs</span></code></pre></td></tr></table></div></figure>
 
 
-<p>即可</p>
+<p>到此全部完成</p>
+
+<h2>Q1</h2>
+
+<p>如果测试mysql时没有显示版本信息等界面，而是显示Can&rsquo;t connect to local MySQL server through socket &lsquo;/tmp/mysql.sock&rsquo;(2)则极有可能是mysql没有安装成功。解决办法是删除系统自带的mysql服务，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rpm -qa | grep mysql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>若有输出结果，则直接用rpm -e删除之，再输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ chkconfig --list | grep -i mysql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>检查mysql服务，有的话再删除之</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo chkconfig --del mysql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后按照安装mysql的步骤再安装一次即可。</p>
 ]]></content>
   </entry>
   
