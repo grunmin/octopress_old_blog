@@ -19,8 +19,14 @@
         <lastmod>2013-08-02T00:23:23+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/
+        </loc>
+        <lastmod>2013-08-05T11:32:23+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://grunmin.github.io/blog/archives/</loc>
-        <lastmod>2013-08-02T00:23:23+08:00</lastmod>
+        <lastmod>2013-08-05T11:32:23+08:00</lastmod>
     </url>
     <url>
         <loc>http://grunmin.github.io/robots.txt</loc>
@@ -28,6 +34,6 @@
     </url>
     <url>
         <loc>http://grunmin.github.io/</loc>
-        <lastmod>2013-08-02T00:23:23+08:00</lastmod>
+        <lastmod>2013-08-05T11:32:23+08:00</lastmod>
     </url>
 </urlset>
