@@ -1,0 +1,289 @@
+---
+layout: post
+title: "RHCE note 9"
+date: 2013-11-03 23:20
+comments: true
+categories: 
+---
+##unit 2
+###配置sudoers
+文件/etc/sudoers是只读文件，保存时需加！强制保存.  
+<!-- more -->
+实例：
+```
+[root@desktop31 ~]# ll /etc/sudoers
+-r--r-----. 1 root root 4002 Mar  2  2012 /etc/sudoers
+```
+
+vi sudoers  
+
+1. sudoers语法规则
+```
+user1	machine=(user2)	command
+```  
+实例：
+```
+[root@desktop31 ~]# cat /etc/sudoers | grep -v ^#
+root	ALL=(ALL) 	ALL
+```
+说明:root能在所有机器上以所有用户的身份执行任何命令。
+
+2. 授予组成员访问任何命令的权限
+```
+%groupname	ALL=	ALL
+```
+实例：
+```
+[root@desktop31 ~]# cat /etc/sudoers | grep %wheel
+%wheel	ALL=(ALL)	ALLj
+```
+说明：wheel组能在所有机器上以所有用户身份执行任何命令。
+
+3. 无需提供密码的设置
+```
+user	machine=(user2)	NOPASSWD: ALL
+```
+实例：
+```
+user1   ALL=(root)      NOPASSWD: ALL
+```
+
+4. 授予多名用户具有sudo权限
+```
+User_Alias	username = user1, user2, user3
+username	machine=(user)	ALL
+```
+实例：
+```
+User_Alias ADMINS = user01, user001
+ADMIN   ALL=(ALL)       NOPASSWD: ALL
+```
+
+5. 设置用户对特定命令列表具有sudo权限
+```
+Cmnd_Alias type = command, command
+username	ALL=(ALL)	type
+```
+实例：
+```
+Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount, /bin/umount
+ADMINS  ALL=(ALL)       NOPASSWD: STORAGE
+```
+
+
+###Kerberos配置
+####安装
+```
+yum groupinstall -y directory-client
+yum install -y openldap-clients
+yum install -y krb5-workstation
+```
+
+####配置
+```
+authconfig --enableldap --ldapserver=instructor.example.com --enableldaptls --ldaploadcacert=ftp://instructor.example.com/pub/example-ca.crt --ldapbasedn="dc=example,dc=com" --disableldapauth --enablekrb5 --krb5kdc=instructor.example.com --krb5adminserver=instructor.example.com --krb5realm=EXAMPLE.COM --enablesssd --enablesssdauth --update
+```
+```
+--enablceldaptls 开启tls
+--ldaploadcacert derberos证书下载目录
+--ldapbasedn 基准dn
+--disableldapauth 禁止ldap认证
+--krb5realm 域名
+--enablesssd --enablesssdauth 开启sssd认证
+```
+
+####测试配置：
+```
+getent passwd ldapuserX
+ssh ldapuserX@serverX
+```
+实例：
+```
+[root@demo cacerts]# getent passwd ldapuser1
+ldapuser1:*:1701:1701:LDAP Test User 1:/home/guests/ldapuser1:/bin/bash
+[root@demo cacerts]# ssh ldapuser1@serverX
+ldapuser1@serverX's password: kerberos
+```
+
+
+##unit 3
+###Bash 编程
+- 包含bash命令的文件第一行应为：
+\#!/bin/bash
+
+- 查看环境变量：  
+`echo $PATH`  
+`set`  
+`env`  
+实例：
+```
+[root@desktop31 ~]# echo $PATH
+/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/root/bin
+```
+
+- 变量赋值,使用
+str=value
+$str 或者 ${str}
+
+- 添加目录到环境变量：  
+`PATH=$PATH:path`  
+实例：  
+`PATH=$PATH:/root`
+
+- 创建全局变量：  
+`export $NAME`
+
+- 命令替换  
+`$( shell command)`  
+\`shell command\`  
+实例1：
+```
+touch datafile.$(id -un)
+[root@desktop31 ~]# ls | grep datafile
+datafile.root
+```
+实例2：
+```
+[root@desktop31 ~]# echo $TODAY
+[root@desktop31 ~]# TODAY=`date +%Y-%m-%d`
+[root@desktop31 ~]# echo $TODAY
+2013-10-26
+```
+
+- 弱引用，强引用和转义
+
+- bash编程实例：
+```
+添加用户  
+#!/bin/bash
+if grep "^$1:" /etc/passwd ; then
+	echo "$1 is exist"
+else
+	useradd $1;
+	echo redhat |passwd --stdin $1;
+fi
+```  
+```
+查看网络主机
+#!/bin/bash
+read -p "Please input a ip addr:" IP
+ping -c2 $IP > /dev/null 2>&1
+if [ $? -eq 0 ];then
+	echo "$IP is up..."
+else
+	echo "$IP is down..."
+fi
+```
+```
+无题……
+#!/bin/bash
+read -p "Please choice y/n" YN
+if [ $YN == y -o $YN == Y  -o $YN == 'yes' ]; then
+	echo "Continue..."
+elif [ $YN == n -o $YN == N -o $YN == 'no' ]; then
+	exit 1
+else
+	echo "other"
+fi
+```
+```
+检查服务运行状态
+#!/bin/bash
+read -p "Plese input a service name:" SN
+SERVICE=$(netstat -anutlp |grep $SN)
+if test -n "$SERVICE" ; then
+	echo "$SN is running..."
+else
+	echo "$SN is down..."
+fi
+```
+```
+添加用户
+#!/bin/bash
+for Name in usera userb userc a b c;
+do
+        if grep "^$Name:" /etc/passwd > /dev/null 2>&1; then
+                echo "User exist!";
+        else
+                useradd $Name;
+                echo "Add user $Name succeed!";
+                echo "redhat" | passwd --stdin $Name > /dev/null 2>&1;
+        fi
+done
+```
+```
+删除用户
+#!/bin/bash
+for Name in usera userb userc a b c;
+do
+        if grep "^$Name:" /etc/passwd > /dev/null 2>&1 ; then
+                userdel $Name;
+                rm -rf /home/$Name;
+                rm -rf /var/mail/$Name;
+                echo "user $Name delete succeed!";
+        fi
+done
+```
+- 比较文件内容diff  
+diff -Naur file1 file2 > patchfile  可以制作补丁文件
+
+- 补丁命令patch
+实例：
+```
+# patch issue patchfile
+patching file issue
+# patch -b < patch file
+patching file hosts
+patching file network
+```
+- 过滤 grep
+几个需要记住的参数：  
+-i  不区分大小写  
+-v 返回不包含特定字符的行  
+
+- 剪切cut  
+-f 指定第几个字段  
+-d 分隔符  
+实例：
+```
+cut -f3 -d: /etc/hosts //取出hosts文件中以:为分隔符的第3个字段
+[root@demo ~]# ip addr |grep "inet " |cut -d" " -f6 |cut -d/ -f1
+127.0.0.1
+192.168.0.250
+```
+
+- tail 和 head  
+tail显示文件末尾10行（默认）  
+head显示文件开头10行（默认）  
+均可-n 参数后面接数字更改输出行数  
+tail -f可以持续显示文件的更新，例如  
+tail -f /var/log/messages  
+系统管理员常用  
+
+- wc显示文件信息  
+-l 行数  
+-w 字数  
+-c 字节数 
+-m 字符数  
+  
+- 排序sort
+
+- 取唯一uniq
+
+###默认用户属性
+在/etc/login.defs及/etc/default/useradd中定义  
+chage命令可以调整属性
+
+##unit 4
+gpg的使用  
+  + 流程：  
+  由user1产生密钥对，公钥导出给需要向user1传送文件的主机user2。  
+  gpg --gen-key   
+  gpg -K 查看私钥  
+  gpg -k 查看公钥  
+  gpg --export --armor key-id -o > file.key  
+  user2导入公钥加密文件，传送给user1。  
+  gpg --import file.key  
+  gpg -e -armor -r key-id file  
+  user1运用私钥解密文件，用私钥前需输入密码。  
+  gpg -d file > file_without_encrypt  
