@@ -597,19 +597,14 @@ lvscan,lvdisplay
   Block device           253:5
 [root@demo ~]# df -h
 Filesystem            Size  Used Avail Use% Mounted on
-/dev/mapper/vgsrv-root
-                      4.0G  2.6G  1.3G  68% /
+/dev/mapper/vgsrv-root 4.0G  2.6G  1.3G  68% /
 tmpfs                 499M   88K  499M   1% /dev/shm
 /dev/vda1             248M   33M  203M  14% /boot
-/dev/mapper/vgsrv-common
-                      124M  5.6M  113M   5% /common
-/dev/mapper/vgsrv-home
-                      248M   46M  191M  20% /home
-/dev/mapper/vgsrv-shrink
-                      310M   11M  284M   4% /shrink
+/dev/mapper/vgsrv-common 124M  5.6M  113M   5% /common
+/dev/mapper/vgsrv-home 248M   46M  191M  20% /home
+/dev/mapper/vgsrv-shrink 310M   11M  284M   4% /shrink
 /dev/vda5              98M  5.6M   87M   6% /togogo
-/dev/mapper/togogovg-lv01
-                      148M  5.6M  135M   4% /lv01
+/dev/mapper/togogovg-lv01 148M  5.6M  135M   4% /lv01
 [root@demo ~]# resize2fs /dev/mapper/togogovg-lv01 
 resize2fs 1.41.12 (17-May-2010)
 Filesystem at /dev/mapper/togogovg-lv01 is mounted on /lv01; on-line resizing required
@@ -618,19 +613,14 @@ Performing an on-line resize of /dev/mapper/togogovg-lv01 to 307200 (1k) blocks.
 The filesystem on /dev/mapper/togogovg-lv01 is now 307200 blocks long.
 [root@demo ~]# df -h
 Filesystem            Size  Used Avail Use% Mounted on
-/dev/mapper/vgsrv-root
-                      4.0G  2.6G  1.3G  68% /
+/dev/mapper/vgsrv-root 4.0G  2.6G  1.3G  68% /
 tmpfs                 499M   88K  499M   1% /dev/shm
 /dev/vda1             248M   33M  203M  14% /boot
-/dev/mapper/vgsrv-common
-                      124M  5.6M  113M   5% /common
-/dev/mapper/vgsrv-home
-                      248M   46M  191M  20% /home
-/dev/mapper/vgsrv-shrink
-                      310M   11M  284M   4% /shrink
+/dev/mapper/vgsrv-common 124M  5.6M  113M   5% /common
+/dev/mapper/vgsrv-home 248M   46M  191M  20% /home
+/dev/mapper/vgsrv-shrink 310M   11M  284M   4% /shrink
 /dev/vda5              98M  5.6M   87M   6% /togogo
-/dev/mapper/togogovg-lv01
-                      291M  6.1M  270M   3% /lv01
+/dev/mapper/togogovg-lv01  291M  6.1M  270M   3% /lv01
 [root@demo ~]# pvscan
   PV /dev/vda6   VG togogovg   lvm2 [196.00 MiB / 0    free]
   PV /dev/vda7   VG togogovg   lvm2 [296.00 MiB / 192.00 MiB free]
