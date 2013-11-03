@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-11-03T23:25:11+08:00</updated>
+  <updated>2013-11-03T23:29:31+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -1504,101 +1504,135 @@ lvscan,lvdisplay<br/>
 </span><span class='line'>  VG UUID               fd7wDW-R1Ov-8oQh-iyvN-tBur-RMoG-VcYQ5d</span></code></pre></td></tr></table></div></figure>
 
 
-<p>3、扩展逻辑卷
-&#8220;`
-[root@demo ~]# lvextend -L +148M /dev/mapper/togogovg-lv01
-  Extending logical volume lv01 to 300.00 MiB
-  Logical volume lv01 successfully resized
-[root@demo ~]# lvdisplay /dev/mapper/togogovg-lv01
-  &mdash;&ndash; Logical volume &mdash;&ndash;
-  LV Path                /dev/togogovg/lv01
-  LV Name                lv01
-  VG Name                togogovg
-  LV UUID                BMsz8a-ye5Q-77oH-rm5y-O3I6-moKB-YeOXmP
-  LV Write Access        read/write
-  LV Creation host, time demo.example.com, 2013-09-15 14:56:43 -0400
-  LV Status              available
-  # open                 1
-  LV Size                300.00 MiB
-  Current LE             75
-  Segments               2
-  Allocation             inherit
-  Read ahead sectors     auto
-  &ndash; currently set to     256
-  Block device           253:5
-[root@demo ~]# df -h
-Filesystem            Size  Used Avail Use% Mounted on
-/dev/mapper/vgsrv-root</p>
+<p>3、扩展逻辑卷</p>
 
-<pre><code>                  4.0G  2.6G  1.3G  68% /
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# lvextend -L +148M /dev/mapper/togogovg-lv01 
+</span><span class='line'>  Extending logical volume lv01 to 300.00 MiB
+</span><span class='line'>  Logical volume lv01 successfully resized
+</span><span class='line'>[root@demo ~]# lvdisplay /dev/mapper/togogovg-lv01
+</span><span class='line'>  --- Logical volume ---
+</span><span class='line'>  LV Path                /dev/togogovg/lv01
+</span><span class='line'>  LV Name                lv01
+</span><span class='line'>  VG Name                togogovg
+</span><span class='line'>  LV UUID                BMsz8a-ye5Q-77oH-rm5y-O3I6-moKB-YeOXmP
+</span><span class='line'>  LV Write Access        read/write
+</span><span class='line'>  LV Creation host, time demo.example.com, 2013-09-15 14:56:43 -0400
+</span><span class='line'>  LV Status              available
+</span><span class='line'>  # open                 1
+</span><span class='line'>  LV Size                300.00 MiB
+</span><span class='line'>  Current LE             75
+</span><span class='line'>  Segments               2
+</span><span class='line'>  Allocation             inherit
+</span><span class='line'>  Read ahead sectors     auto
+</span><span class='line'>  - currently set to     256
+</span><span class='line'>  Block device           253:5
+</span><span class='line'>[root@demo ~]# df -h
+</span><span class='line'>Filesystem            Size  Used Avail Use% Mounted on
+</span><span class='line'>/dev/mapper/vgsrv-root
+</span><span class='line'>                      4.0G  2.6G  1.3G  68% /
+</span><span class='line'>tmpfs                 499M   88K  499M   1% /dev/shm
+</span><span class='line'>/dev/vda1             248M   33M  203M  14% /boot
+</span><span class='line'>/dev/mapper/vgsrv-common
+</span><span class='line'>                      124M  5.6M  113M   5% /common
+</span><span class='line'>/dev/mapper/vgsrv-home
+</span><span class='line'>                      248M   46M  191M  20% /home
+</span><span class='line'>/dev/mapper/vgsrv-shrink
+</span><span class='line'>                      310M   11M  284M   4% /shrink
+</span><span class='line'>/dev/vda5              98M  5.6M   87M   6% /togogo
+</span><span class='line'>/dev/mapper/togogovg-lv01
+</span><span class='line'>                      148M  5.6M  135M   4% /lv01
+</span><span class='line'>[root@demo ~]# resize2fs /dev/mapper/togogovg-lv01 
+</span><span class='line'>resize2fs 1.41.12 (17-May-2010)
+</span><span class='line'>Filesystem at /dev/mapper/togogovg-lv01 is mounted on /lv01; on-line resizing required
+</span><span class='line'>old desc_blocks = 1, new_desc_blocks = 2
+</span><span class='line'>Performing an on-line resize of /dev/mapper/togogovg-lv01 to 307200 (1k) blocks.
+</span><span class='line'>The filesystem on /dev/mapper/togogovg-lv01 is now 307200 blocks long.
+</span><span class='line'>[root@demo ~]# df -h
+</span><span class='line'>Filesystem            Size  Used Avail Use% Mounted on
+</span><span class='line'>/dev/mapper/vgsrv-root
+</span><span class='line'>                      4.0G  2.6G  1.3G  68% /
+</span><span class='line'>tmpfs                 499M   88K  499M   1% /dev/shm
+</span><span class='line'>/dev/vda1             248M   33M  203M  14% /boot
+</span><span class='line'>/dev/mapper/vgsrv-common
+</span><span class='line'>                      124M  5.6M  113M   5% /common
+</span><span class='line'>/dev/mapper/vgsrv-home
+</span><span class='line'>                      248M   46M  191M  20% /home
+</span><span class='line'>/dev/mapper/vgsrv-shrink
+</span><span class='line'>                      310M   11M  284M   4% /shrink
+</span><span class='line'>/dev/vda5              98M  5.6M   87M   6% /togogo
+</span><span class='line'>/dev/mapper/togogovg-lv01
+</span><span class='line'>                      291M  6.1M  270M   3% /lv01
+</span><span class='line'>[root@demo ~]# pvscan
+</span><span class='line'>  PV /dev/vda6   VG togogovg   lvm2 [196.00 MiB / 0    free]
+</span><span class='line'>  PV /dev/vda7   VG togogovg   lvm2 [296.00 MiB / 192.00 MiB free]
+</span><span class='line'>  PV /dev/vda8   VG togogovg   lvm2 [296.00 MiB / 296.00 MiB free]
+</span><span class='line'>  PV /dev/vda2   VG vgsrv      lvm2 [9.97 GiB / 4.75 GiB free]
+</span><span class='line'>  Total: 4 [10.74 GiB] / in use: 4 [10.74 GiB] / in no VG: 0 [0   ]</span></code></pre></td></tr></table></div></figure>
 
-<p>tmpfs                 499M   88K  499M   1% /dev/shm
-/dev/vda1             248M   33M  203M  14% /boot
-/dev/mapper/vgsrv-common</p>
 
-<pre><code>                  124M  5.6M  113M   5% /common
-</code></pre>
 
-<p>/dev/mapper/vgsrv-home</p>
-
-<pre><code>                  248M   46M  191M  20% /home
-</code></pre>
-
-<p>/dev/mapper/vgsrv-shrink</p>
-
-<pre><code>                  310M   11M  284M   4% /shrink
-</code></pre>
-
-<p>/dev/vda5              98M  5.6M   87M   6% /togogo
-/dev/mapper/togogovg-lv01</p>
-
-<pre><code>                  148M  5.6M  135M   4% /lv01
-</code></pre>
-
-<p>[root@demo ~]# resize2fs /dev/mapper/togogovg-lv01
-resize2fs 1.41.12 (17-May-2010)
-Filesystem at /dev/mapper/togogovg-lv01 is mounted on /lv01; on-line resizing required
-old desc_blocks = 1, new_desc_blocks = 2
-Performing an on-line resize of /dev/mapper/togogovg-lv01 to 307200 (1k) blocks.
-The filesystem on /dev/mapper/togogovg-lv01 is now 307200 blocks long.
-[root@demo ~]# df -h
-Filesystem            Size  Used Avail Use% Mounted on
-/dev/mapper/vgsrv-root</p>
-
-<pre><code>                  4.0G  2.6G  1.3G  68% /
-</code></pre>
-
-<p>tmpfs                 499M   88K  499M   1% /dev/shm
-/dev/vda1             248M   33M  203M  14% /boot
-/dev/mapper/vgsrv-common</p>
-
-<pre><code>                  124M  5.6M  113M   5% /common
-</code></pre>
-
-<p>/dev/mapper/vgsrv-home</p>
-
-<pre><code>                  248M   46M  191M  20% /home
-</code></pre>
-
-<p>/dev/mapper/vgsrv-shrink</p>
-
-<pre><code>                  310M   11M  284M   4% /shrink
-</code></pre>
-
-<p>/dev/vda5              98M  5.6M   87M   6% /togogo
-/dev/mapper/togogovg-lv01</p>
-
-<pre><code>                  291M  6.1M  270M   3% /lv01
-</code></pre>
-
-<p>[root@demo ~]# pvscan
-  PV /dev/vda6   VG togogovg   lvm2 [196.00 MiB / 0    free]
-  PV /dev/vda7   VG togogovg   lvm2 [296.00 MiB / 192.00 MiB free]
-  PV /dev/vda8   VG togogovg   lvm2 [296.00 MiB / 296.00 MiB free]
-  PV /dev/vda2   VG vgsrv      lvm2 [9.97 GiB / 4.75 GiB free]
-  Total: 4 [10.74 GiB] / in use: 4 [10.74 GiB] / in no VG: 0 [0   ]
-  &#8220;`</p>
 ]]></content>
   </entry>
   
