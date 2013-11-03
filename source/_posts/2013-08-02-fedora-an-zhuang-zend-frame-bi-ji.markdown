@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Fedora 安装 Zend Frame 笔记"
+title: "linux安装 Zend Frame 笔记"
 date: 2013-08-02 00:15
 comments: true
 categories: 

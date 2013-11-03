@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "fedora安装lamp环境笔记"
+title: "linux安装lamp环境笔记"
 date: 2013-07-21 11:20
 comments: true
 categories: 

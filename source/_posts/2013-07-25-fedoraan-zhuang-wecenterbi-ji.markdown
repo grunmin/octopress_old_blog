@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Fedora安装wecenter笔记"
+title: "linux安装wecenter笔记"
 date: 2013-07-25 20:32
 comments: true
 categories: 
