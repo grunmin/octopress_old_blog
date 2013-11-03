@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>fedora安装lamp环境笔记 - 郭润民的博客</title>
+  <meta name="author" content="Grunmin">
+
+  
+  <meta name="description" content="前期工作 第1步： 在终端输入 1
+$ sudo yum update # 更新系统 第2步：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包 第3步： 1
+$ sudo yum install gcc gcc-c++ libxml2 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="郭润民的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-42775487-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">郭润民的博客</a></h1>
+  
+    <h2>Learn for Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:grunmin.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Fedora安装lamp环境笔记</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-21T11:20:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2013</time>
+        
+
+          | <a href="#comments">Comments</a>
+         
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>前期工作</h2>
+
+<p><strong>第1步</strong>： 在终端输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yum update  # 更新系统</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>第2步</strong>：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包</p>
+
+<!-- more -->
+
+
+<p><strong>第3步</strong>：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yum install gcc gcc-c++ libxml2 libxml2-devel pcre pcre-devel #安装依赖软件包</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>第4步</strong>：tar -zxvf 解压apache,mysql,php,pcre 等压缩包， sudo mv 移动到/usr/local目录下</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cd /usr/local/pcre;./configure --prefix=/usr/local/pcre #安装pcre</span></code></pre></td></tr></table></div></figure>
+
+
+<p>（非必需，如果安装apache时显示未安装pcre可按照此法安装）<br/>
+<strong>第5步</strong>： cd httpd/srclib/ 解压apr,apr-util 到目录下，修改文件名（不带版本号，如apr-util）</p>
+
+<h2>一、安装apache:</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /usr/local/httpd  # 进入安装目录  
+</span><span class='line'>$ sudo ./configure --prefix=/usr/local/apache2 --enable-so --with-mpm=worker --with-pcre=/usr/local/pcre --with-included-apr # 配置（注意./configure的/前有个小点，若没有按照上文安装pcre，可去掉--with-pcre后面的路径）
+</span><span class='line'>$ sudo make
+</span><span class='line'>$ sudo make install
+</span><span class='line'> #(--prefix指定安装目录，配置文件在/usr/local/apache2/conf目录下，--enable-so启动加载共享模块的功能，--with-mpm=worker吿诉apache使用多线程化多处理模块worker.)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>启动apache</strong>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /usr/local/apache2/bin/httpd -k start | stop</span></code></pre></td></tr></table></div></figure>
+
+
+<p> 或</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /usr/local/apache2/bin/apachectl start | stop</span></code></pre></td></tr></table></div></figure>
+
+
+<p>(可用ps -e | grep httpd 查看apache是否已开启）</p>
+
+<h2>二、 安装mysql：</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /usr/local
+</span><span class='line'>$ sudo ln -s /usr/local/mysql-××× mysql #链接源码到一个文件夹
+</span><span class='line'>$ cd mysql
+</span><span class='line'>$ scripts/mysql_install_db --user=[username]    #（username为自己的用户名，中括号不用打进去，下同）
+</span><span class='line'>$ sudo chown -R root .     #（注意末尾有个小点）
+</span><span class='line'>$ sudo chown -R [username] data
+</span><span class='line'>$ sudo chgrp -R [username] .</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>启动mysql</strong>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> sudo /usr/local/mysql/bin/mysqld_safe --user=[username] &</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>设置开机启动Mysql</strong>：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo cp support-files/mysql.server /etc/init.d/[username]
+</span><span class='line'>$ sudo cp support-files/mysqld_multi.server /etc/init.d/[username]
+</span><span class='line'>$ sudo chmod +x /etc/init.d/[username]
+</span><span class='line'>$ sudo chkconfig --add [username]</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>测试</strong>：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /usr/local/mysql/bin/mysqladmin -u root -p version
+</span><span class='line'>$ sudo /usr/local/mysql/bin/mysqlshow</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>修改密码，删除匿名用户</strong>：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo /usr/local/mysql/bin/mysqladmin -u root -p password [password]
+</span><span class='line'>$ sudo /usr/local/mysql/bin/mysql -u root -p</span></code></pre></td></tr></table></div></figure>
+
+
+<p>[password]可以不输入，上面两个命令是修改密码用，此时进入mysql命令界面</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mysql&gt; delete from mysql.user where host='localhost' and user='';
+</span><span class='line'>mysql&gt; flush privileges;</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>三、安装php</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /usr/local/php-5__
+</span><span class='line'>$ sudo ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/local/mysql
+</span><span class='line'>$ make
+</span><span class='line'>$ sudo make install
+</span><span class='line'>$ sudo cp /usr/local/php___/php.ini-__ /usr/local/php/lib/php.ini  </span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改httpd.conf 添加AddType application/x-httpd-php .php<br/>
+在DirectoryIndex index.html 后加入index.php<br/>
+<strong>重启apache</strong>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/local/apache2/bin/apachectl restart</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>四、安装phpMyAdmin:</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs</span></code></pre></td></tr></table></div></figure>
+
+
+<p>到此全部完成</p>
+
+<h2>Q1</h2>
+
+<p>如果测试mysql时没有显示版本信息等界面，而是显示Can&rsquo;t connect to local MySQL server through socket &lsquo;/tmp/mysql.sock&rsquo;(2)则极有可能是mysql没有安装成功。解决办法是删除系统自带的mysql服务，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rpm -qa | grep mysql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>若有输出结果，则直接用rpm -e删除之，再输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ chkconfig --list | grep -i mysql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>检查mysql服务，有的话再删除之</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo chkconfig --del mysql</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后按照安装mysql的步骤再安装一次即可。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Grunmin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-21T11:20:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <!-- <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/" data-via="" data-counturl="http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/" >Tweet</a>
+  
+  
+  
+</div> -->
+<!-- AddThis Button BEGIN 
+<div class="addthis_toolbox addthis_default_style ">
+  <a class="addthis_button_sinaweibo"></a>
+  <a class="addthis_button_tweet"></a>
+  <a class="addthis_button_pinterest_pinit"></a>
+  <a class="addthis_counter addthis_pill_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51f51ba51b9b8965"></script>
+AddThis Button END -->
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+  <a class="addthis_button_sinaweibo"></a>
+  <a class="addthis_button_facebook"></a>
+  <a class="addthis_button_twitter"></a>
+  <a class="addthis_button_google_plusone_share"></a>
+  <a class="addthis_button_douban"></a>
+  <a class="addthis_button_qzone"></a>
+  <a class="addthis_button_kaixin"></a>
+  <a class="addthis_button_compact"></a>
+  <a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-51f51ba51b9b8965"></script>
+<!-- AddThis Button END -->
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/" title="Previous Post: 为知笔记使用笔记(1)-启动方式">&laquo; 为知笔记使用笔记(1)-启动方式</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/" title="Next Post: Fedora安装wecenter笔记">Fedora安装wecenter笔记 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+
+  <section>
+      <h1>Comments</h1>
+          <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"grunmin"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END -->
+</div>
+            </section>
+            
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/">关于知道不知道的几点理解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Fedora 安装 Zend Frame 笔记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/">Fedora安装wecenter笔记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/">Fedora安装lamp环境笔记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/">为知笔记使用笔记(1)-启动方式</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>About Me</h1>
+  <li><p>南中国一般大学大光电学子.</p></li>
+  <li><p>Linux爱好者</p></li>
+  <li><p>新浪微博：<a href="http://weibo.com/u/3082793807">光一_润民</a><br /></li>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Grunmin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
