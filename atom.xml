@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-08-05T11:32:37+08:00</updated>
+  <updated>2013-11-03T23:25:11+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,6 +12,1595 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[RHCE note 9]]></title>
+    <link href="http://grunmin.github.io/blog/2013/11/03/rhce-note-9/"/>
+    <updated>2013-11-03T23:20:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/11/03/rhce-note-9</id>
+    <content type="html"><![CDATA[<h2>unit 2</h2>
+
+<h3>配置sudoers</h3>
+
+<p>文件/etc/sudoers是只读文件，保存时需加！强制保存.</p>
+
+<!-- more -->
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# ll /etc/sudoers
+</span><span class='line'>-r--r-----. 1 root root 4002 Mar  2  2012 /etc/sudoers</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vi sudoers</p>
+
+<ol>
+<li>sudoers语法规则</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user1    machine=(user2) command</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# cat /etc/sudoers | grep -v ^#
+</span><span class='line'>root  ALL=(ALL)   ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<p>说明:root能在所有机器上以所有用户的身份执行任何命令。</p>
+
+<ol>
+<li>授予组成员访问任何命令的权限</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>%groupname   ALL=    ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# cat /etc/sudoers | grep %wheel
+</span><span class='line'>%wheel    ALL=(ALL)   ALLj</span></code></pre></td></tr></table></div></figure>
+
+
+<p>说明：wheel组能在所有机器上以所有用户身份执行任何命令。</p>
+
+<ol>
+<li>无需提供密码的设置</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user machine=(user2) NOPASSWD: ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user1   ALL=(root)      NOPASSWD: ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>授予多名用户具有sudo权限</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>User_Alias   username = user1, user2, user3
+</span><span class='line'>username  machine=(user)  ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>User_Alias ADMINS = user01, user001
+</span><span class='line'>ADMIN   ALL=(ALL)       NOPASSWD: ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>设置用户对特定命令列表具有sudo权限</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Cmnd_Alias type = command, command
+</span><span class='line'>username  ALL=(ALL)   type</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount, /bin/umount
+</span><span class='line'>ADMINS  ALL=(ALL)       NOPASSWD: STORAGE</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Kerberos配置</h3>
+
+<h4>安装</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum groupinstall -y directory-client
+</span><span class='line'>yum install -y openldap-clients
+</span><span class='line'>yum install -y krb5-workstation</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>配置</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>authconfig --enableldap --ldapserver=instructor.example.com --enableldaptls --ldaploadcacert=ftp://instructor.example.com/pub/example-ca.crt --ldapbasedn="dc=example,dc=com" --disableldapauth --enablekrb5 --krb5kdc=instructor.example.com --krb5adminserver=instructor.example.com --krb5realm=EXAMPLE.COM --enablesssd --enablesssdauth --update</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--enablceldaptls 开启tls
+</span><span class='line'>--ldaploadcacert derberos证书下载目录
+</span><span class='line'>--ldapbasedn 基准dn
+</span><span class='line'>--disableldapauth 禁止ldap认证
+</span><span class='line'>--krb5realm 域名
+</span><span class='line'>--enablesssd --enablesssdauth 开启sssd认证</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>测试配置：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>getent passwd ldapuserX
+</span><span class='line'>ssh ldapuserX@serverX</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo cacerts]# getent passwd ldapuser1
+</span><span class='line'>ldapuser1:*:1701:1701:LDAP Test User 1:/home/guests/ldapuser1:/bin/bash
+</span><span class='line'>[root@demo cacerts]# ssh ldapuser1@serverX
+</span><span class='line'>ldapuser1@serverX's password: kerberos</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>unit 3</h2>
+
+<h3>Bash 编程</h3>
+
+<ul>
+<li><p>包含bash命令的文件第一行应为：
+#!/bin/bash</p></li>
+<li><p>查看环境变量：<br/>
+<code>echo $PATH</code><br/>
+<code>set</code><br/>
+<code>env</code><br/>
+实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# echo $PATH
+</span><span class='line'>/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/root/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>变量赋值,使用
+str=value
+$str 或者 ${str}</p></li>
+<li><p>添加目录到环境变量：<br/>
+<code>PATH=$PATH:path</code><br/>
+实例：<br/>
+<code>PATH=$PATH:/root</code></p></li>
+<li><p>创建全局变量：<br/>
+<code>export $NAME</code></p></li>
+<li><p>命令替换<br/>
+<code>$( shell command)</code><br/>
+`shell command`<br/>
+实例1：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>touch datafile.$(id -un)
+</span><span class='line'>[root@desktop31 ~]# ls | grep datafile
+</span><span class='line'>datafile.root</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例2：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# echo $TODAY
+</span><span class='line'>[root@desktop31 ~]# TODAY=`date +%Y-%m-%d`
+</span><span class='line'>[root@desktop31 ~]# echo $TODAY
+</span><span class='line'>2013-10-26</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>弱引用，强引用和转义</p></li>
+<li><p>bash编程实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>添加用户  
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>if grep "^$1:" /etc/passwd ; then
+</span><span class='line'>  echo "$1 is exist"
+</span><span class='line'>else
+</span><span class='line'>  useradd $1;
+</span><span class='line'>  echo redhat |passwd --stdin $1;
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>查看网络主机
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>read -p "Please input a ip addr:" IP
+</span><span class='line'>ping -c2 $IP &gt; /dev/null 2&gt;&1
+</span><span class='line'>if [ $? -eq 0 ];then
+</span><span class='line'>  echo "$IP is up..."
+</span><span class='line'>else
+</span><span class='line'>  echo "$IP is down..."
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>无题……
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>read -p "Please choice y/n" YN
+</span><span class='line'>if [ $YN == y -o $YN == Y  -o $YN == 'yes' ]; then
+</span><span class='line'>  echo "Continue..."
+</span><span class='line'>elif [ $YN == n -o $YN == N -o $YN == 'no' ]; then
+</span><span class='line'>  exit 1
+</span><span class='line'>else
+</span><span class='line'>  echo "other"
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>检查服务运行状态
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>read -p "Plese input a service name:" SN
+</span><span class='line'>SERVICE=$(netstat -anutlp |grep $SN)
+</span><span class='line'>if test -n "$SERVICE" ; then
+</span><span class='line'>  echo "$SN is running..."
+</span><span class='line'>else
+</span><span class='line'>  echo "$SN is down..."
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>添加用户
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>for Name in usera userb userc a b c;
+</span><span class='line'>do
+</span><span class='line'>        if grep "^$Name:" /etc/passwd &gt; /dev/null 2&gt;&1; then
+</span><span class='line'>                echo "User exist!";
+</span><span class='line'>        else
+</span><span class='line'>                useradd $Name;
+</span><span class='line'>                echo "Add user $Name succeed!";
+</span><span class='line'>                echo "redhat" | passwd --stdin $Name &gt; /dev/null 2&gt;&1;
+</span><span class='line'>        fi
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>删除用户
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>for Name in usera userb userc a b c;
+</span><span class='line'>do
+</span><span class='line'>        if grep "^$Name:" /etc/passwd &gt; /dev/null 2&gt;&1 ; then
+</span><span class='line'>                userdel $Name;
+</span><span class='line'>                rm -rf /home/$Name;
+</span><span class='line'>                rm -rf /var/mail/$Name;
+</span><span class='line'>                echo "user $Name delete succeed!";
+</span><span class='line'>        fi
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>比较文件内容diff<br/>
+diff -Naur file1 file2 > patchfile  可以制作补丁文件</p></li>
+<li><p>补丁命令patch
+实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># patch issue patchfile
+</span><span class='line'>patching file issue
+</span><span class='line'># patch -b &lt; patch file
+</span><span class='line'>patching file hosts
+</span><span class='line'>patching file network</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>过滤 grep
+几个需要记住的参数：<br/>
+-i  不区分大小写<br/>
+-v 返回不包含特定字符的行</p></li>
+<li><p>剪切cut<br/>
+-f 指定第几个字段<br/>
+-d 分隔符<br/>
+实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cut -f3 -d: /etc/hosts //取出hosts文件中以:为分隔符的第3个字段
+</span><span class='line'>[root@demo ~]# ip addr |grep "inet " |cut -d" " -f6 |cut -d/ -f1
+</span><span class='line'>127.0.0.1
+</span><span class='line'>192.168.0.250</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>tail 和 head<br/>
+tail显示文件末尾10行（默认）<br/>
+head显示文件开头10行（默认）<br/>
+均可-n 参数后面接数字更改输出行数<br/>
+tail -f可以持续显示文件的更新，例如<br/>
+tail -f /var/log/messages<br/>
+系统管理员常用</p></li>
+<li><p>wc显示文件信息<br/>
+-l 行数<br/>
+-w 字数<br/>
+-c 字节数
+-m 字符数</p></li>
+<li><p>排序sort</p></li>
+<li><p>取唯一uniq</p></li>
+</ul>
+
+
+<h3>默认用户属性</h3>
+
+<p>在/etc/login.defs及/etc/default/useradd中定义<br/>
+chage命令可以调整属性</p>
+
+<h2>unit 4</h2>
+
+<p>gpg的使用<br/>
+  + 流程：<br/>
+  由user1产生密钥对，公钥导出给需要向user1传送文件的主机user2。<br/>
+  gpg &mdash;gen-key <br/>
+  gpg -K 查看私钥<br/>
+  gpg -k 查看公钥<br/>
+  gpg &mdash;export &mdash;armor key-id -o > file.key<br/>
+  user2导入公钥加密文件，传送给user1。<br/>
+  gpg &mdash;import file.key<br/>
+  gpg -e -armor -r key-id file<br/>
+  user1运用私钥解密文件，用私钥前需输入密码。<br/>
+  gpg -d file > file_without_encrypt</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RHCE note 1]]></title>
+    <link href="http://grunmin.github.io/blog/2013/11/03/rhce-note-1/"/>
+    <updated>2013-11-03T02:07:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/11/03/rhce-note-1</id>
+    <content type="html"><![CDATA[<h2>unit 1</h2>
+
+<ul>
+<li><p>查看系统版本<br/>
+cat /etc/redhat-release</p></li>
+<li><p>查看网络参数<br/>
+ifconfig</p></li>
+</ul>
+
+
+<!-- more -->
+
+
+<ul>
+<li><p>查看主机名<br/>
+hostname</p></li>
+<li><p>查看shell<br/>
+cat /etc/shells</p></li>
+<li><p>查看当前用户名称<br/>
+whoami</p></li>
+<li><p>查看当前位置<br/>
+pwd</p></li>
+<li><p>修改用户密码<br/>
+passwd username</p></li>
+<li><p>查看当前用户id<br/>
+id</p></li>
+<li><p>切换用户<br/>
+su &ndash; username</p></li>
+<li><p>查看历史命令并执行<br/>
+history<br/>
+!number<br/>
+或者!加命令前面几个字母<br/>
+实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@instructor 920]# !ca
+</span><span class='line'>cat /etc/shells 
+</span><span class='line'>/bin/sh
+</span><span class='line'>/bin/bash
+</span><span class='line'>/sbin/nologin
+</span><span class='line'>/bin/tcsh
+</span><span class='line'>/bin/csh</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>快捷输入前一个参数<br/>
+Alt+.</p></li>
+<li><p>查看后台任务，更改到前台运行，更改到后台运行<br/>
+jobs，fg number，bg number<br/>
+实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@instructor 920]# jobs
+</span><span class='line'>[1]-  Running                 gedit day1.txt &
+</span><span class='line'>[2]+  Stopped                 firefox
+</span><span class='line'>[root@instructor 920]# 
+</span><span class='line'>[root@instructor 920]# 
+</span><span class='line'>[root@instructor 920]# fg 2
+</span><span class='line'>firefox</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>暂停当前任务并移到后台，停止当前命令：<br/>
+Ctrl+z，Ctrl+c</li>
+</ul>
+
+
+<h2>unit 6</h2>
+
+<h3>创建文件系统</h3>
+
+<ul>
+<li> mbr区域有512B大小，其中16*4的大小用来记录四个主分区</li>
+<li>主分区，扩展分区和逻辑分区总数不能超过15</li>
+<li>查看磁盘信息<br/>
+实例：</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@instructor 920]# fdisk -l /dev/sda
+</span><span class='line'>Disk /dev/sda: 320.1 GB, 320072933376 bytes
+</span><span class='line'>255 heads, 63 sectors/track, 38913 cylinders
+</span><span class='line'>Units = cylinders of 16065 * 512 = 8225280 bytes
+</span><span class='line'>Sector size (logical/physical): 512 bytes / 512 bytes
+</span><span class='line'>I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span><span class='line'>Disk identifier: 0x0007213a
+</span><span class='line'>
+</span><span class='line'>   Device Boot      Start         End      Blocks   Id  System
+</span><span class='line'>/dev/sda1   *           1          17      131072   83  Linux
+</span><span class='line'>Partition 1 does not end on cylinder boundary.
+</span><span class='line'>/dev/sda2              17        4096    32768000   8e  Linux LVM
+</span><span class='line'>/dev/sda3            4096        6646    20480000   8e  Linux LVM
+</span><span class='line'>/dev/sda4            6646       38914   259190784    5  Extended
+</span><span class='line'>/dev/sda5            6646        7952    10485760   83  Linux
+</span><span class='line'>/dev/sda6            7952        8605     5251727   83  Linux
+</span><span class='line'>/dev/sda7            8606        8657      417658+  8e  Linux LVM
+</span><span class='line'>/dev/sda8            8658        8785     1028128+  8e  Linux LVM
+</span><span class='line'>/dev/sda9            8786        8888      827316   8e  Linux LVM
+</span><span class='line'>/dev/sda10           8889       16722    62926573+  8e  Linux LVM
+</span><span class='line'>/dev/sda11          16723       18812    16787893+  8e  Linux LVM</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>基本流程：<br/>
+fdisk 分区 &mdash;>  mkfs  格式化 &mdash;> mount 挂载<br/>
+1、分区<br/>
+实例：</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>fdisk /dev/vda
+</span><span class='line'>Command (m for help): m
+</span><span class='line'>Command action
+</span><span class='line'>   a   toggle a bootable flag
+</span><span class='line'>   b   edit bsd disklabel
+</span><span class='line'>   c   toggle the dos compatibility flag
+</span><span class='line'>   d   delete a partition
+</span><span class='line'>   l   list known partition types
+</span><span class='line'>   m   print this menu
+</span><span class='line'>   n   add a new partition
+</span><span class='line'>   o   create a new empty DOS partition table
+</span><span class='line'>   p   print the partition table
+</span><span class='line'>   q   quit without saving changes
+</span><span class='line'>   s   create a new empty Sun disklabel
+</span><span class='line'>   t   change a partition's system id
+</span><span class='line'>   u   change display/entry units
+</span><span class='line'>   v   verify the partition table
+</span><span class='line'>   w   write table to disk and exit
+</span><span class='line'>   x   extra functionality (experts only)
+</span><span class='line'>Command (m for help): n
+</span><span class='line'>Command action
+</span><span class='line'>   e   extended
+</span><span class='line'>   p   primary partition (1-4)
+</span><span class='line'>e
+</span><span class='line'>Partition number (1-4): 3
+</span><span class='line'>First cylinder (1-27046, default 1): 21328
+</span><span class='line'>Last cylinder, +cylinders or +size{K,M,G} (21328-27046, default 27046): 
+</span><span class='line'>Using default value 27046
+</span><span class='line'>Command (m for help): p
+</span><span class='line'>Disk /dev/vda: 14.0 GB, 13958643712 bytes
+</span><span class='line'>16 heads, 63 sectors/track, 27046 cylinders
+</span><span class='line'>Units = cylinders of 1008 * 512 = 516096 bytes
+</span><span class='line'>Sector size (logical/physical): 512 bytes / 512 bytes
+</span><span class='line'>I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span><span class='line'>Disk identifier: 0x00064009
+</span><span class='line'>   Device Boot      Start         End      Blocks   Id  System
+</span><span class='line'>/dev/vda1   *           3         523      262144   83  Linux
+</span><span class='line'>Partition 1 does not end on cylinder boundary.
+</span><span class='line'>/dev/vda2             523       21328    10485760   8e  Linux LVM
+</span><span class='line'>Partition 2 does not end on cylinder boundary.
+</span><span class='line'>/dev/vda3           21328       27046     2882256    5  Extended
+</span><span class='line'>Command (m for help): n
+</span><span class='line'>Command action
+</span><span class='line'>   l   logical (5 or over)
+</span><span class='line'>   p   primary partition (1-4)
+</span><span class='line'>l
+</span><span class='line'>First cylinder (21328-27046, default 21328): 
+</span><span class='line'>Using default value 21328
+</span><span class='line'>Last cylinder, +cylinders or +size{K,M,G} (21328-27046, default 27046): +100M
+</span><span class='line'>Command (m for help): p
+</span><span class='line'>Disk /dev/vda: 14.0 GB, 13958643712 bytes
+</span><span class='line'>16 heads, 63 sectors/track, 27046 cylinders
+</span><span class='line'>Units = cylinders of 1008 * 512 = 516096 bytes
+</span><span class='line'>Sector size (logical/physical): 512 bytes / 512 bytes
+</span><span class='line'>I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span><span class='line'>Disk identifier: 0x00064009
+</span><span class='line'>   Device Boot      Start         End      Blocks   Id  System
+</span><span class='line'>/dev/vda1   *           3         523      262144   83  Linux
+</span><span class='line'>Partition 1 does not end on cylinder boundary.
+</span><span class='line'>/dev/vda2             523       21328    10485760   8e  Linux LVM
+</span><span class='line'>Partition 2 does not end on cylinder boundary.
+</span><span class='line'>/dev/vda3           21328       27046     2882256    5  Extended
+</span><span class='line'>/dev/vda5           21328       21531      102664+  83  Linux
+</span><span class='line'>Command (m for help): w
+</span><span class='line'>The partition table has been altered!
+</span><span class='line'>Calling ioctl() to re-read partition table.
+</span><span class='line'>WARNING: Re-reading the partition table failed with error 16: Device or resource busy.
+</span><span class='line'>The kernel still uses the old table. The new table will be used at
+</span><span class='line'>the next reboot or after you run partprobe(8) or kpartx(8)
+</span><span class='line'>Syncing disks.
+</span><span class='line'>[root@demo ~]# partx -a /dev/vda
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 1
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 2
+</span><span class='line'>[root@demo ~]# 
+</span><span class='line'>[root@demo ~]# partx -a /dev/vda
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 1
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 2
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 3
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  2、格式化<br/>
+实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# mkfs -t ext4 /dev/vda5
+</span><span class='line'>mke2fs 1.41.12 (17-May-2010)
+</span><span class='line'>Filesystem label=
+</span><span class='line'>OS type: Linux
+</span><span class='line'>Block size=1024 (log=0)
+</span><span class='line'>Fragment size=1024 (log=0)
+</span><span class='line'>Stride=0 blocks, Stripe width=0 blocks
+</span><span class='line'>25688 inodes, 102664 blocks
+</span><span class='line'>5133 blocks (5.00%) reserved for the super user
+</span><span class='line'>First data block=1
+</span><span class='line'>Maximum filesystem blocks=67371008
+</span><span class='line'>13 block groups
+</span><span class='line'>8192 blocks per group, 8192 fragments per group
+</span><span class='line'>1976 inodes per group
+</span><span class='line'>Superblock backups stored on blocks: 
+</span><span class='line'>  8193, 24577, 40961, 57345, 73729
+</span><span class='line'>Writing inode tables: done                            
+</span><span class='line'>Creating journal (4096 blocks): done
+</span><span class='line'>Writing superblocks and filesystem accounting information: done
+</span><span class='line'>This filesystem will be automatically checked every 23 mounts or
+</span><span class='line'>180 days, whichever comes first.  Use tune2fs -c or -i to override.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  3、挂载<br/>
+实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# mkdir /togogo
+</span><span class='line'>[root@demo ~]# 
+</span><span class='line'>[root@demo ~]# mount /dev/vda5 /togogo/
+</span><span class='line'>[root@demo media]# mount | grep vda
+</span><span class='line'>(ro,nosuid,nodev,uhelper=udisks,uid=0,gid=0,iocharset=utf8,mode=0400,dmode=0500)
+</span><span class='line'>/dev/vda5 on /togogo type ext4 (rw)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  4、修改配置文件<br/>
+实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# cat /etc/fstab
+</span><span class='line'>#
+</span><span class='line'># /etc/fstab
+</span><span class='line'># Created by anaconda on Sun Sep  1 09:14:16 2013
+</span><span class='line'>#
+</span><span class='line'># Accessible filesystems, by reference, are maintained under '/dev/disk'
+</span><span class='line'># See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+</span><span class='line'>#
+</span><span class='line'>/dev/mapper/vgsrv-root  /                       ext4    defaults        1 1
+</span><span class='line'>UUID=af186298-194c-4d01-8c3e-a21b28c45740 /boot                   ext4    defaults        1 2
+</span><span class='line'>/dev/mapper/vgsrv-common /common                 ext4    defaults        1 2
+</span><span class='line'>/dev/mapper/vgsrv-home  /home                   ext4    defaults        1 2
+</span><span class='line'>/dev/mapper/vgsrv-shrink /shrink                 ext4    defaults        1 2
+</span><span class='line'>/dev/mapper/vgsrv-swap  swap                    swap    defaults        0 0
+</span><span class='line'>tmpfs                   /dev/shm                tmpfs   defaults        0 0
+</span><span class='line'>devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
+</span><span class='line'>sysfs                   /sys                    sysfs   defaults        0 0
+</span><span class='line'>proc                    /proc                   proc    defaults        0 0
+</span><span class='line'>UUID=c061f12f-efa2-4aa2-8091-de8e73549bae /data   ext4    defaults,_netdev    0 0
+</span><span class='line'>/dev/vda5     /togogo         ext4    defaults    0 0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>mount -a 可自动挂载已写在配置文件下的分区。</p>
+
+<h2>unit 7</h2>
+
+<h3>创建逻辑卷</h3>
+
+<p>逻辑卷相对于普通分区的好处是可以动态修改卷的大小，以使用卷内文件数量的变化。
+&ndash; 基本流程：<br/>
+fdisk 分区 &mdash;> pvcreate 创建物理卷 &mdash;> vgcreate 创建卷组 &mdash;> lvcreate 创建逻辑卷 &mdash;> mkfs 格式化 &mdash;> mount 挂载<br/>
+实例：<br/>
+  1、分区，修改分区ID号</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# fdisk /dev/vda
+</span><span class='line'>WARNING: DOS-compatible mode is deprecated. It's strongly recommended to
+</span><span class='line'>         switch off the mode (command 'c') and change display units to
+</span><span class='line'>         sectors (command 'u').
+</span><span class='line'>Command (m for help): n
+</span><span class='line'>Command action
+</span><span class='line'>   l   logical (5 or over)
+</span><span class='line'>   p   primary partition (1-4)
+</span><span class='line'>l
+</span><span class='line'>First cylinder (21532-27046, default 21532): 
+</span><span class='line'>Using default value 21532
+</span><span class='line'>Last cylinder, +cylinders or +size{K,M,G} (21532-27046, default 27046): +200M
+</span><span class='line'>Command (m for help): n
+</span><span class='line'>Command action
+</span><span class='line'>   l   logical (5 or over)
+</span><span class='line'>   p   primary partition (1-4)
+</span><span class='line'>l
+</span><span class='line'>First cylinder (21939-27046, default 21939): 
+</span><span class='line'>Using default value 21939
+</span><span class='line'>Last cylinder, +cylinders or +size{K,M,G} (21939-27046, default 27046): +300M
+</span><span class='line'>Command (m for help): p
+</span><span class='line'>Disk /dev/vda: 14.0 GB, 13958643712 bytes
+</span><span class='line'>16 heads, 63 sectors/track, 27046 cylinders
+</span><span class='line'>Units = cylinders of 1008 * 512 = 516096 bytes
+</span><span class='line'>Sector size (logical/physical): 512 bytes / 512 bytes
+</span><span class='line'>I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span><span class='line'>Disk identifier: 0x00064009
+</span><span class='line'>   Device Boot      Start         End      Blocks   Id  System
+</span><span class='line'>/dev/vda1   *           3         523      262144   83  Linux
+</span><span class='line'>Partition 1 does not end on cylinder boundary.
+</span><span class='line'>/dev/vda2             523       21328    10485760   8e  Linux LVM
+</span><span class='line'>Partition 2 does not end on cylinder boundary.
+</span><span class='line'>/dev/vda3           21328       27046     2882256    5  Extended
+</span><span class='line'>/dev/vda5           21328       21531      102664+  83  Linux
+</span><span class='line'>/dev/vda6           21532       21938      205096+  83  Linux
+</span><span class='line'>/dev/vda7           21939       22549      307912+  83  Linux
+</span><span class='line'>Command (m for help): m
+</span><span class='line'>Command action
+</span><span class='line'>   a   toggle a bootable flag
+</span><span class='line'>   b   edit bsd disklabel
+</span><span class='line'>   c   toggle the dos compatibility flag
+</span><span class='line'>   d   delete a partition
+</span><span class='line'>   l   list known partition types
+</span><span class='line'>   m   print this menu
+</span><span class='line'>   n   add a new partition
+</span><span class='line'>   o   create a new empty DOS partition table
+</span><span class='line'>   p   print the partition table
+</span><span class='line'>   q   quit without saving changes
+</span><span class='line'>   s   create a new empty Sun disklabel
+</span><span class='line'>   t   change a partition's system id
+</span><span class='line'>   u   change display/entry units
+</span><span class='line'>   v   verify the partition table
+</span><span class='line'>   w   write table to disk and exit
+</span><span class='line'>   x   extra functionality (experts only)
+</span><span class='line'>Command (m for help): t
+</span><span class='line'>Partition number (1-7): 6
+</span><span class='line'>Hex code (type L to list codes): 8e
+</span><span class='line'>Changed system type of partition 6 to 8e (Linux LVM)
+</span><span class='line'>Command (m for help): t
+</span><span class='line'>Partition number (1-7): 7
+</span><span class='line'>Hex code (type L to list codes): 8e
+</span><span class='line'>Changed system type of partition 7 to 8e (Linux LVM)
+</span><span class='line'>Command (m for help): p
+</span><span class='line'>Disk /dev/vda: 14.0 GB, 13958643712 bytes
+</span><span class='line'>16 heads, 63 sectors/track, 27046 cylinders
+</span><span class='line'>Units = cylinders of 1008 * 512 = 516096 bytes
+</span><span class='line'>Sector size (logical/physical): 512 bytes / 512 bytes
+</span><span class='line'>I/O size (minimum/optimal): 512 bytes / 512 bytes
+</span><span class='line'>Disk identifier: 0x00064009
+</span><span class='line'>   Device Boot      Start         End      Blocks   Id  System
+</span><span class='line'>/dev/vda1   *           3         523      262144   83  Linux
+</span><span class='line'>Partition 1 does not end on cylinder boundary.
+</span><span class='line'>/dev/vda2             523       21328    10485760   8e  Linux LVM
+</span><span class='line'>Partition 2 does not end on cylinder boundary.
+</span><span class='line'>/dev/vda3           21328       27046     2882256    5  Extended
+</span><span class='line'>/dev/vda5           21328       21531      102664+  83  Linux
+</span><span class='line'>/dev/vda6           21532       21938      205096+  8e  Linux LVM
+</span><span class='line'>/dev/vda7           21939       22549      307912+  8e  Linux LVM
+</span><span class='line'>Command (m for help): w
+</span><span class='line'>The partition table has been altered!
+</span><span class='line'>Calling ioctl() to re-read partition table.
+</span><span class='line'>[root@demo ~]# partx -a /dev/vda
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 1
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 2
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 3
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 5
+</span><span class='line'>[root@demo ~]# 
+</span><span class='line'>[root@demo ~]# partx -a /dev/vda
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 1
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 2
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 3
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 5
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 6
+</span><span class='line'>BLKPG: Device or resource busy
+</span><span class='line'>error adding partition 7</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  2、创建物理卷</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# pvcreate /dev/vda6
+</span><span class='line'>  Writing physical volume data to disk "/dev/vda6"
+</span><span class='line'>  Physical volume "/dev/vda6" successfully created
+</span><span class='line'>[root@demo ~]# pvcreate /dev/vda7
+</span><span class='line'>  Writing physical volume data to disk "/dev/vda7"
+</span><span class='line'>  Physical volume "/dev/vda7" successfully created</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  3、创建卷组</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# vgcreate togogovg /dev/vda6 /dev/vda7
+</span><span class='line'>  Volume group "togogovg" successfully created
+</span><span class='line'>[root@demo ~]# vgdisplay togogovg
+</span><span class='line'>  --- Volume group ---
+</span><span class='line'>  VG Name               togogovg
+</span><span class='line'>  System ID             
+</span><span class='line'>  Format                lvm2
+</span><span class='line'>  Metadata Areas        2
+</span><span class='line'>  Metadata Sequence No  1
+</span><span class='line'>  VG Access             read/write
+</span><span class='line'>  VG Status             resizable
+</span><span class='line'>  MAX LV                0
+</span><span class='line'>  Cur LV                0
+</span><span class='line'>  Open LV               0
+</span><span class='line'>  Max PV                0
+</span><span class='line'>  Cur PV                2
+</span><span class='line'>  Act PV                2
+</span><span class='line'>  VG Size               492.00 MiB
+</span><span class='line'>  PE Size               4.00 MiB
+</span><span class='line'>  Total PE              123
+</span><span class='line'>  Alloc PE / Size       0 / 0   
+</span><span class='line'>  Free  PE / Size       123 / 492.00 MiB
+</span><span class='line'>  VG UUID               fd7wDW-R1Ov-8oQh-iyvN-tBur-RMoG-VcYQ5d</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4、创建逻辑卷</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# lvcreate -n lv01 -L 150M togogovg
+</span><span class='line'>  Rounding up size to full physical extent 152.00 MiB
+</span><span class='line'>  Logical volume "lv01" created</span></code></pre></td></tr></table></div></figure>
+
+
+<p>5、格式化</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# mkfs -t ext4 /dev/mapper/togogovg-lv01
+</span><span class='line'>mke2fs 1.41.12 (17-May-2010)
+</span><span class='line'>Filesystem label=
+</span><span class='line'>OS type: Linux
+</span><span class='line'>Block size=1024 (log=0)
+</span><span class='line'>Fragment size=1024 (log=0)
+</span><span class='line'>Stride=0 blocks, Stripe width=0 blocks
+</span><span class='line'>38912 inodes, 155648 blocks
+</span><span class='line'>7782 blocks (5.00%) reserved for the super user
+</span><span class='line'>First data block=1
+</span><span class='line'>Maximum filesystem blocks=67371008
+</span><span class='line'>19 block groups
+</span><span class='line'>8192 blocks per group, 8192 fragments per group
+</span><span class='line'>2048 inodes per group
+</span><span class='line'>Superblock backups stored on blocks: 
+</span><span class='line'>  8193, 24577, 40961, 57345, 73729
+</span><span class='line'>Writing inode tables: done                            
+</span><span class='line'>Creating journal (4096 blocks): done
+</span><span class='line'>Writing superblocks and filesystem accounting information: done
+</span><span class='line'>This filesystem will be automatically checked every 20 mounts or
+</span><span class='line'>180 days, whichever comes first.  Use tune2fs -c or -i to override.</span></code></pre></td></tr></table></div></figure>
+
+
+<p>6、挂载</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# mkdir /lv01
+</span><span class='line'>[root@demo ~]# blkid /dev/mapper/togogovg-lv01 
+</span><span class='line'>/dev/mapper/togogovg-lv01: UUID="2460a9a1-f1ea-4aae-95ea-c39762380480" TYPE="ext4" 
+</span><span class='line'>[root@demo ~]# cat /etc/fstab
+</span><span class='line'>#
+</span><span class='line'># /etc/fstab
+</span><span class='line'># Created by anaconda on Sun Sep  1 09:14:16 2013
+</span><span class='line'>#
+</span><span class='line'># Accessible filesystems, by reference, are maintained under '/dev/disk'
+</span><span class='line'># See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+</span><span class='line'>#
+</span><span class='line'>/dev/mapper/vgsrv-root  /                       ext4    defaults        1 1
+</span><span class='line'>UUID=af186298-194c-4d01-8c3e-a21b28c45740 /boot                   ext4    defaults        1 2
+</span><span class='line'>/dev/mapper/vgsrv-common /common                 ext4    defaults        1 2
+</span><span class='line'>/dev/mapper/vgsrv-home  /home                   ext4    defaults        1 2
+</span><span class='line'>/dev/mapper/vgsrv-shrink /shrink                 ext4    defaults        1 2
+</span><span class='line'>/dev/mapper/vgsrv-swap  swap                    swap    defaults        0 0
+</span><span class='line'>tmpfs                   /dev/shm                tmpfs   defaults        0 0
+</span><span class='line'>devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
+</span><span class='line'>sysfs                   /sys                    sysfs   defaults        0 0
+</span><span class='line'>proc                    /proc                   proc    defaults        0 0
+</span><span class='line'>UUID=c061f12f-efa2-4aa2-8091-de8e73549bae /data   ext4    defaults,_netdev    0 0
+</span><span class='line'>/dev/vda5     /togogo         ext4    defaults    0 0
+</span><span class='line'>UUID=2460a9a1-f1ea-4aae-95ea-c39762380480 /lv01   ext4    defaults    0 0
+</span><span class='line'>[root@demo ~]# mount
+</span><span class='line'>/dev/mapper/vgsrv-root on / type ext4 (rw)
+</span><span class='line'>proc on /proc type proc (rw)
+</span><span class='line'>sysfs on /sys type sysfs (rw)
+</span><span class='line'>devpts on /dev/pts type devpts (rw,gid=5,mode=620)
+</span><span class='line'>tmpfs on /dev/shm type tmpfs (rw,rootcontext="system_u:object_r:tmpfs_t:s0")
+</span><span class='line'>/dev/vda1 on /boot type ext4 (rw)
+</span><span class='line'>/dev/mapper/vgsrv-common on /common type ext4 (rw)
+</span><span class='line'>/dev/mapper/vgsrv-home on /home type ext4 (rw)
+</span><span class='line'>/dev/mapper/vgsrv-shrink on /shrink type ext4 (rw)
+</span><span class='line'>none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)
+</span><span class='line'>sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
+</span><span class='line'>/dev/vda5 on /togogo type ext4 (rw)
+</span><span class='line'>/dev/mapper/togogovg-lv01 on /lv01 type ext4 (rw)</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>扫描，查看物理卷，卷组，逻辑卷信息：<br/>
+pvscan,pvdisplay<br/>
+vgscan,vgdisplay<br/>
+lvscan,lvdisplay<br/>
+实例：</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# vgscan
+</span><span class='line'>  Reading all physical volumes.  This may take a while...
+</span><span class='line'>  Found volume group "togogovg" using metadata type lvm2
+</span><span class='line'>  Found volume group "vgsrv" using metadata type lvm2
+</span><span class='line'>[root@demo ~]# 
+</span><span class='line'>[root@demo ~]# pvscan
+</span><span class='line'>  PV /dev/vda6   VG togogovg   lvm2 [196.00 MiB / 44.00 MiB free]
+</span><span class='line'>  PV /dev/vda7   VG togogovg   lvm2 [296.00 MiB / 296.00 MiB free]
+</span><span class='line'>  PV /dev/vda2   VG vgsrv      lvm2 [9.97 GiB / 4.75 GiB free]
+</span><span class='line'>  Total: 3 [10.45 GiB] / in use: 3 [10.45 GiB] / in no VG: 0 [0   ]
+</span><span class='line'>[root@demo ~]# pvdisplay /dev/vda6
+</span><span class='line'>  --- Physical volume ---
+</span><span class='line'>  PV Name               /dev/vda6
+</span><span class='line'>  VG Name               togogovg
+</span><span class='line'>  PV Size               200.29 MiB / not usable 4.29 MiB
+</span><span class='line'>  Allocatable           yes 
+</span><span class='line'>  PE Size               4.00 MiB
+</span><span class='line'>  Total PE              49
+</span><span class='line'>  Free PE               11
+</span><span class='line'>  Allocated PE          38
+</span><span class='line'>  PV UUID               pjxkza-zEAg-3JF6-G7Gg-1oju-xcuZ-bJdF5x
+</span><span class='line'>[root@demo ~]# vgdisplay togogovg
+</span><span class='line'>  --- Volume group ---
+</span><span class='line'>  VG Name               togogovg
+</span><span class='line'>  System ID             
+</span><span class='line'>  Format                lvm2
+</span><span class='line'>  Metadata Areas        2
+</span><span class='line'>  Metadata Sequence No  2
+</span><span class='line'>  VG Access             read/write
+</span><span class='line'>  VG Status             resizable
+</span><span class='line'>  MAX LV                0
+</span><span class='line'>  Cur LV                1
+</span><span class='line'>  Open LV               1
+</span><span class='line'>  Max PV                0
+</span><span class='line'>  Cur PV                2
+</span><span class='line'>  Act PV                2
+</span><span class='line'>  VG Size               492.00 MiB
+</span><span class='line'>  PE Size               4.00 MiB
+</span><span class='line'>  Total PE              123
+</span><span class='line'>  Alloc PE / Size       38 / 152.00 MiB
+</span><span class='line'>  Free  PE / Size       85 / 340.00 MiB
+</span><span class='line'>  VG UUID               fd7wDW-R1Ov-8oQh-iyvN-tBur-RMoG-VcYQ5d
+</span><span class='line'>[root@demo ~]# lvdisplay /dev/mapper/togogovg-lv01 
+</span><span class='line'>  --- Logical volume ---
+</span><span class='line'>  LV Path                /dev/togogovg/lv01
+</span><span class='line'>  LV Name                lv01
+</span><span class='line'>  VG Name                togogovg
+</span><span class='line'>  LV UUID                BMsz8a-ye5Q-77oH-rm5y-O3I6-moKB-YeOXmP
+</span><span class='line'>  LV Write Access        read/write
+</span><span class='line'>  LV Creation host, time demo.example.com, 2013-09-15 14:56:43 -0400
+</span><span class='line'>  LV Status              available
+</span><span class='line'>  # open                 1
+</span><span class='line'>  LV Size                152.00 MiB
+</span><span class='line'>  Current LE             38
+</span><span class='line'>  Segments               1
+</span><span class='line'>  Allocation             inherit
+</span><span class='line'>  Read ahead sectors     auto
+</span><span class='line'>  - currently set to     256
+</span><span class='line'>  Block device           253:5</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>扩展逻辑卷</h3>
+
+<ul>
+<li>一般流程：<br/>
+新建一个物理卷&mdash;>将物理卷加入卷组&mdash;>扩展逻辑卷<br/>
+实例：<br/>
+1、创建物理卷（略）<br/>
+2、扩展卷组</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo ~]# vgextend togogovg /dev/vda8
+</span><span class='line'>  Volume group "togogovg" successfully extended
+</span><span class='line'>[root@demo ~]# vgdisplay togogovg
+</span><span class='line'>    
+</span><span class='line'>  VG Name               togogovg
+</span><span class='line'>  System ID             
+</span><span class='line'>  Format                lvm2
+</span><span class='line'>  Metadata Areas        3
+</span><span class='line'>  Metadata Sequence No  3
+</span><span class='line'>  VG Access             read/write
+</span><span class='line'>  VG Status             resizable
+</span><span class='line'>  MAX LV                0
+</span><span class='line'>  Cur LV                1
+</span><span class='line'>  Open LV               1
+</span><span class='line'>  Max PV                0
+</span><span class='line'>  Cur PV                3
+</span><span class='line'>  Act PV                3
+</span><span class='line'>  VG Size               788.00 MiB
+</span><span class='line'>  PE Size               4.00 MiB
+</span><span class='line'>  Total PE              197
+</span><span class='line'>  Alloc PE / Size       38 / 152.00 MiB
+</span><span class='line'>  Free  PE / Size       159 / 636.00 MiB
+</span><span class='line'>  VG UUID               fd7wDW-R1Ov-8oQh-iyvN-tBur-RMoG-VcYQ5d</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3、扩展逻辑卷
+&#8220;`
+[root@demo ~]# lvextend -L +148M /dev/mapper/togogovg-lv01
+  Extending logical volume lv01 to 300.00 MiB
+  Logical volume lv01 successfully resized
+[root@demo ~]# lvdisplay /dev/mapper/togogovg-lv01
+  &mdash;&ndash; Logical volume &mdash;&ndash;
+  LV Path                /dev/togogovg/lv01
+  LV Name                lv01
+  VG Name                togogovg
+  LV UUID                BMsz8a-ye5Q-77oH-rm5y-O3I6-moKB-YeOXmP
+  LV Write Access        read/write
+  LV Creation host, time demo.example.com, 2013-09-15 14:56:43 -0400
+  LV Status              available
+  # open                 1
+  LV Size                300.00 MiB
+  Current LE             75
+  Segments               2
+  Allocation             inherit
+  Read ahead sectors     auto
+  &ndash; currently set to     256
+  Block device           253:5
+[root@demo ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/vgsrv-root</p>
+
+<pre><code>                  4.0G  2.6G  1.3G  68% /
+</code></pre>
+
+<p>tmpfs                 499M   88K  499M   1% /dev/shm
+/dev/vda1             248M   33M  203M  14% /boot
+/dev/mapper/vgsrv-common</p>
+
+<pre><code>                  124M  5.6M  113M   5% /common
+</code></pre>
+
+<p>/dev/mapper/vgsrv-home</p>
+
+<pre><code>                  248M   46M  191M  20% /home
+</code></pre>
+
+<p>/dev/mapper/vgsrv-shrink</p>
+
+<pre><code>                  310M   11M  284M   4% /shrink
+</code></pre>
+
+<p>/dev/vda5              98M  5.6M   87M   6% /togogo
+/dev/mapper/togogovg-lv01</p>
+
+<pre><code>                  148M  5.6M  135M   4% /lv01
+</code></pre>
+
+<p>[root@demo ~]# resize2fs /dev/mapper/togogovg-lv01
+resize2fs 1.41.12 (17-May-2010)
+Filesystem at /dev/mapper/togogovg-lv01 is mounted on /lv01; on-line resizing required
+old desc_blocks = 1, new_desc_blocks = 2
+Performing an on-line resize of /dev/mapper/togogovg-lv01 to 307200 (1k) blocks.
+The filesystem on /dev/mapper/togogovg-lv01 is now 307200 blocks long.
+[root@demo ~]# df -h
+Filesystem            Size  Used Avail Use% Mounted on
+/dev/mapper/vgsrv-root</p>
+
+<pre><code>                  4.0G  2.6G  1.3G  68% /
+</code></pre>
+
+<p>tmpfs                 499M   88K  499M   1% /dev/shm
+/dev/vda1             248M   33M  203M  14% /boot
+/dev/mapper/vgsrv-common</p>
+
+<pre><code>                  124M  5.6M  113M   5% /common
+</code></pre>
+
+<p>/dev/mapper/vgsrv-home</p>
+
+<pre><code>                  248M   46M  191M  20% /home
+</code></pre>
+
+<p>/dev/mapper/vgsrv-shrink</p>
+
+<pre><code>                  310M   11M  284M   4% /shrink
+</code></pre>
+
+<p>/dev/vda5              98M  5.6M   87M   6% /togogo
+/dev/mapper/togogovg-lv01</p>
+
+<pre><code>                  291M  6.1M  270M   3% /lv01
+</code></pre>
+
+<p>[root@demo ~]# pvscan
+  PV /dev/vda6   VG togogovg   lvm2 [196.00 MiB / 0    free]
+  PV /dev/vda7   VG togogovg   lvm2 [296.00 MiB / 192.00 MiB free]
+  PV /dev/vda8   VG togogovg   lvm2 [296.00 MiB / 296.00 MiB free]
+  PV /dev/vda2   VG vgsrv      lvm2 [9.97 GiB / 4.75 GiB free]
+  Total: 4 [10.74 GiB] / in use: 4 [10.74 GiB] / in no VG: 0 [0   ]
+  &#8220;`</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[关于知道不知道的几点理解]]></title>
@@ -108,7 +1697,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Fedora 安装 Zend Frame 笔记]]></title>
+    <title type="html"><![CDATA[linux安装 Zend Frame 笔记]]></title>
     <link href="http://grunmin.github.io/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/"/>
     <updated>2013-08-02T00:15:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji</id>
@@ -188,7 +1777,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Fedora安装wecenter笔记]]></title>
+    <title type="html"><![CDATA[linux安装wecenter笔记]]></title>
     <link href="http://grunmin.github.io/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/"/>
     <updated>2013-07-25T20:32:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji</id>
@@ -238,7 +1827,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[fedora安装lamp环境笔记]]></title>
+    <title type="html"><![CDATA[linux安装lamp环境笔记]]></title>
     <link href="http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/"/>
     <updated>2013-07-21T11:20:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji</id>

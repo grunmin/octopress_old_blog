@@ -1,0 +1,667 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>RHCE note 9 - 郭润民的博客</title>
+  <meta name="author" content="Grunmin">
+
+  
+  <meta name="description" content="unit 2 配置sudoers 文件/etc/sudoers是只读文件，保存时需加！强制保存. 实例： 1
+2
+[root@desktop31 ~]# ll /etc/sudoers
+-r--r-----. 1 root root 4002 Mar 2 2012 /etc/sudoers vi &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://grunmin.github.io/blog/2013/11/03/rhce-note-9">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="郭润民的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-42775487-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">郭润民的博客</a></h1>
+  
+    <h2>Learn for Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:grunmin.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">RHCE Note 9</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-03T23:20:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><h2>unit 2</h2>
+
+<h3>配置sudoers</h3>
+
+<p>文件/etc/sudoers是只读文件，保存时需加！强制保存.</p>
+
+<!-- more -->
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# ll /etc/sudoers
+</span><span class='line'>-r--r-----. 1 root root 4002 Mar  2  2012 /etc/sudoers</span></code></pre></td></tr></table></div></figure>
+
+
+<p>vi sudoers</p>
+
+<ol>
+<li>sudoers语法规则</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user1    machine=(user2) command</span></code></pre></td></tr></table></div></figure>
+
+
+<p>
+实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# cat /etc/sudoers | grep -v ^#
+</span><span class='line'>root  ALL=(ALL)   ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<p>说明:root能在所有机器上以所有用户的身份执行任何命令。</p>
+
+<ol>
+<li>授予组成员访问任何命令的权限</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>%groupname   ALL=    ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# cat /etc/sudoers | grep %wheel
+</span><span class='line'>%wheel    ALL=(ALL)   ALLj</span></code></pre></td></tr></table></div></figure>
+
+
+<p>说明：wheel组能在所有机器上以所有用户身份执行任何命令。</p>
+
+<ol>
+<li>无需提供密码的设置</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user machine=(user2) NOPASSWD: ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>user1   ALL=(root)      NOPASSWD: ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>授予多名用户具有sudo权限</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>User_Alias   username = user1, user2, user3
+</span><span class='line'>username  machine=(user)  ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>User_Alias ADMINS = user01, user001
+</span><span class='line'>ADMIN   ALL=(ALL)       NOPASSWD: ALL</span></code></pre></td></tr></table></div></figure>
+
+
+<ol>
+<li>设置用户对特定命令列表具有sudo权限</li>
+</ol>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Cmnd_Alias type = command, command
+</span><span class='line'>username  ALL=(ALL)   type</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Cmnd_Alias STORAGE = /sbin/fdisk, /sbin/sfdisk, /sbin/parted, /sbin/partprobe, /bin/mount, /bin/umount
+</span><span class='line'>ADMINS  ALL=(ALL)       NOPASSWD: STORAGE</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Kerberos配置</h3>
+
+<h4>安装</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum groupinstall -y directory-client
+</span><span class='line'>yum install -y openldap-clients
+</span><span class='line'>yum install -y krb5-workstation</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>配置</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>authconfig --enableldap --ldapserver=instructor.example.com --enableldaptls --ldaploadcacert=ftp://instructor.example.com/pub/example-ca.crt --ldapbasedn="dc=example,dc=com" --disableldapauth --enablekrb5 --krb5kdc=instructor.example.com --krb5adminserver=instructor.example.com --krb5realm=EXAMPLE.COM --enablesssd --enablesssdauth --update</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>--enablceldaptls 开启tls
+</span><span class='line'>--ldaploadcacert derberos证书下载目录
+</span><span class='line'>--ldapbasedn 基准dn
+</span><span class='line'>--disableldapauth 禁止ldap认证
+</span><span class='line'>--krb5realm 域名
+</span><span class='line'>--enablesssd --enablesssdauth 开启sssd认证</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>测试配置：</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>getent passwd ldapuserX
+</span><span class='line'>ssh ldapuserX@serverX</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@demo cacerts]# getent passwd ldapuser1
+</span><span class='line'>ldapuser1:*:1701:1701:LDAP Test User 1:/home/guests/ldapuser1:/bin/bash
+</span><span class='line'>[root@demo cacerts]# ssh ldapuser1@serverX
+</span><span class='line'>ldapuser1@serverX's password: kerberos</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>unit 3</h2>
+
+<h3>Bash 编程</h3>
+
+<ul>
+<li><p>包含bash命令的文件第一行应为：
+#!/bin/bash</p></li>
+<li><p>查看环境变量：<br/>
+<code>echo $PATH</code><br/>
+<code>set</code><br/>
+<code>env</code><br/>
+实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# echo $PATH
+</span><span class='line'>/usr/lib64/qt-3.3/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/root/bin</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>变量赋值,使用
+str=value
+$str 或者 ${str}</p></li>
+<li><p>添加目录到环境变量：<br/>
+<code>PATH=$PATH:path</code><br/>
+实例：<br/>
+<code>PATH=$PATH:/root</code></p></li>
+<li><p>创建全局变量：<br/>
+<code>export $NAME</code></p></li>
+<li><p>命令替换<br/>
+<code>$( shell command)</code><br/>
+`shell command`<br/>
+实例1：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>touch datafile.$(id -un)
+</span><span class='line'>[root@desktop31 ~]# ls | grep datafile
+</span><span class='line'>datafile.root</span></code></pre></td></tr></table></div></figure>
+
+
+<p>实例2：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@desktop31 ~]# echo $TODAY
+</span><span class='line'>[root@desktop31 ~]# TODAY=`date +%Y-%m-%d`
+</span><span class='line'>[root@desktop31 ~]# echo $TODAY
+</span><span class='line'>2013-10-26</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>弱引用，强引用和转义</p></li>
+<li><p>bash编程实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>添加用户  
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>if grep "^$1:" /etc/passwd ; then
+</span><span class='line'>  echo "$1 is exist"
+</span><span class='line'>else
+</span><span class='line'>  useradd $1;
+</span><span class='line'>  echo redhat |passwd --stdin $1;
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>查看网络主机
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>read -p "Please input a ip addr:" IP
+</span><span class='line'>ping -c2 $IP &gt; /dev/null 2&gt;&1
+</span><span class='line'>if [ $? -eq 0 ];then
+</span><span class='line'>  echo "$IP is up..."
+</span><span class='line'>else
+</span><span class='line'>  echo "$IP is down..."
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>无题……
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>read -p "Please choice y/n" YN
+</span><span class='line'>if [ $YN == y -o $YN == Y  -o $YN == 'yes' ]; then
+</span><span class='line'>  echo "Continue..."
+</span><span class='line'>elif [ $YN == n -o $YN == N -o $YN == 'no' ]; then
+</span><span class='line'>  exit 1
+</span><span class='line'>else
+</span><span class='line'>  echo "other"
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>检查服务运行状态
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>read -p "Plese input a service name:" SN
+</span><span class='line'>SERVICE=$(netstat -anutlp |grep $SN)
+</span><span class='line'>if test -n "$SERVICE" ; then
+</span><span class='line'>  echo "$SN is running..."
+</span><span class='line'>else
+</span><span class='line'>  echo "$SN is down..."
+</span><span class='line'>fi</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>添加用户
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>for Name in usera userb userc a b c;
+</span><span class='line'>do
+</span><span class='line'>        if grep "^$Name:" /etc/passwd &gt; /dev/null 2&gt;&1; then
+</span><span class='line'>                echo "User exist!";
+</span><span class='line'>        else
+</span><span class='line'>                useradd $Name;
+</span><span class='line'>                echo "Add user $Name succeed!";
+</span><span class='line'>                echo "redhat" | passwd --stdin $Name &gt; /dev/null 2&gt;&1;
+</span><span class='line'>        fi
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>删除用户
+</span><span class='line'>#!/bin/bash
+</span><span class='line'>for Name in usera userb userc a b c;
+</span><span class='line'>do
+</span><span class='line'>        if grep "^$Name:" /etc/passwd &gt; /dev/null 2&gt;&1 ; then
+</span><span class='line'>                userdel $Name;
+</span><span class='line'>                rm -rf /home/$Name;
+</span><span class='line'>                rm -rf /var/mail/$Name;
+</span><span class='line'>                echo "user $Name delete succeed!";
+</span><span class='line'>        fi
+</span><span class='line'>done</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>比较文件内容diff<br/>
+diff -Naur file1 file2 > patchfile  可以制作补丁文件</p></li>
+<li><p>补丁命令patch
+实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># patch issue patchfile
+</span><span class='line'>patching file issue
+</span><span class='line'># patch -b &lt; patch file
+</span><span class='line'>patching file hosts
+</span><span class='line'>patching file network</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>过滤 grep
+几个需要记住的参数：<br/>
+-i  不区分大小写<br/>
+-v 返回不包含特定字符的行</p></li>
+<li><p>剪切cut<br/>
+-f 指定第几个字段<br/>
+-d 分隔符<br/>
+实例：</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cut -f3 -d: /etc/hosts //取出hosts文件中以:为分隔符的第3个字段
+</span><span class='line'>[root@demo ~]# ip addr |grep "inet " |cut -d" " -f6 |cut -d/ -f1
+</span><span class='line'>127.0.0.1
+</span><span class='line'>192.168.0.250</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>tail 和 head<br/>
+tail显示文件末尾10行（默认）<br/>
+head显示文件开头10行（默认）<br/>
+均可-n 参数后面接数字更改输出行数<br/>
+tail -f可以持续显示文件的更新，例如<br/>
+tail -f /var/log/messages<br/>
+系统管理员常用</p></li>
+<li><p>wc显示文件信息<br/>
+-l 行数<br/>
+-w 字数<br/>
+-c 字节数
+-m 字符数</p></li>
+<li><p>排序sort</p></li>
+<li><p>取唯一uniq</p></li>
+</ul>
+
+
+<h3>默认用户属性</h3>
+
+<p>在/etc/login.defs及/etc/default/useradd中定义<br/>
+chage命令可以调整属性</p>
+
+<h2>unit 4</h2>
+
+<p>gpg的使用<br/>
+  + 流程：<br/>
+  由user1产生密钥对，公钥导出给需要向user1传送文件的主机user2。<br/>
+  gpg &mdash;gen-key <br/>
+  gpg -K 查看私钥<br/>
+  gpg -k 查看公钥<br/>
+  gpg &mdash;export &mdash;armor key-id -o > file.key<br/>
+  user2导入公钥加密文件，传送给user1。<br/>
+  gpg &mdash;import file.key<br/>
+  gpg -e -armor -r key-id file<br/>
+  user1运用私钥解密文件，用私钥前需输入密码。<br/>
+  gpg -d file > file_without_encrypt</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Grunmin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-03T23:20:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://grunmin.github.io/blog/2013/11/03/rhce-note-9/" data-via="" data-counturl="http://grunmin.github.io/blog/2013/11/03/rhce-note-9/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/11/03/rhce-note-1/" title="Previous Post: RHCE note 1">&laquo; RHCE note 1</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/03/rhce-note-1/">RHCE Note 1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/">关于知道不知道的几点理解</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Linux安装 Zend Frame 笔记</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/">Linux安装wecenter笔记</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>About Me</h1>
+  <p>A little something about me.</p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Grunmin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
