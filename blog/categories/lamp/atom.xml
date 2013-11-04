@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: lamp | 郭润民的博客]]></title>
+  <link href="http://grunmin.github.io/blog/categories/lamp/atom.xml" rel="self"/>
+  <link href="http://grunmin.github.io/"/>
+  <updated>2013-11-04T16:25:59+08:00</updated>
+  <id>http://grunmin.github.io/</id>
+  <author>
+    <name><![CDATA[Grunmin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[linux搭建lamp环境笔记]]></title>
+    <link href="http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/"/>
+    <updated>2013-07-21T11:20:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji</id>
+    <content type="html"><![CDATA[<p>在学习php编程的过程中，了解了lamp环境的重要性，因此尝试自行搭建。在这个过程中经历了很多困难，为了便于查阅和再次搭建，在此将过程都记录下来。有错漏或可以改进的地方，欢迎指出拨正。</p>
+
+<!-- more -->
+
+
+<p>此前都是用源码包安装，其实用rpm包安装省时省力。</p>
+
+<h2>从软件包安装</h2>
+
+<p>```</p>
+
+<h1>yum groupinstall &lsquo;web-server&rsquo; -y</h1>
+
+<h1>yum install -y php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt pcre-devel libxml2-devel mysql-devel apr apr-devel apr-util apr-util-devel curl-devel libpng-devel mysql-server</h1>
+
+<p>```</p>
+
+<h2>源码包安装</h2>
+
+<h3>前期工作</h3>
+
+<p><strong>第1步</strong>： 在终端输入
+<code>
+$ sudo yum update  # 更新系统
+</code>
+<strong>第2步</strong>：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包</p>
+
+<p><strong>第3步</strong>：
+<code>
+$ sudo yum install gcc gcc-c++ libxml2 libxml2-devel pcre pcre-devel #安装依赖软件包
+</code>
+<strong>第4步</strong>：tar -zxvf 解压apache,mysql,php,pcre 等压缩包， sudo mv 移动到/usr/local目录下<br/>
+<code>
+$ sudo cd /usr/local/pcre;./configure --prefix=/usr/local/pcre #安装pcre
+</code>
+（非必需，如果安装apache时显示未安装pcre可按照此法安装）<br/>
+<strong>第5步</strong>： cd httpd/srclib/ 解压apr,apr-util 到目录下，修改文件名（不带版本号，如apr-util）</p>
+
+<h3>安装apache:</h3>
+
+<p><code>
+$ cd /usr/local/httpd  # 进入安装目录  
+$ sudo ./configure --prefix=/usr/local/apache2 --enable-so --with-mpm=worker --with-pcre=/usr/local/pcre --with-included-apr # 配置（注意./configure的/前有个小点，若没有按照上文安装pcre，可去掉--with-pcre后面的路径）
+$ sudo make
+$ sudo make install
+ #(--prefix指定安装目录，配置文件在/usr/local/apache2/conf目录下，--enable-so启动加载共享模块的功能，--with-mpm=worker吿诉apache使用多线程化多处理模块worker.)
+</code>
+<strong>启动apache</strong>:<br/>
+<code>
+$ sudo /usr/local/apache2/bin/httpd -k start | stop
+</code>
+ 或
+<code>
+$ sudo /usr/local/apache2/bin/apachectl start | stop
+</code>
+(可用ps -e | grep httpd 查看apache是否已开启）</p>
+
+<h3>安装mysql：</h3>
+
+<p><code>
+$ cd /usr/local
+$ sudo ln -s /usr/local/mysql-××× mysql #链接源码到一个文件夹
+$ cd mysql
+$ scripts/mysql_install_db --user=[username]    #（username为自己的用户名，中括号不用打进去，下同）
+$ sudo chown -R root .     #（注意末尾有个小点）
+$ sudo chown -R [username] data
+$ sudo chgrp -R [username] .
+</code>
+<strong>启动mysql</strong>:<br/>
+<code>
+ sudo /usr/local/mysql/bin/mysqld_safe --user=[username] &amp;
+</code>
+<strong>设置开机启动Mysql</strong>：
+<code>
+$ sudo cp support-files/mysql.server /etc/init.d/[username]
+$ sudo cp support-files/mysqld_multi.server /etc/init.d/[username]
+$ sudo chmod +x /etc/init.d/[username]
+$ sudo chkconfig --add [username]
+</code>
+<strong>测试</strong>：
+<code>
+$ sudo /usr/local/mysql/bin/mysqladmin -u root -p version
+$ sudo /usr/local/mysql/bin/mysqlshow
+</code>
+<strong>修改密码，删除匿名用户</strong>：
+<code>
+$ sudo /usr/local/mysql/bin/mysqladmin -u root -p password [password]
+$ sudo /usr/local/mysql/bin/mysql -u root -p
+</code>
+[password]可以不输入，上面两个命令是修改密码用，此时进入mysql命令界面<br/>
+<code>
+mysql&gt; delete from mysql.user where host='localhost' and user='';
+mysql&gt; flush privileges;
+</code></p>
+
+<h3>安装php</h3>
+
+<p><code>
+$ cd /usr/local/php-5__
+$ sudo ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/local/mysql
+$ make
+$ sudo make install
+$ sudo cp /usr/local/php___/php.ini-__ /usr/local/php/lib/php.ini  
+</code>
+修改httpd.conf 添加AddType application/x-httpd-php .php<br/>
+在DirectoryIndex index.html 后加入index.php<br/>
+<strong>重启apache</strong>:
+<code>
+sudo /usr/local/apache2/bin/apachectl restart
+</code></p>
+
+<h3>安装phpMyAdmin:</h3>
+
+<p><code>
+tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs
+</code>
+到此全部完成</p>
+
+<h3>Q1</h3>
+
+<p>如果测试mysql时没有显示版本信息等界面，而是显示Can&rsquo;t connect to local MySQL server through socket &lsquo;/tmp/mysql.sock&rsquo;(2)则极有可能是mysql没有安装成功。解决办法是删除系统自带的mysql服务，
+<code>
+$ rpm -qa | grep mysql
+</code>
+若有输出结果，则直接用rpm -e删除之，再输入
+<code>
+$ chkconfig --list | grep -i mysql
+</code>
+检查mysql服务，有的话再删除之
+<code>
+$ sudo chkconfig --del mysql
+</code>
+然后按照安装mysql的步骤再安装一次即可。</p>
+]]></content>
+  </entry>
+  
+</feed>

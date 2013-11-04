@@ -10,6 +10,7 @@
 
   
   <meta name="description" content="新建项目 下载Zend Frame安装包(现在下载ZF要注册！可以用这条命令直接下载) 1
+2
 $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.11.11-minimal.tar.gz &hellip;">
   
 
@@ -69,8 +70,8 @@ $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
 </ul>
 
 </nav>
@@ -106,25 +107,22 @@ $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.
   </header>
 
 
-<div class="entry-content"><h2>新建项目</h2>
+<div class="entry-content"><h3>新建项目</h3>
 
 <p>下载Zend Frame安装包(现在下载ZF要注册！可以用这条命令直接下载)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.11.11-minimal.tar.gz
+</span><span class='line'>$ php -i | grep include_path </span></code></pre></td></tr></table></div></figure>
+
+
+<p>(用源码包安装的php，若显示php命令不存在，就把php安装目录里bin文件下的php文件复制到可执行目录下，如/bin或/usr/bin)</p>
 
 <!-- more -->
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.11.11-minimal.tar.gz</span></code></pre></td></tr></table></div></figure>
-
-
-<p>命令行输入</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ php -i | grep include_path </span></code></pre></td></tr></table></div></figure>
-
-
-<p>(若显示php命令不存在，就把php安装目录里bin文件下的php文件复制到可执行目录下，如/bin或/usr/bin)<br/>
-在服务器文件根目录apache2/htdocs下执行</p>
+<p>在服务器文件根目录apache2/htdocs下执行</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ zf create project [projectname]</span></code></pre></td></tr></table></div></figure>
@@ -133,7 +131,7 @@ $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.
 <p>(projectname即你要的项目名，不加方括号)，会生成一个projectname的目录。此时目录下有application,docs,library,public,tests目录。<br/>
 把之前的Zend文件夹再复制到library目录下。</p>
 
-<h2>配置php，启动rewrite功能</h2>
+<h3>配置php和apache，启动rewrite功能</h3>
 
 <p>进入apache的源码目录(不是安装目录)输入</p>
 
@@ -147,15 +145,22 @@ $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.
 </span><span class='line'>$ sudo /usr/local/apache2/bin/apxs -i -a -n mod_rewrite mod_rewrite.la</span></code></pre></td></tr></table></div></figure>
 
 
-<p>成功的话应该在你的apache的modules目录中编译出一个mod_rewrite.so文件。<br/>
-编辑httpd.conf文件，确认httpd.conf中已经包含mod_rewrite.so的加载语句，如下：
-<code>LoadModule rewrite_module modules/mod_rewrite.so</code>(即把此语句前的#号去掉)<br/>
-这时你的apache应该已经支持rewrite了。</p>
+<p>成功的话应该在你的apache的modules目录中编译出一个<code>mod_rewrite.so</code>文件。<br/>
+编辑httpd.conf文件，确认httpd.conf中已经包含<code>mod_rewrite.so</code>的加载语句，如下：</p>
 
-<h2>配置apache</h2>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LoadModule rewrite_module modules/mod_rewrite.so  #(即把此语句前的#号去掉)  </span></code></pre></td></tr></table></div></figure>
 
-<p>修改apache/conf/httpd.conf<br/>
-把AllowOverride None 的None改成 All<br/>
+
+<p>这时你的apache应该已经支持rewrite了。<br/>
+修改<code>apache/conf/httpd.conf </code>
+把</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>AllowOverride None </span></code></pre></td></tr></table></div></figure>
+
+
+<p>的None改成 All<br/>
 重启apache</p>
 
 <p>若成功的话打开浏览器进入<code>localhost/projectname/public</code>可以看到Zend Frame的欢迎界面</p>
@@ -166,15 +171,23 @@ $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.
 </pre></td><td class='code'><pre><code class=''><span class='line'>zf show version</span></code></pre></td></tr></table></div></figure>
 
 
-<p>安装过程中遇到了许多问题，比如服务器加载失败，出现500错误等。按照一些教程去弄虚拟主机，并设置library为apache文件根目录。结果证明这些都是多余的。如果按照上面的步骤安装出现了问题，可以查看apache2/log/error_log文件。如出现下面的问题，可以参考参考资料里的<a href="http://ayiui4566.iteye.com/blog/662170">wamp+Zend框架配置问题</a>。<br/>
- Request exceeded the limit of 10 internal     redirects due to probable configuration error. Use &lsquo;LimitInternalRecursion&rsquo;     to increase the limit if necessary. Use &lsquo;LogLevel debug&rsquo; to get a backtrace.</p>
+<p>安装过程中遇到了许多问题，比如服务器加载失败，出现500错误等。按照一些教程去弄虚拟主机，并设置library为apache文件根目录。结果证明这些都是多余的。如果按照上面的步骤安装出现了问题，可以查看apache2/log/error_log文件。如出现下面的问题，可以参考参考资料里的<a href="http://ayiui4566.iteye.com/blog/662170">wamp+Zend框架配置问题</a></p>
 
-<p>  /usr/local/apache2/htdocs/zftest/.htaccess:            Invalid command &lsquo;RewriteRule!&#46;(js|ico|gif|jpg|png|css)$&rsquo;, perhaps             misspelled or defined by a module not included in the server configuration</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Request exceeded the limit of 10 internal     redirects due to probable configuration error. Use 'LimitInternalRecursion'     to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace.</span></code></pre></td></tr></table></div></figure>
 
-<p>   PHP Warning:  require_once(Zend/Application.php):      failed to open stream: No such file or directory in /usr/local/apache2/         htdocs/zftest/public/index.php on line 18</p>
 
-<p>   参考资料：
-   <a href="http://www.path8.net/tn/archives/961">Linux下Apache安装/增加mod_rewrite模块以启用rewrite功能</a><br/>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  /usr/local/apache2/htdocs/zftest/.htaccess:            Invalid command 'RewriteRule!\\.(js|ico|gif|jpg|png|css)$', perhaps             misspelled or defined by a module not included in the server configuration</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   PHP Warning:  require_once(Zend/Application.php):      failed to open stream: No such file or directory in /usr/local/apache2/         htdocs/zftest/public/index.php on line 18</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>参考资料：</h4>
+
+<p>   <a href="http://www.path8.net/tn/archives/961">Linux下Apache安装/增加mod_rewrite模块以启用rewrite功能</a><br/>
    <a href="http://ayiui4566.iteye.com/blog/662170">WAMP+Zend框架配置问题</a><br/>
    <a href="http://blog.csdn.net/daydreamingboy/article/details/6327527">Zend Framework学习日记(1)&mdash;环境搭建篇</a><br/>
    <a href="http://blog.csdn.net/mengxiangbaidu/article/details/7046568#">Zend Framework教程-用Zend命令行快速创建Zend应用</a></p>
@@ -202,6 +215,12 @@ $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.
 
 <time datetime="2013-08-02T00:15:00+08:00" pubdate data-updated="true">Aug 2<span>nd</span>, 2013</time>
       
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/php/'>php</a>
+  
+</span>
 
 
     </p>
@@ -237,8 +256,25 @@ $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h1>分类目录</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/rhce/'>RHCE (2)</a></li>
+<li class='category'><a href='/blog/categories/lamp/'>lamp (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/wecenter/'>wecenter (1)</a></li>
+<li class='category'><a href='/blog/categories/wiznote/'>wiznote (1)</a></li>
+<li class='category'><a href='/blog/categories/随想/'>随想 (1)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a>
@@ -256,10 +292,6 @@ $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.
         <a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Linux安装 Zend Frame 笔记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/">Linux安装wecenter笔记</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -268,9 +300,11 @@ $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.
 
 <section>
   <h1>About Me</h1>
-  <p>南中国一般大学大光电学子</p>
   <li>
-  <p>linux爱好者</p>
+  <p>南中国一般大学大光电学子</p>
+  </li>
+  <li>
+  <p>linux 爱好者</p>
   </li>
 </section>
 

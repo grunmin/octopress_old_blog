@@ -12,7 +12,8 @@
   <meta name="description" content="unit 1 查看系统版本
 cat /etc/redhat-release
 查看网络参数
-ifconfig 查看主机名
+ifconfig
+查看主机名
 hostname
 查看shell
 cat /etc/shells
@@ -80,8 +81,8 @@ passwd username &hellip;">
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
 </ul>
 
 </nav>
@@ -117,20 +118,16 @@ passwd username &hellip;">
   </header>
 
 
-<div class="entry-content"><h2>unit 1</h2>
+<div class="entry-content"><!-- more -->
+
+
+<h2>unit 1</h2>
 
 <ul>
 <li><p>查看系统版本<br/>
 cat /etc/redhat-release</p></li>
 <li><p>查看网络参数<br/>
 ifconfig</p></li>
-</ul>
-
-
-<!-- more -->
-
-
-<ul>
 <li><p>查看主机名<br/>
 hostname</p></li>
 <li><p>查看shell<br/>
@@ -1291,6 +1288,12 @@ lvscan,lvdisplay<br/>
 <time datetime="2013-11-03T02:07:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2013</time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/rhce/'>RHCE</a>
+  
+</span>
+
 
     </p>
     
@@ -1325,8 +1328,25 @@ lvscan,lvdisplay<br/>
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h1>分类目录</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/rhce/'>RHCE (2)</a></li>
+<li class='category'><a href='/blog/categories/lamp/'>lamp (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/wecenter/'>wecenter (1)</a></li>
+<li class='category'><a href='/blog/categories/wiznote/'>wiznote (1)</a></li>
+<li class='category'><a href='/blog/categories/随想/'>随想 (1)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a>
@@ -1344,10 +1364,6 @@ lvscan,lvdisplay<br/>
         <a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Linux安装 Zend Frame 笔记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/">Linux安装wecenter笔记</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -1356,9 +1372,11 @@ lvscan,lvdisplay<br/>
 
 <section>
   <h1>About Me</h1>
-  <p>南中国一般大学大光电学子</p>
   <li>
-  <p>linux爱好者</p>
+  <p>南中国一般大学大光电学子</p>
+  </li>
+  <li>
+  <p>linux 爱好者</p>
   </li>
 </section>
 

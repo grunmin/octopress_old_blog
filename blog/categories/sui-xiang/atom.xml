@@ -1,115 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>关于知道不知道的几点理解 - 郭润民的博客</title>
-  <meta name="author" content="Grunmin">
-
-  
-  <meta name="description" content="关于大学学习的四个层次:
-不知道自己不知道
-知道自己不知道
-不知道自己知道
-知道自己知道 通常我们的理解是这样：甫入大学，在没有对大学尤其是专业进行深入的了解之前，没能认识到自己知识的匮乏，此谓之不知道不知道。随着专业的学习，渐渐接触更多东西，开始感觉自己原有的知识不足以解决新的问题， &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="郭润民的博客" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-42775487-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">郭润民的博客</a></h1>
-  
-    <h2>Learn for Learning</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:grunmin.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">首页</a></li>
-  <li><a href="/blog/archives">归档</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
+  <title><![CDATA[Category: 随想 | 郭润民的博客]]></title>
+  <link href="http://grunmin.github.io/blog/categories/sui-xiang/atom.xml" rel="self"/>
+  <link href="http://grunmin.github.io/"/>
+  <updated>2013-11-04T16:25:59+08:00</updated>
+  <id>http://grunmin.github.io/</id>
+  <author>
+    <name><![CDATA[Grunmin]]></name>
     
-      <h1 class="entry-title">关于知道不知道的几点理解</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2013-08-05T11:24:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-<div class="entry-content"><p>关于大学学习的四个层次:<br/>
+  <entry>
+    <title type="html"><![CDATA[关于知道不知道的几点理解]]></title>
+    <link href="http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/"/>
+    <updated>2013-08-05T11:24:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie</id>
+    <content type="html"><![CDATA[<p>关于大学学习的四个层次:<br/>
 <strong>不知道自己不知道</strong><br/>
 <strong>知道自己不知道</strong><br/>
 <strong>不知道自己知道</strong><br/>
@@ -185,172 +94,7 @@
 <p>同样的事情，有的人绞尽脑汁也解不出来，有的人轻易解出来了。解不出的人讥讽，这有什么稀罕的？只不过一时没有想到而已。 也许真是这样，但问题是，没有那个解出来了的人的存在，没想到常常是永远都想不到了。一旦问题解出来了，很多人就跳出来表示自己也会。砸个鸡蛋大家当然都是会的，问题是不知道要砸，或者，用另外一个办法，转它。</p>
 
 <p>对于我而言，大学四层次的第二种描述能让我保持一种正确的姿态来对待生活中的各种问题，保持对智慧的不懈探索和追求。我愿意在以后的日子，尽我所能地做到这一点。</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
+]]></content>
+  </entry>
   
-
-<span class="byline author vcard">Posted by <span class="fn">Grunmin</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-05T11:24:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/sui-xiang/'>随想</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/" data-via="" data-counturl="http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/" title="Previous Post: linux安装 Zend Frame 笔记">&laquo; linux安装 Zend Frame 笔记</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/11/03/rhce-note-1/" title="Next Post: RHCE note 1">RHCE note 1 &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-  <h1>分类目录</h1>
-  <ul id="categories">
-    <li class='category'><a href='/blog/categories/rhce/'>RHCE (2)</a></li>
-<li class='category'><a href='/blog/categories/lamp/'>lamp (1)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
-<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
-<li class='category'><a href='/blog/categories/wecenter/'>wecenter (1)</a></li>
-<li class='category'><a href='/blog/categories/wiznote/'>wiznote (1)</a></li>
-<li class='category'><a href='/blog/categories/随想/'>随想 (1)</a></li>
-
-  </ul>
-</section>
-<section>
-  <h1>近期文章</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/03/rhce-note-1/">RHCE Note 1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/">关于知道不知道的几点理解</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Linux安装 Zend Frame 笔记</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-<section>
-  <h1>About Me</h1>
-  <li>
-  <p>南中国一般大学大光电学子</p>
-  </li>
-  <li>
-  <p>linux 爱好者</p>
-  </li>
-</section>
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Grunmin -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'grunmin';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/';
-        var disqus_url = 'http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>

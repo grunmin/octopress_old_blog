@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-11-04T12:35:21+08:00</updated>
+  <updated>2013-11-04T16:25:59+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -14,20 +14,299 @@
 
   
   <entry>
-    <title type="html"><![CDATA[RHCE note 9]]></title>
-    <link href="http://grunmin.github.io/blog/2013/11/03/rhce-note-9/"/>
-    <updated>2013-11-03T23:20:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2013/11/03/rhce-note-9</id>
-    <content type="html"><![CDATA[<h2>unit 2</h2>
-
-<h3>配置sudoers</h3>
-
-<p>文件/etc/sudoers是只读文件，保存时需加！强制保存.</p>
+    <title type="html"><![CDATA[octopress博客搭建和个性化配置]]></title>
+    <link href="http://grunmin.github.io/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/"/>
+    <updated>2013-11-04T15:02:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi</id>
+    <content type="html"><![CDATA[<p>使用octopress搭建博客的人，大概都会喜欢写关于如何搭建配置octopress的文章。因为它的高定制性，为极客们带来很多乐趣。从首页的配置，到分类，评论，个人信息，社会化分享等的配置，内容繁多。而且这是我第二次搭建octopress环境了，发现上一次的配置有一部分不能clone到本机上。因此，把配置的过程记录下来是十分有必要的。<br/>
+我的意愿是记录配置的过程，顺便整理大牛们关于这方面的一些说明。网络上相关资料有很多，没有实践过的没有摘录在这里。所有的代码实现都是直接引用前辈们的。另外，本博的配置环境是linux fedora 18.</p>
 
 <!-- more -->
 
 
-<p>实例：</p>
+<h4><a href="http://octopress.org/">octopress官方网站</a></h4>
+
+<p>octopress的配置都可以在官网上找到。事实上，遇到问题查询官网文档是最有效率的方法。</p>
+
+<h3>github的设置</h3>
+
+<h4>创建仓库</h4>
+
+<p>登陆github网站，注册一个用户，假设为grunmin。<br/>
+创建一个仓库，命名为username.github.com，例如<code>grunmin.github.com</code></p>
+
+<h4>使用密钥登陆github</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa     #生成密钥对</span></code></pre></td></tr></table></div></figure>
+
+
+<p>按默认一直确认即可。<br/>
+在github帐号设置里找到ssh的设置，添加一个ssh key。<br/>
+进入~/.ssh/找到id_rsa.pub文件，把里面的内容填到key里，title不填。<br/>
+这样做的好处是之后push到仓库上时可以不用输入密码。</p>
+
+<h3>安装ruby</h3>
+
+<p>查看ruby版本</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ruby --version  # 必须显示1.9.3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>安装方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -L https://get.rvm.io | bash -s stable --ruby
+</span><span class='line'>rvm install 1.9.3
+</span><span class='line'>rvm use 1.9.3
+</span><span class='line'>rvm rubygems latest</span></code></pre></td></tr></table></div></figure>
+
+
+<p>若有显示命名未找到，直接下载安装即可。</p>
+
+<h3>安装octopress</h3>
+
+<p>在安装octopress之前，确保已安装git。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone git://github.com/imathis/octopress.git octopress
+</span><span class='line'>cd octopress
+</span><span class='line'>gem install bundler
+</span><span class='line'>bundle install
+</span><span class='line'>rake install</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里容易出现三个问题：<br/>
+1、已安装rvm和bundler，但显示找不到命令。</p>
+
+<p>用绝对路径：<code>/home/username/.rvm/bin/rvm</code>
+<code>/home/username/.rvm/bin/bundler</code><br/>
+2、执行bundler install时显示：GemfileNotFound error?</p>
+
+<p>可能在安装的过程中退出了octopress目录，进入后执行即可。<br/>
+3、执行rake install时显示</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake aborted!
+</span><span class='line'>No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>同理，进入安装目录即可。</p>
+
+<h3>将博客部署到github上</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake setup_github_pages </span></code></pre></td></tr></table></div></figure>
+
+
+<p>此时会要求输入仓库的url，可以在github仓库内容业的右下角找到。<br/>
+例如我的是<code>git@github.com:grunmin/grunmin.github.com.git</code><br/>
+成功后即可用</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake new_post["title"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>生成新文章，文章在source/_post/目录下，文件名构成为时间和标题的拼音。之后执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake generate
+</span><span class='line'>rake preview   </span></code></pre></td></tr></table></div></figure>
+
+
+<p>此时可以预览(浏览器打开localhost:4000可看到效果。）如果没有问题，则执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rake deploy 
+</span><span class='line'>git add .
+</span><span class='line'>git comment -m "comment"
+</span><span class='line'>git push origin source </span></code></pre></td></tr></table></div></figure>
+
+
+<p>保存到仓库。<br/>
+需要注意的是执行git命令时应处于octopress目录，并且checkout到source分支，</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+</span><span class='line'>git checkout source
+</span><span class='line'>git add .
+</span><span class='line'>git commit -m "comment"
+</span><span class='line'>git push origin souce</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>从新电脑上恢复博客内容：</h3>
+
+<p>找到博客仓库的url，执行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git clone -b source (url) octopress   #把source 克隆到本地octopress目录上</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd octopress
+</span><span class='line'>git clone (url) _deploy   #克隆master分支，它存放着博客内容。</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem install bundler
+</span><span class='line'>bundle install
+</span><span class='line'>rake install
+</span><span class='line'>rake setup_github_pages</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之后操作同上，有问题照葫芦画瓢。</p>
+
+<h3>octopress博客的个性化配置</h3>
+
+<h4>添加文章分类（category)</h4>
+
+<p>1、增加category_list插件<br/>
+将下面的代码写到<code>plugins/category_list_tag.rb</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>module Jekyll
+</span><span class='line'>  class CategoryListTag &lt; Liquid::Tag
+</span><span class='line'>    def render(context)
+</span><span class='line'>      html = ""
+</span><span class='line'>      categories = context.registers[:site].categories.keys
+</span><span class='line'>      categories.sort.each do |category|
+</span><span class='line'>        posts_in_category = context.registers[:site].categories[category].size
+</span><span class='line'>        category_dir = context.registers[:site].config['category_dir']
+</span><span class='line'>        category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
+</span><span class='line'>        html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='http://grunmin.github.io/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
+</span><span class='line'>      end
+</span><span class='line'>      html
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2、增加侧边栏<br/>
+将下面的代码写到<code>source/_includes/asides/category_list.html</code></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
+</span><span class='line'>  &lt;h1&gt;Categories&lt;/h1&gt;
+</span><span class='line'>  &lt;ul id="categories"&gt;
+</span><span class='line'>    {\% category_list \%} #代码中应去掉\
+</span><span class='line'>  &lt;/ul&gt;
+</span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>修改_config.yml文件，找到<code>default_asides:</code><br/>
+在中括号内添加
+<code>asides/category_list.html</code></p>
+
+<p>添加的位置决定在页面显示的位置，注意用逗号隔开。<br/>
+用vim编辑器粘贴的话可能会自动缩进，启用粘贴模式或用其他编辑器即可。</p>
+
+<h4>添加社会化评论</h4>
+
+<p>octopress 产生静态网页，不支持评论功能，所以我们用第三方评论系统。好消息是octopress已为我们配置好了Disqus，我们只需要稍微填写以下信息即可。<br/>
+1、首先在<a href="http://www.disqus.com/">Disqus</a> 注册一个帐号，点击添加到我的网页，添加站点信息，比如我的<code>grunmin.github.io</code><br/>
+2、修改_config.yml文件，找到这一段：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Disqus Comments 
+</span><span class='line'>disqus_short_name: 
+</span><span class='line'>disqus_show_comment_count: false</span></code></pre></td></tr></table></div></figure>
+
+
+<p>添加你的disqus用户名，并把false修改成true即可。注意冒号后面有空格。<br/>
+此外，可以用国内的多说系统，速度较快，且比较符合景德镇村民的需要。之前我用的就是这个，但是没有记录配置过程，这次克隆时多说系统没有成功启动，因此不折腾了，有需要的话可以自行谷歌。</p>
+
+<h4>导航栏设置</h4>
+
+<p>导航栏的设置在<code>source\_includes\custom\navigation.html</code><br/>
+我们可以将Blog和Archives修改为首页和归档，也可以在此添加一个标签页，此时应使用命令<code>rake new_page['about']</code>创建一个页面，页面路径为<code>source\about\index.markdown</code>;<br/>
+修改后的文件如下：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;ul class="main-navigation"&gt; 
+</span><span class='line'>  &lt;li&gt;&lt;a href="http://grunmin.github.io/"&gt;首页&lt;/a&gt;&lt;/li&gt; 
+</span><span class='line'>  &lt;li&gt;&lt;a href="http://grunmin.github.io/blog/archives"&gt;归档&lt;/a&gt;&lt;/li&gt; 
+</span><span class='line'>  &lt;li&gt;&lt;a href="http://grunmin.github.io/about"&gt;关于&lt;/a&gt;&lt;/li&gt; 
+</span><span class='line'>&lt;/ul&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>持续更新…………</strong></p>
+
+<h4>参考文章：</h4>
+
+<p><a href="http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/">利用Octopress搭建一个Github博客</a></p>
+
+<p><a href="http://www.yangzhiping.com/tech/octopress.html">Ruby开源项目介绍(1)：octopress——像黑客一样写博客</a></p>
+
+<p><a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/">为octopress添加分类(category)列表</a></p>
+
+<p><a href="http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html">冯威的学习专栏&mdash;-记录工作学习点滴</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RHCE note 9]]></title>
+    <link href="http://grunmin.github.io/blog/2013/11/03/rhce-note-9/"/>
+    <updated>2013-11-03T23:20:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/11/03/rhce-note-9</id>
+    <content type="html"><![CDATA[<!-- more -->
+
+
+<h2>unit 2</h2>
+
+<h3>配置sudoers</h3>
+
+<p>文件/etc/sudoers是只读文件，保存时需加！强制保存.<br/>
+实例：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -464,20 +743,16 @@ chage命令可以调整属性</p>
     <link href="http://grunmin.github.io/blog/2013/11/03/rhce-note-1/"/>
     <updated>2013-11-03T02:07:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2013/11/03/rhce-note-1</id>
-    <content type="html"><![CDATA[<h2>unit 1</h2>
+    <content type="html"><![CDATA[<!-- more -->
+
+
+<h2>unit 1</h2>
 
 <ul>
 <li><p>查看系统版本<br/>
 cat /etc/redhat-release</p></li>
 <li><p>查看网络参数<br/>
 ifconfig</p></li>
-</ul>
-
-
-<!-- more -->
-
-
-<ul>
 <li><p>查看主机名<br/>
 hostname</p></li>
 <li><p>查看shell<br/>
@@ -1621,15 +1896,11 @@ lvscan,lvdisplay<br/>
     <link href="http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/"/>
     <updated>2013-08-05T11:24:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie</id>
-    <content type="html"><![CDATA[<p><strong>关于大学学习的四个层次：</strong></p>
-
-<ul>
-<li><p>不知道自己不知道</p></li>
-<li><p>知道自己不知道</p></li>
-<li><p>不知道自己知道</p></li>
-<li><p>知道自己知道</p></li>
-</ul>
-
+    <content type="html"><![CDATA[<p>关于大学学习的四个层次:<br/>
+<strong>不知道自己不知道</strong><br/>
+<strong>知道自己不知道</strong><br/>
+<strong>不知道自己知道</strong><br/>
+<strong>知道自己知道</strong></p>
 
 <!-- more -->
 
@@ -1640,33 +1911,27 @@ lvscan,lvdisplay<br/>
 
 <p>我们把这几句话写在一起：</p>
 
-<ul>
-<li><p>不知道    <code>不知道</code></p></li>
-<li><p>知道      <code>不知道</code></p></li>
-<li><p>不知道    <code>知道</code></p></li>
-<li><p>知道      <code>知道</code></p></li>
-</ul>
-
+<p><strong>不知道    不知道</strong>  <br/>
+<strong>知道      不知道</strong>  <br/>
+<strong>不知道    知道</strong><br/>
+<strong>知道      知道</strong></p>
 
 <p>其实我们早已发现，这几句话里透露的信息是，大学是从不知道到知道的一个过程。虽然这些话从始至终似乎重点讲自我认知的改变，但是从上面排列来看，它所要表达的重点是后一列：从不知道到知道。而这所谓知道不知道，是对专业知识了解深浅的一种描述。自己的认知经历了一个反复不是重点，重点是随着学习深入专业知识的积累或者其他认知的不断提升，证据是，第三层次，即使不知道自己在提升但不妨碍自己的进步，所以它排在第三。因此这些话讲的是知识的故事。</p>
 
 <p>然而我们是否注意到前面这一列呢？</p>
 
-<p>人非生而知之者，然则知识的积累总是时刻在进行的，有些人的速度快些，有些人的速度慢些。在大学的学习也是如此。一部分人比另一部分人更早“知道”，有部分人知道毕业依然“不知道”。不管如何，每个人都会有不小的进步。在大学有限的时间里，是什么导致了这种区别呢？……这句话没有讲。它讲的是大学是个从不知道到到知道的过程，这听起来很美妙。它给新生描述的是一个美妙的前景，它也许是毕业生精辟的总结。但是它教给了我们什么？没什么。</p>
+<p>人非生而知之者，然则知识的积累总是时刻在进行的，有些人的速度快些，有些人的速度慢些。在大学的学习也是如此。一部分人比另一部分人更早“知道”，有部分人知道毕业依然“不知道”。不管如何，每个人都会有不小的进步。在大学有限的时间里，是什么导致了这种区别呢？……这句话没有讲。它讲的是大学是个从不知道到到知道的过程，这听起来很美妙。它给新生描述的是一个美妙的前景，它也许是毕业生精辟的总结。但是它教给了我们什么？</p>
 
 <p>事实上，我们更关心造成这些区别的原因是什么。</p>
 
 <p>我们可以把上面的话再写下来：</p>
 
-<ul>
-<li><p><code>不知道</code>    不知道</p></li>
-<li><p><code>不知道</code>    知道</p></li>
-<li><p><code>知道</code>      不知道</p></li>
-<li><p><code>知道</code>      知道</p></li>
-</ul>
+<p><strong>不知道    不知道</strong><br/>
+<strong>不知道    知道</strong> <br/>
+<strong>知道      不知道</strong><br/>
+<strong>知道      知道</strong></p>
 
-
-<p>只不过把这句话按照前一列来排序而已。不知道有何区别呢？</p>
+<p>我将它更改了顺序，来看看有何不同。</p>
 
 <p>何谓不知道自己不知道，有个说法是，一个人的知识如果用一个圆来表示，那么知识越多，圆的面积就越大，它所接触到的外界的东西就越多，越能发现到自己不知道的东西。因此无知的人总是觉得自己无所不知，而博学的人却能保持谦逊，因为他知道自己有太多的不知道。举个不成熟的例子，一个新生想知道图书馆里有没有指导自己解决人际交往问题的书，这是一个问题，但是他已经意识到遇到问题可以上图书馆寻找答案。如果他确实遇到了交际问题而一直闷闷不乐，愁眉苦脸，没有寻找帮助的意识，他就不知道有前面那个问题的存在，也就不知道自己对那个问题的解答，不知道自己不知道。</p>
 
@@ -1680,7 +1945,7 @@ lvscan,lvdisplay<br/>
 
 <p>基于上述的理由，我不能分辨知道自己知不知道与否哪个更高级——两者都有很强的改造世界的能力。知不知道解决一个具体问题的方法，说起来更像一个概率问题。生活中的问题有无数个，谁能说自己一定知道呢？如果说区别的话，或许可以这样区别：不知道的，意味着不是自己的，是外在的;知道的，就是自己的，是内在的。认识外在和认识自我孰轻孰重，不好一而概之。</p>
 
-<p>关于知道不知道，有一个有趣的问题。很多人以为自己知道，其实并不知道。有个哥伦布竖鸡蛋的传说。</p>
+<p>关于知道不知道，有一个有趣的现象。很多人以为自己知道，其实并不知道。有个哥伦布竖鸡蛋的传说。</p>
 
 <blockquote><p>哥伦布发现了新大陆。从海上回来，他成了西班牙人民心目中的英雄。国王和王后也把他当作上宾，封他做海军上将。可是有些贵族瞧不起他，他们用鼻子一哼，说：“哼，这有什么稀罕？只要坐船出海，谁都会到那块陆地的。”</p>
 
@@ -1706,7 +1971,7 @@ lvscan,lvdisplay<br/>
 
 <p>同样的事情，有的人绞尽脑汁也解不出来，有的人轻易解出来了。解不出的人讥讽，这有什么稀罕的？只不过一时没有想到而已。 也许真是这样，但问题是，没有那个解出来了的人的存在，没想到常常是永远都想不到了。一旦问题解出来了，很多人就跳出来表示自己也会。砸个鸡蛋大家当然都是会的，问题是不知道要砸，或者，用另外一个办法，转它。</p>
 
-<p>对于我而言，大学四层次的第一种描述，能让我体味到语言结构的优美和一气呵成的快感。而第二种描述更能让我保持一种正确的姿态来对待生活中的各种问题，保持对智慧的不懈探索和追求。我愿意在以后的日子，尽我所能地做到这一点。</p>
+<p>对于我而言，大学四层次的第二种描述能让我保持一种正确的姿态来对待生活中的各种问题，保持对智慧的不懈探索和追求。我愿意在以后的日子，尽我所能地做到这一点。</p>
 ]]></content>
   </entry>
   
@@ -1715,25 +1980,22 @@ lvscan,lvdisplay<br/>
     <link href="http://grunmin.github.io/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/"/>
     <updated>2013-08-02T00:15:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji</id>
-    <content type="html"><![CDATA[<h2>新建项目</h2>
+    <content type="html"><![CDATA[<h3>新建项目</h3>
 
 <p>下载Zend Frame安装包(现在下载ZF要注册！可以用这条命令直接下载)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.11.11-minimal.tar.gz
+</span><span class='line'>$ php -i | grep include_path </span></code></pre></td></tr></table></div></figure>
+
+
+<p>(用源码包安装的php，若显示php命令不存在，就把php安装目录里bin文件下的php文件复制到可执行目录下，如/bin或/usr/bin)</p>
 
 <!-- more -->
 
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.11.11-minimal.tar.gz</span></code></pre></td></tr></table></div></figure>
-
-
-<p>命令行输入</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ php -i | grep include_path </span></code></pre></td></tr></table></div></figure>
-
-
-<p>(若显示php命令不存在，就把php安装目录里bin文件下的php文件复制到可执行目录下，如/bin或/usr/bin)<br/>
-在服务器文件根目录apache2/htdocs下执行</p>
+<p>在服务器文件根目录apache2/htdocs下执行</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ zf create project [projectname]</span></code></pre></td></tr></table></div></figure>
@@ -1742,7 +2004,7 @@ lvscan,lvdisplay<br/>
 <p>(projectname即你要的项目名，不加方括号)，会生成一个projectname的目录。此时目录下有application,docs,library,public,tests目录。<br/>
 把之前的Zend文件夹再复制到library目录下。</p>
 
-<h2>配置php，启动rewrite功能</h2>
+<h3>配置php和apache，启动rewrite功能</h3>
 
 <p>进入apache的源码目录(不是安装目录)输入</p>
 
@@ -1756,15 +2018,22 @@ lvscan,lvdisplay<br/>
 </span><span class='line'>$ sudo /usr/local/apache2/bin/apxs -i -a -n mod_rewrite mod_rewrite.la</span></code></pre></td></tr></table></div></figure>
 
 
-<p>成功的话应该在你的apache的modules目录中编译出一个mod_rewrite.so文件。<br/>
-编辑httpd.conf文件，确认httpd.conf中已经包含mod_rewrite.so的加载语句，如下：
-<code>LoadModule rewrite_module modules/mod_rewrite.so</code>(即把此语句前的#号去掉)<br/>
-这时你的apache应该已经支持rewrite了。</p>
+<p>成功的话应该在你的apache的modules目录中编译出一个<code>mod_rewrite.so</code>文件。<br/>
+编辑httpd.conf文件，确认httpd.conf中已经包含<code>mod_rewrite.so</code>的加载语句，如下：</p>
 
-<h2>配置apache</h2>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>LoadModule rewrite_module modules/mod_rewrite.so  #(即把此语句前的#号去掉)  </span></code></pre></td></tr></table></div></figure>
 
-<p>修改apache/conf/httpd.conf<br/>
-把AllowOverride None 的None改成 All<br/>
+
+<p>这时你的apache应该已经支持rewrite了。<br/>
+修改<code>apache/conf/httpd.conf </code>
+把</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>AllowOverride None </span></code></pre></td></tr></table></div></figure>
+
+
+<p>的None改成 All<br/>
 重启apache</p>
 
 <p>若成功的话打开浏览器进入<code>localhost/projectname/public</code>可以看到Zend Frame的欢迎界面</p>
@@ -1775,15 +2044,23 @@ lvscan,lvdisplay<br/>
 </pre></td><td class='code'><pre><code class=''><span class='line'>zf show version</span></code></pre></td></tr></table></div></figure>
 
 
-<p>安装过程中遇到了许多问题，比如服务器加载失败，出现500错误等。按照一些教程去弄虚拟主机，并设置library为apache文件根目录。结果证明这些都是多余的。如果按照上面的步骤安装出现了问题，可以查看apache2/log/error_log文件。如出现下面的问题，可以参考参考资料里的<a href="http://ayiui4566.iteye.com/blog/662170">wamp+Zend框架配置问题</a>。<br/>
- Request exceeded the limit of 10 internal     redirects due to probable configuration error. Use &lsquo;LimitInternalRecursion&rsquo;     to increase the limit if necessary. Use &lsquo;LogLevel debug&rsquo; to get a backtrace.</p>
+<p>安装过程中遇到了许多问题，比如服务器加载失败，出现500错误等。按照一些教程去弄虚拟主机，并设置library为apache文件根目录。结果证明这些都是多余的。如果按照上面的步骤安装出现了问题，可以查看apache2/log/error_log文件。如出现下面的问题，可以参考参考资料里的<a href="http://ayiui4566.iteye.com/blog/662170">wamp+Zend框架配置问题</a></p>
 
-<p>  /usr/local/apache2/htdocs/zftest/.htaccess:            Invalid command &lsquo;RewriteRule!&#46;(js|ico|gif|jpg|png|css)$&rsquo;, perhaps             misspelled or defined by a module not included in the server configuration</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> Request exceeded the limit of 10 internal     redirects due to probable configuration error. Use 'LimitInternalRecursion'     to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace.</span></code></pre></td></tr></table></div></figure>
 
-<p>   PHP Warning:  require_once(Zend/Application.php):      failed to open stream: No such file or directory in /usr/local/apache2/         htdocs/zftest/public/index.php on line 18</p>
 
-<p>   参考资料：
-   <a href="http://www.path8.net/tn/archives/961">Linux下Apache安装/增加mod_rewrite模块以启用rewrite功能</a><br/>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>  /usr/local/apache2/htdocs/zftest/.htaccess:            Invalid command 'RewriteRule!\\.(js|ico|gif|jpg|png|css)$', perhaps             misspelled or defined by a module not included in the server configuration</span></code></pre></td></tr></table></div></figure>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>   PHP Warning:  require_once(Zend/Application.php):      failed to open stream: No such file or directory in /usr/local/apache2/         htdocs/zftest/public/index.php on line 18</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>参考资料：</h4>
+
+<p>   <a href="http://www.path8.net/tn/archives/961">Linux下Apache安装/增加mod_rewrite模块以启用rewrite功能</a><br/>
    <a href="http://ayiui4566.iteye.com/blog/662170">WAMP+Zend框架配置问题</a><br/>
    <a href="http://blog.csdn.net/daydreamingboy/article/details/6327527">Zend Framework学习日记(1)&mdash;环境搭建篇</a><br/>
    <a href="http://blog.csdn.net/mengxiangbaidu/article/details/7046568#">Zend Framework教程-用Zend命令行快速创建Zend应用</a></p>
@@ -1796,7 +2073,7 @@ lvscan,lvdisplay<br/>
     <updated>2013-07-25T20:32:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji</id>
     <content type="html"><![CDATA[<p><em>此文是前文配置lamp的延伸</em><br/>
-wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库，原来安装lamp过程中并无相关方面的配置，鼓捣了半天之后其他条件都已满足，唯独GD图像处理库不能安装。</p>
+在前面的一片文章里，用源码包安装的方式搭建了lamp环境，wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库，原来安装lamp过程中并无相关方面的配置，鼓捣了半天之后其他条件都已满足，唯独GD图像处理库不能安装。</p>
 
 <!-- more -->
 
@@ -1810,7 +2087,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 从最简单的开始，因为后面还会要求UPLOAD下的文件开放权限，因此直接一个</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo chmod 777 /usr/local/apache2/htdocs/UPLOAD</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># chmod 777 /usr/local/apache2/htdocs/UPLOAD</span></code></pre></td></tr></table></div></figure>
 
 
 <p>之后就是折腾了很久的GD，Linux下得GD库安装要比windows麻烦很多。先参照此文：<a href="http://tech.soft6.com/665/16/78687.html  ">http://tech.soft6.com/665/16/78687.html  </a>
@@ -1822,30 +2099,49 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /usr/local/php-***/ext/curl #进入源码包的curl目录
-</span><span class='line'>$ /usr/local/php/bin/phpize #运行phpize命令
-</span><span class='line'>$ ./configure --with-php-config=/usr/local/php/bin/php-config
-</span><span class='line'>$ sudo make && make install</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cd /usr/local/php-***/ext/curl #进入源码包的curl目录
+</span><span class='line'># /usr/local/php/bin/phpize #运行phpize命令
+</span><span class='line'># ./configure --with-php-config=/usr/local/php/bin/php-config
+</span><span class='line'># make && make install</span></code></pre></td></tr></table></div></figure>
 
 
 <p>成功后可以看到创建的curl.so文件位于/usr/local/php/lib/php/extension/no-debug-non-zts-*******/,复制curl.so到/usr/local/php/ext下(没有目录则创建一个)，再敲入</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo vi /usr/local/php/lib/php.ini​</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /usr/local/php/lib/php.ini​</span></code></pre></td></tr></table></div></figure>
 
 
 <p>在加载模块(一堆extension处 大概第980行)加上一行extension=curl.so 修改extension_dir=“/usr/local/php/ext” (第819行),重启apache即可。(前面的操作如需立刻看到效果也需重启apache)</p>
 
 <p><a href="http://blog.csdn.net/grunmin/article/details/9468639">这里</a>是增加php模块的方法介绍，mysqli可用此法解决。</p>
+
+<p><em>注：用rpm包搭建lamp时没有出现上述问题</em></p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[linux安装lamp环境笔记]]></title>
+    <title type="html"><![CDATA[linux搭建lamp环境笔记]]></title>
     <link href="http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/"/>
     <updated>2013-07-21T11:20:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji</id>
-    <content type="html"><![CDATA[<h2>前期工作</h2>
+    <content type="html"><![CDATA[<p>在学习php编程的过程中，了解了lamp环境的重要性，因此尝试自行搭建。在这个过程中经历了很多困难，为了便于查阅和再次搭建，在此将过程都记录下来。有错漏或可以改进的地方，欢迎指出拨正。</p>
+
+<!-- more -->
+
+
+<p>此前都是用源码包安装，其实用rpm包安装省时省力。</p>
+
+<h2>从软件包安装</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># yum groupinstall 'web-server' -y
+</span><span class='line'># yum install -y php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt pcre-devel libxml2-devel mysql-devel apr apr-devel apr-util apr-util-devel curl-devel libpng-devel mysql-server</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>源码包安装</h2>
+
+<h3>前期工作</h3>
 
 <p><strong>第1步</strong>： 在终端输入</p>
 
@@ -1854,9 +2150,6 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 
 
 <p><strong>第2步</strong>：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包</p>
-
-<!-- more -->
-
 
 <p><strong>第3步</strong>：</p>
 
@@ -1873,7 +2166,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 <p>（非必需，如果安装apache时显示未安装pcre可按照此法安装）<br/>
 <strong>第5步</strong>： cd httpd/srclib/ 解压apr,apr-util 到目录下，修改文件名（不带版本号，如apr-util）</p>
 
-<h2>一、安装apache:</h2>
+<h3>安装apache:</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1901,7 +2194,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 
 <p>(可用ps -e | grep httpd 查看apache是否已开启）</p>
 
-<h2>二、 安装mysql：</h2>
+<h3>安装mysql：</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1961,7 +2254,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 </span><span class='line'>mysql&gt; flush privileges;</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>三、安装php</h2>
+<h3>安装php</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1983,7 +2276,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 </pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/local/apache2/bin/apachectl restart</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>四、安装phpMyAdmin:</h2>
+<h3>安装phpMyAdmin:</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs</span></code></pre></td></tr></table></div></figure>
@@ -1991,7 +2284,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 
 <p>到此全部完成</p>
 
-<h2>Q1</h2>
+<h3>Q1</h3>
 
 <p>如果测试mysql时没有显示版本信息等界面，而是显示Can&rsquo;t connect to local MySQL server through socket &lsquo;/tmp/mysql.sock&rsquo;(2)则极有可能是mysql没有安装成功。解决办法是删除系统自带的mysql服务，</p>
 
@@ -2020,7 +2313,13 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
     <link href="http://grunmin.github.io/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/"/>
     <updated>2013-07-21T10:40:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi</id>
-    <content type="html"><![CDATA[<h3><strong>为知笔记下载：</strong></h3>
+    <content type="html"><![CDATA[<p>linux下软件的启动方式有多种，双击快捷方式对为知笔记这个软件并不管用，因此我们寻求其他更有linux风格的方式。<br/>
+文中的方法对于所有应用程序都是通用的。</p>
+
+<!-- more -->
+
+
+<h3><strong>为知笔记下载：</strong></h3>
 
 <p><a href="http://www.wiz.cn/download.html">为知笔记下载</a></p>
 
@@ -2039,9 +2338,6 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 
 
 <p>然后就可以在命令行下直接输入wiznote启动。</p>
-
-<!-- more -->
-
 
 <h3>方式2 使用alias</h3>
 

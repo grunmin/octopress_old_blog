@@ -9,10 +9,8 @@
   <meta name="author" content="Grunmin">
 
   
-  <meta name="description" content="为知笔记下载： 为知笔记下载 解压包到自己名下的文件夹，启动图标在bin文件夹里。 方式1 创建变量 在加环境变量后可以直接在命令行启动 1
-2
-3
-# vi /etc/profile # export PATH="$PATH:/home/username/path/wiznote/bin &hellip;">
+  <meta name="description" content="linux下软件的启动方式有多种，双击快捷方式对为知笔记这个软件并不管用，因此我们寻求其他更有linux风格的方式。
+文中的方法对于所有应用程序都是通用的。 为知笔记下载： 为知笔记下载 解压包到自己名下的文件夹，启动图标在bin文件夹里。 方式1 创建变量 在加环境变量后可以直接在命令行启动 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,8 +69,8 @@
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
 </ul>
 
 </nav>
@@ -108,7 +106,13 @@
   </header>
 
 
-<div class="entry-content"><h3><strong>为知笔记下载：</strong></h3>
+<div class="entry-content"><p>linux下软件的启动方式有多种，双击快捷方式对为知笔记这个软件并不管用，因此我们寻求其他更有linux风格的方式。<br/>
+文中的方法对于所有应用程序都是通用的。</p>
+
+<!-- more -->
+
+
+<h3><strong>为知笔记下载：</strong></h3>
 
 <p><a href="http://www.wiz.cn/download.html">为知笔记下载</a></p>
 
@@ -127,9 +131,6 @@
 
 
 <p>然后就可以在命令行下直接输入wiznote启动。</p>
-
-<!-- more -->
-
 
 <h3>方式2 使用alias</h3>
 
@@ -217,6 +218,12 @@ Name是启动栏里显示的名称，Exec是打开路径，Icon是图标路径�
 <time datetime="2013-07-21T10:40:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2013</time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/wiznote/'>wiznote</a>
+  
+</span>
+
 
     </p>
     
@@ -232,7 +239,7 @@ Name是启动栏里显示的名称，Exec是打开路径，Icon是图标路径�
     <p class="meta">
       
       
-        <a class="basic-alignment right" href="/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/" title="Next Post: linux安装lamp环境笔记">linux安装lamp环境笔记 &raquo;</a>
+        <a class="basic-alignment right" href="/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/" title="Next Post: linux搭建lamp环境笔记">linux搭建lamp环境笔记 &raquo;</a>
       
     </p>
   </footer>
@@ -249,8 +256,25 @@ Name是启动栏里显示的名称，Exec是打开路径，Icon是图标路径�
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h1>分类目录</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/rhce/'>RHCE (2)</a></li>
+<li class='category'><a href='/blog/categories/lamp/'>lamp (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/wecenter/'>wecenter (1)</a></li>
+<li class='category'><a href='/blog/categories/wiznote/'>wiznote (1)</a></li>
+<li class='category'><a href='/blog/categories/随想/'>随想 (1)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a>
@@ -268,10 +292,6 @@ Name是启动栏里显示的名称，Exec是打开路径，Icon是图标路径�
         <a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Linux安装 Zend Frame 笔记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/">Linux安装wecenter笔记</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -280,9 +300,11 @@ Name是启动栏里显示的名称，Exec是打开路径，Icon是图标路径�
 
 <section>
   <h1>About Me</h1>
-  <p>南中国一般大学大光电学子</p>
   <li>
-  <p>linux爱好者</p>
+  <p>南中国一般大学大光电学子</p>
+  </li>
+  <li>
+  <p>linux 爱好者</p>
   </li>
 </section>
 

@@ -9,7 +9,7 @@
   <meta name="author" content="Grunmin">
 
   
-  <meta name="description" content="unit 2 配置sudoers 文件/etc/sudoers是只读文件，保存时需加！强制保存. ">
+  <meta name="description" content="郭润民的博客">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -68,8 +68,8 @@
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
 </ul>
 
 </nav>
@@ -77,6 +77,50 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-04T15:02:00+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用octopress搭建博客的人，大概都会喜欢写关于如何搭建配置octopress的文章。因为它的高定制性，为极客们带来很多乐趣。从首页的配置，到分类，评论，个人信息，社会化分享等的配置，内容繁多。而且这是我第二次搭建octopress环境了，发现上一次的配置有一部分不能clone到本机上。因此，把配置的过程记录下来是十分有必要的。<br/>
+我的意愿是记录配置的过程，顺便整理大牛们关于这方面的一些说明。网络上相关资料有很多，没有实践过的没有摘录在这里。所有的代码实现都是直接引用前辈们的。另外，本博的配置环境是linux fedora 18.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -108,13 +152,7 @@
   </header>
 
 
-  <div class="entry-content"><h2>unit 2</h2>
-
-<h3>配置sudoers</h3>
-
-<p>文件/etc/sudoers是只读文件，保存时需加！强制保存.</p>
-
-</div>
+  <div class="entry-content"></div>
   
   
     <footer>
@@ -155,17 +193,7 @@
   </header>
 
 
-  <div class="entry-content"><h2>unit 1</h2>
-
-<ul>
-<li><p>查看系统版本<br/>
-cat /etc/redhat-release</p></li>
-<li><p>查看网络参数<br/>
-ifconfig</p></li>
-</ul>
-
-
-</div>
+  <div class="entry-content"></div>
   
   
     <footer>
@@ -206,15 +234,11 @@ ifconfig</p></li>
   </header>
 
 
-  <div class="entry-content"><p><strong>关于大学学习的四个层次：</strong></p>
-
-<ul>
-<li><p>不知道自己不知道</p></li>
-<li><p>知道自己不知道</p></li>
-<li><p>不知道自己知道</p></li>
-<li><p>知道自己知道</p></li>
-</ul>
-
+  <div class="entry-content"><p>关于大学学习的四个层次:<br/>
+<strong>不知道自己不知道</strong><br/>
+<strong>知道自己不知道</strong><br/>
+<strong>不知道自己知道</strong><br/>
+<strong>知道自己知道</strong></p>
 
 </div>
   
@@ -257,9 +281,17 @@ ifconfig</p></li>
   </header>
 
 
-  <div class="entry-content"><h2>新建项目</h2>
+  <div class="entry-content"><h3>新建项目</h3>
 
 <p>下载Zend Frame安装包(现在下载ZF要注册！可以用这条命令直接下载)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.11.11-minimal.tar.gz
+</span><span class='line'>$ php -i | grep include_path </span></code></pre></td></tr></table></div></figure>
+
+
+<p>(用源码包安装的php，若显示php命令不存在，就把php安装目录里bin文件下的php文件复制到可执行目录下，如/bin或/usr/bin)</p>
 
 </div>
   
@@ -303,7 +335,7 @@ ifconfig</p></li>
 
 
   <div class="entry-content"><p><em>此文是前文配置lamp的延伸</em><br/>
-wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库，原来安装lamp过程中并无相关方面的配置，鼓捣了半天之后其他条件都已满足，唯独GD图像处理库不能安装。</p>
+在前面的一片文章里，用源码包安装的方式搭建了lamp环境，wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库，原来安装lamp过程中并无相关方面的配置，鼓捣了半天之后其他条件都已满足，唯独GD图像处理库不能安装。</p>
 
 </div>
   
@@ -321,7 +353,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
       
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/">Linux安装lamp环境笔记</a></h1>
+      <h1 class="entry-title"><a href="/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/">Linux搭建lamp环境笔记</a></h1>
     
     
       <p class="meta">
@@ -346,15 +378,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
   </header>
 
 
-  <div class="entry-content"><h2>前期工作</h2>
-
-<p><strong>第1步</strong>： 在终端输入</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo yum update  # 更新系统</span></code></pre></td></tr></table></div></figure>
-
-
-<p><strong>第2步</strong>：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包</p>
+  <div class="entry-content"><p>在学习php编程的过程中，了解了lamp环境的重要性，因此尝试自行搭建。在这个过程中经历了很多困难，为了便于查阅和再次搭建，在此将过程都记录下来。有错漏或可以改进的地方，欢迎指出拨正。</p>
 
 </div>
   
@@ -397,25 +421,8 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
   </header>
 
 
-  <div class="entry-content"><h3><strong>为知笔记下载：</strong></h3>
-
-<p><a href="http://www.wiz.cn/download.html">为知笔记下载</a></p>
-
-<p>解压包到自己名下的文件夹，启动图标在bin文件夹里。</p>
-
-<h3>方式1 创建变量</h3>
-
-<p>在加环境变量后可以直接在命令行启动</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># vi /etc/profile  
-</span><span class='line'># export PATH="$PATH:/home/username/path/wiznote/bin/"  
-</span><span class='line'># source /etc/profile #重新加载环境变量  </span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后就可以在命令行下直接输入wiznote启动。</p>
+  <div class="entry-content"><p>linux下软件的启动方式有多种，双击快捷方式对为知笔记这个软件并不管用，因此我们寻求其他更有linux风格的方式。<br/>
+文中的方法对于所有应用程序都是通用的。</p>
 
 </div>
   
@@ -437,8 +444,25 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h1>分类目录</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/rhce/'>RHCE (2)</a></li>
+<li class='category'><a href='/blog/categories/lamp/'>lamp (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/wecenter/'>wecenter (1)</a></li>
+<li class='category'><a href='/blog/categories/wiznote/'>wiznote (1)</a></li>
+<li class='category'><a href='/blog/categories/随想/'>随想 (1)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a>
@@ -456,10 +480,6 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
         <a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Linux安装 Zend Frame 笔记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/">Linux安装wecenter笔记</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -468,9 +488,11 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 
 <section>
   <h1>About Me</h1>
-  <p>南中国一般大学大光电学子</p>
   <li>
-  <p>linux爱好者</p>
+  <p>南中国一般大学大光电学子</p>
+  </li>
+  <li>
+  <p>linux 爱好者</p>
   </li>
 </section>
 

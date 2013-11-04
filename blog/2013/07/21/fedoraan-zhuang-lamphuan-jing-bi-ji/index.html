@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>linux安装lamp环境笔记 - 郭润民的博客</title>
+  <title>linux搭建lamp环境笔记 - 郭润民的博客</title>
   <meta name="author" content="Grunmin">
 
   
-  <meta name="description" content="前期工作 第1步： 在终端输入 1
-$ sudo yum update # 更新系统 第2步：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包 第3步： 1
-$ sudo yum install gcc gcc-c++ libxml2 &hellip;">
+  <meta name="description" content="在学习php编程的过程中，了解了lamp环境的重要性，因此尝试自行搭建。在这个过程中经历了很多困难，为了便于查阅和再次搭建，在此将过程都记录下来。有错漏或可以改进的地方，欢迎指出拨正。 此前都是用源码包安装，其实用rpm包安装省时省力。 从软件包安装 1
+2
+# yum groupinstall &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -70,8 +70,8 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
 </ul>
 
 </nav>
@@ -82,7 +82,7 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Linux安装lamp环境笔记</h1>
+      <h1 class="entry-title">Linux搭建lamp环境笔记</h1>
     
     
       <p class="meta">
@@ -107,7 +107,24 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
   </header>
 
 
-<div class="entry-content"><h2>前期工作</h2>
+<div class="entry-content"><p>在学习php编程的过程中，了解了lamp环境的重要性，因此尝试自行搭建。在这个过程中经历了很多困难，为了便于查阅和再次搭建，在此将过程都记录下来。有错漏或可以改进的地方，欢迎指出拨正。</p>
+
+<!-- more -->
+
+
+<p>此前都是用源码包安装，其实用rpm包安装省时省力。</p>
+
+<h2>从软件包安装</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># yum groupinstall 'web-server' -y
+</span><span class='line'># yum install -y php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt pcre-devel libxml2-devel mysql-devel apr apr-devel apr-util apr-util-devel curl-devel libpng-devel mysql-server</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>源码包安装</h2>
+
+<h3>前期工作</h3>
 
 <p><strong>第1步</strong>： 在终端输入</p>
 
@@ -116,9 +133,6 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 
 
 <p><strong>第2步</strong>：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包</p>
-
-<!-- more -->
-
 
 <p><strong>第3步</strong>：</p>
 
@@ -135,7 +149,7 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 <p>（非必需，如果安装apache时显示未安装pcre可按照此法安装）<br/>
 <strong>第5步</strong>： cd httpd/srclib/ 解压apr,apr-util 到目录下，修改文件名（不带版本号，如apr-util）</p>
 
-<h2>一、安装apache:</h2>
+<h3>安装apache:</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -163,7 +177,7 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 
 <p>(可用ps -e | grep httpd 查看apache是否已开启）</p>
 
-<h2>二、 安装mysql：</h2>
+<h3>安装mysql：</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -223,7 +237,7 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 </span><span class='line'>mysql&gt; flush privileges;</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>三、安装php</h2>
+<h3>安装php</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -245,7 +259,7 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 </pre></td><td class='code'><pre><code class=''><span class='line'>sudo /usr/local/apache2/bin/apachectl restart</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>四、安装phpMyAdmin:</h2>
+<h3>安装phpMyAdmin:</h3>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs</span></code></pre></td></tr></table></div></figure>
@@ -253,7 +267,7 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 
 <p>到此全部完成</p>
 
-<h2>Q1</h2>
+<h3>Q1</h3>
 
 <p>如果测试mysql时没有显示版本信息等界面，而是显示Can&rsquo;t connect to local MySQL server through socket &lsquo;/tmp/mysql.sock&rsquo;(2)则极有可能是mysql没有安装成功。解决办法是删除系统自带的mysql服务，</p>
 
@@ -299,6 +313,12 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 <time datetime="2013-07-21T11:20:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2013</time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/lamp/'>lamp</a>
+  
+</span>
+
 
     </p>
     
@@ -333,8 +353,25 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h1>分类目录</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/rhce/'>RHCE (2)</a></li>
+<li class='category'><a href='/blog/categories/lamp/'>lamp (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/wecenter/'>wecenter (1)</a></li>
+<li class='category'><a href='/blog/categories/wiznote/'>wiznote (1)</a></li>
+<li class='category'><a href='/blog/categories/随想/'>随想 (1)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a>
@@ -352,10 +389,6 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
         <a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Linux安装 Zend Frame 笔记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/">Linux安装wecenter笔记</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -364,9 +397,11 @@ $ sudo yum install gcc gcc-c++ libxml2 &hellip;">
 
 <section>
   <h1>About Me</h1>
-  <p>南中国一般大学大光电学子</p>
   <li>
-  <p>linux爱好者</p>
+  <p>南中国一般大学大光电学子</p>
+  </li>
+  <li>
+  <p>linux 爱好者</p>
   </li>
 </section>
 

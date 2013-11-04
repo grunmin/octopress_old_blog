@@ -10,7 +10,7 @@
 
   
   <meta name="description" content="此文是前文配置lamp的延伸
-wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库，原来安装lamp过程中并无相关方面的配置，鼓捣了半天之后其他条件都已满足，唯独GD图像处理库不能安装。 谷歌了许多结果，一一尝试，一一失败，最后看到这篇文章， &hellip;">
+在前面的一片文章里，用源码包安装的方式搭建了lamp环境，wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库，原来安装lamp过程中并无相关方面的配置，鼓捣了半天之后其他条件都已满足，唯独GD图像处理库不能安装。 谷歌了许多结果， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,8 +69,8 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 </form>
   
 <ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
 </ul>
 
 </nav>
@@ -107,7 +107,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 
 
 <div class="entry-content"><p><em>此文是前文配置lamp的延伸</em><br/>
-wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库，原来安装lamp过程中并无相关方面的配置，鼓捣了半天之后其他条件都已满足，唯独GD图像处理库不能安装。</p>
+在前面的一片文章里，用源码包安装的方式搭建了lamp环境，wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库，原来安装lamp过程中并无相关方面的配置，鼓捣了半天之后其他条件都已满足，唯独GD图像处理库不能安装。</p>
 
 <!-- more -->
 
@@ -121,7 +121,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 从最简单的开始，因为后面还会要求UPLOAD下的文件开放权限，因此直接一个</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo chmod 777 /usr/local/apache2/htdocs/UPLOAD</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># chmod 777 /usr/local/apache2/htdocs/UPLOAD</span></code></pre></td></tr></table></div></figure>
 
 
 <p>之后就是折腾了很久的GD，Linux下得GD库安装要比windows麻烦很多。先参照此文：<a href="http://tech.soft6.com/665/16/78687.html  ">http://tech.soft6.com/665/16/78687.html  </a>
@@ -133,21 +133,23 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /usr/local/php-***/ext/curl #进入源码包的curl目录
-</span><span class='line'>$ /usr/local/php/bin/phpize #运行phpize命令
-</span><span class='line'>$ ./configure --with-php-config=/usr/local/php/bin/php-config
-</span><span class='line'>$ sudo make && make install</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># cd /usr/local/php-***/ext/curl #进入源码包的curl目录
+</span><span class='line'># /usr/local/php/bin/phpize #运行phpize命令
+</span><span class='line'># ./configure --with-php-config=/usr/local/php/bin/php-config
+</span><span class='line'># make && make install</span></code></pre></td></tr></table></div></figure>
 
 
 <p>成功后可以看到创建的curl.so文件位于/usr/local/php/lib/php/extension/no-debug-non-zts-*******/,复制curl.so到/usr/local/php/ext下(没有目录则创建一个)，再敲入</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo vi /usr/local/php/lib/php.ini​</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'># vi /usr/local/php/lib/php.ini​</span></code></pre></td></tr></table></div></figure>
 
 
 <p>在加载模块(一堆extension处 大概第980行)加上一行extension=curl.so 修改extension_dir=“/usr/local/php/ext” (第819行),重启apache即可。(前面的操作如需立刻看到效果也需重启apache)</p>
 
 <p><a href="http://blog.csdn.net/grunmin/article/details/9468639">这里</a>是增加php模块的方法介绍，mysqli可用此法解决。</p>
+
+<p><em>注：用rpm包搭建lamp时没有出现上述问题</em></p>
 </div>
 
 
@@ -173,6 +175,12 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 <time datetime="2013-07-25T20:32:00+08:00" pubdate data-updated="true">Jul 25<span>th</span>, 2013</time>
       
 
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/wecenter/'>wecenter</a>
+  
+</span>
+
 
     </p>
     
@@ -187,7 +195,7 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/" title="Previous Post: linux安装lamp环境笔记">&laquo; linux安装lamp环境笔记</a>
+        <a class="basic-alignment left" href="/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/" title="Previous Post: linux搭建lamp环境笔记">&laquo; linux搭建lamp环境笔记</a>
       
       
         <a class="basic-alignment right" href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/" title="Next Post: linux安装 Zend Frame 笔记">linux安装 Zend Frame 笔记 &raquo;</a>
@@ -207,8 +215,25 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 <aside class="sidebar">
   
     <section>
-  <h1>Recent Posts</h1>
+  <h1>分类目录</h1>
+  <ul id="categories">
+    <li class='category'><a href='/blog/categories/rhce/'>RHCE (2)</a></li>
+<li class='category'><a href='/blog/categories/lamp/'>lamp (1)</a></li>
+<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
+<li class='category'><a href='/blog/categories/php/'>php (1)</a></li>
+<li class='category'><a href='/blog/categories/wecenter/'>wecenter (1)</a></li>
+<li class='category'><a href='/blog/categories/wiznote/'>wiznote (1)</a></li>
+<li class='category'><a href='/blog/categories/随想/'>随想 (1)</a></li>
+
+  </ul>
+</section>
+<section>
+  <h1>近期文章</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a>
@@ -226,10 +251,6 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
         <a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Linux安装 Zend Frame 笔记</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/07/25/fedoraan-zhuang-wecenterbi-ji/">Linux安装wecenter笔记</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -238,9 +259,11 @@ wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库�
 
 <section>
   <h1>About Me</h1>
-  <p>南中国一般大学大光电学子</p>
   <li>
-  <p>linux爱好者</p>
+  <p>南中国一般大学大光电学子</p>
+  </li>
+  <li>
+  <p>linux 爱好者</p>
   </li>
 </section>
 
