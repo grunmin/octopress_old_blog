@@ -3,12 +3,12 @@ layout: post
 title: "RHCE note 9"
 date: 2013-11-03 23:20
 comments: true
-categories: 
+categories: RHCE
 ---
+<!-- more -->
 ##unit 2
 ###配置sudoers
 文件/etc/sudoers是只读文件，保存时需加！强制保存.  
-<!-- more -->
 实例：
 ```
 [root@desktop31 ~]# ll /etc/sudoers

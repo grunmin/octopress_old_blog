@@ -3,27 +3,23 @@ layout: post
 title: "linux安装 Zend Frame 笔记"
 date: 2013-08-02 00:15
 comments: true
-categories: 
+categories: php
 ---
-新建项目
----
+###新建项目
 下载Zend Frame安装包(现在下载ZF要注册！可以用这条命令直接下载)
-<!-- more -->
 ```
 $ wget http://framework.zend.com/releases/ZendFramework-1.11.11/ZendFramework-1.11.11-minimal.tar.gz
-```
-命令行输入
-```
 $ php -i | grep include_path 
-```(若显示php命令不存在，就把php安装目录里bin文件下的php文件复制到可执行目录下，如/bin或/usr/bin)  
+```
+(用源码包安装的php，若显示php命令不存在，就把php安装目录里bin文件下的php文件复制到可执行目录下，如/bin或/usr/bin)  
+<!-- more -->
 在服务器文件根目录apache2/htdocs下执行
 ```
 $ zf create project [projectname]
 ```
 (projectname即你要的项目名，不加方括号)，会生成一个projectname的目录。此时目录下有application,docs,library,public,tests目录。  
 把之前的Zend文件夹再复制到library目录下。
-配置php，启动rewrite功能
----
+###配置php和apache，启动rewrite功能
 进入apache的源码目录(不是安装目录)输入
 ```
 $ find -name mod_rewrite.c
@@ -31,14 +27,18 @@ $ cd PATH/to/mod_rewrite.c  #进入mod_rewrite.c所在目录
 $ sudo /usr/local/apache2/bin/apxs -c mod_rewrite.c
 $ sudo /usr/local/apache2/bin/apxs -i -a -n mod_rewrite mod_rewrite.la
 ```
-成功的话应该在你的apache的modules目录中编译出一个mod_rewrite.so文件。  
-编辑httpd.conf文件，确认httpd.conf中已经包含mod_rewrite.so的加载语句，如下：
-`LoadModule rewrite_module modules/mod_rewrite.so`(即把此语句前的#号去掉)  
-这时你的apache应该已经支持rewrite了。
-配置apache
----
-修改apache/conf/httpd.conf  
-把AllowOverride None 的None改成 All  
+成功的话应该在你的apache的modules目录中编译出一个`mod_rewrite.so`文件。  
+编辑httpd.conf文件，确认httpd.conf中已经包含`mod_rewrite.so`的加载语句，如下：
+```
+LoadModule rewrite_module modules/mod_rewrite.so  #(即把此语句前的#号去掉)  
+```
+这时你的apache应该已经支持rewrite了。  
+修改`apache/conf/httpd.conf  `
+把
+```
+AllowOverride None 
+```
+的None改成 All  
 重启apache
 
 若成功的话打开浏览器进入`localhost/projectname/public`可以看到Zend Frame的欢迎界面  
@@ -49,17 +49,21 @@ $ sudo /usr/local/apache2/bin/apxs -i -a -n mod_rewrite mod_rewrite.la
 ```
 zf show version
 ```
-安装过程中遇到了许多问题，比如服务器加载失败，出现500错误等。按照一些教程去弄虚拟主机，并设置library为apache文件根目录。结果证明这些都是多余的。如果按照上面的步骤安装出现了问题，可以查看apache2/log/error_log文件。如出现下面的问题，可以参考参考资料里的[wamp+Zend框架配置问题](http://ayiui4566.iteye.com/blog/662170)。  
+安装过程中遇到了许多问题，比如服务器加载失败，出现500错误等。按照一些教程去弄虚拟主机，并设置library为apache文件根目录。结果证明这些都是多余的。如果按照上面的步骤安装出现了问题，可以查看apache2/log/error_log文件。如出现下面的问题，可以参考参考资料里的[wamp+Zend框架配置问题](http://ayiui4566.iteye.com/blog/662170)
+``` 
  Request exceeded the limit of 10 internal     redirects due to probable configuration error. Use 'LimitInternalRecursion'     to increase the limit if necessary. Use 'LogLevel debug' to get a backtrace.
-
+```
+```
   /usr/local/apache2/htdocs/zftest/.htaccess:            Invalid command 'RewriteRule!\\.(js|ico|gif|jpg|png|css)$', perhaps             misspelled or defined by a module not included in the server configuration
-
+```
+```
    PHP Warning:  require_once(Zend/Application.php):      failed to open stream: No such file or directory in /usr/local/apache2/         htdocs/zftest/public/index.php on line 18
+```
 
 
-
-   参考资料：
+####参考资料：  
    [Linux下Apache安装/增加mod_rewrite模块以启用rewrite功能](http://www.path8.net/tn/archives/961)  
    [WAMP+Zend框架配置问题](http://ayiui4566.iteye.com/blog/662170)  
    [Zend Framework学习日记(1)--环境搭建篇](http://blog.csdn.net/daydreamingboy/article/details/6327527)  
    [Zend Framework教程-用Zend命令行快速创建Zend应用](http://blog.csdn.net/mengxiangbaidu/article/details/7046568# )
+

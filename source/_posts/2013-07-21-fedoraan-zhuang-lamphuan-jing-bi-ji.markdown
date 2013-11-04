@@ -1,19 +1,30 @@
 ---
 layout: post
-title: "linux安装lamp环境笔记"
+title: "linux搭建lamp环境笔记"
 date: 2013-07-21 11:20
 comments: true
-categories: 
+categories: lamp
 ---
-前期工作
+在学习php编程的过程中，了解了lamp环境的重要性，因此尝试自行搭建。在这个过程中经历了很多困难，为了便于查阅和再次搭建，在此将过程都记录下来。有错漏或可以改进的地方，欢迎指出拨正。  
+<!-- more -->
+此前都是用源码包安装，其实用rpm包安装省时省力。
+从软件包安装
 ---
+```
+# yum groupinstall 'web-server' -y
+# yum install -y php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt pcre-devel libxml2-devel mysql-devel apr apr-devel apr-util apr-util-devel curl-devel libpng-devel mysql-server
+```
+
+源码包安装
+---
+###前期工作
+
 **第1步**： 在终端输入
 ```
 $ sudo yum update  # 更新系统
 ```
 **第2步**：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包  
 
-<!-- more -->
 
 **第3步**： 
 ```
@@ -26,8 +37,7 @@ $ sudo cd /usr/local/pcre;./configure --prefix=/usr/local/pcre #安装pcre
 （非必需，如果安装apache时显示未安装pcre可按照此法安装）  
 **第5步**： cd httpd/srclib/ 解压apr,apr-util 到目录下，修改文件名（不带版本号，如apr-util）
 
-一、安装apache:
----
+###安装apache:
 ```
 $ cd /usr/local/httpd  # 进入安装目录  
 $ sudo ./configure --prefix=/usr/local/apache2 --enable-so --with-mpm=worker --with-pcre=/usr/local/pcre --with-included-apr # 配置（注意./configure的/前有个小点，若没有按照上文安装pcre，可去掉--with-pcre后面的路径）
@@ -45,8 +55,7 @@ $ sudo /usr/local/apache2/bin/apachectl start | stop
 ```
 (可用ps -e | grep httpd 查看apache是否已开启）
 
-二、 安装mysql：
----
+###安装mysql：
 ```
 $ cd /usr/local
 $ sudo ln -s /usr/local/mysql-××× mysql #链接源码到一个文件夹
@@ -82,8 +91,7 @@ $ sudo /usr/local/mysql/bin/mysql -u root -p
 mysql> delete from mysql.user where host='localhost' and user='';
 mysql> flush privileges;
 ```
-三、安装php
----
+###安装php
 ```
 $ cd /usr/local/php-5__
 $ sudo ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/local/mysql
@@ -97,8 +105,7 @@ $ sudo cp /usr/local/php___/php.ini-__ /usr/local/php/lib/php.ini
 ```
 sudo /usr/local/apache2/bin/apachectl restart
 ```
-四、安装phpMyAdmin:
----
+###安装phpMyAdmin:
 ```
 tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs
 ```
@@ -108,8 +115,7 @@ tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs
 
 
 
-Q1
----
+###Q1
 如果测试mysql时没有显示版本信息等界面，而是显示Can't connect to local MySQL server through socket '/tmp/mysql.sock'(2)则极有可能是mysql没有安装成功。解决办法是删除系统自带的mysql服务，
 ```
 $ rpm -qa | grep mysql
@@ -123,4 +129,6 @@ $ chkconfig --list | grep -i mysql
 $ sudo chkconfig --del mysql
 ```
 然后按照安装mysql的步骤再安装一次即可。
+
+
 
