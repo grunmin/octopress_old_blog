@@ -3,7 +3,7 @@ layout: post
 title: "linux安装wecenter笔记"
 date: 2013-07-25 20:32
 comments: true
-categories: wecenter
+categories: linux
 ---
 *此文是前文配置lamp的延伸*  
 在前面的一片文章里，用源码包安装的方式搭建了lamp环境，wecenter需要服务器支持mysqli或者pdo模块,支持curl,GD图像处理库，原来安装lamp过程中并无相关方面的配置，鼓捣了半天之后其他条件都已满足，唯独GD图像处理库不能安装。  

@@ -3,7 +3,7 @@ layout: post
 title: "RHCE note 1"
 date: 2013-11-03 02:07
 comments: true
-categories: RHCE
+categories: linux
 ---
 <!-- more -->
 ##unit 1
