@@ -4,6 +4,7 @@ title: "linux安装 Zend Frame 笔记"
 date: 2013-08-02 00:15
 comments: true
 categories: linux
+tags: [linux,zend]
 ---
 ###新建项目
 下载Zend Frame安装包(现在下载ZF要注册！可以用这条命令直接下载)
