@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: wiznote | 郭润民的博客]]></title>
+  <link href="http://grunmin.github.io/tags/wiznote/atom.xml" rel="self"/>
+  <link href="http://grunmin.github.io/"/>
+  <updated>2013-11-13T21:19:06+08:00</updated>
+  <id>http://grunmin.github.io/</id>
+  <author>
+    <name><![CDATA[Grunmin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[为知笔记使用笔记(1)-启动方式]]></title>
+    <link href="http://grunmin.github.io/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/"/>
+    <updated>2013-07-21T10:40:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi</id>
+    <content type="html"><![CDATA[<p>linux下软件的启动方式有多种，双击快捷方式对为知笔记这个软件并不管用，因此我们寻求其他更有linux风格的方式。<br/>
+文中的方法对于所有应用程序都是通用的。</p>
+
+<!-- more -->
+
+
+<h3><strong>为知笔记下载：</strong></h3>
+
+<p><a href="http://www.wiz.cn/download.html">为知笔记下载</a></p>
+
+<p>解压包到自己名下的文件夹，启动图标在bin文件夹里。</p>
+
+<h3>方式1 创建变量</h3>
+
+<p>在加环境变量后可以直接在命令行启动
+```</p>
+
+<h1>vi /etc/profile</h1>
+
+<h1>export PATH=&ldquo;$PATH:/home/username/path/wiznote/bin/&rdquo;</h1>
+
+<h1>source /etc/profile #重新加载环境变量</h1>
+
+<p>```
+然后就可以在命令行下直接输入wiznote启动。</p>
+
+<h3>方式2 使用alias</h3>
+
+<p>其实我们可以在命令行直接输入/path/to/wiznote/bin/wiznote来启动，不过每次都需要输入很长的一段命令，因此可以用alias来使命令更简单<br/>
+<code>
+$ vi .bashrc  #打开bash配置文件  
+</code>
+在文档末尾添加一行
+<code>
+alias note="/path/to/wiznote/bin/wiznote"
+</code>
+保存，重新启动终端模拟器，输入note即可启动<br/>
+（/path/to…… 需要根据自己的解压目录具体修改）</p>
+
+<h3>方式3 创建桌面快捷方式</h3>
+
+<p>直接复制bin/wiznote到桌面是不能正常使用wiznote的，需要为其创建一个链接，具体如下：
+在终端输入<br/>
+<code>
+$ ln -s /path/to/wiznote/bin/wiznote /path/want/to/locate
+</code>
+第一个path是原来wiznote的目录，第二个path是要安放快捷方式的地方。<br/>
+直接双击图标即可启动。</p>
+
+<h3>方式4 添加到快捷启动栏</h3>
+
+<p>```</p>
+
+<h1>vi /usr/share/applications/wiznote.desktop</h1>
+
+<p><code>
+复制一下代码到文件中：
+</code>
+[Desktop Entry]<br/>
+Name=wiznote<br/>
+GenericName=cloud note-taking application<br/>
+Comment=taking note and manage information<br/>
+Exec=/pate/to/wiznote/bin/wiznote<br/>
+Terminal=false<br/>
+Type=Application<br/>
+StartupNotify=true<br/>
+Icon=/path/toznote/share/wiznote/skins/wiznote64.png<br/>
+Categories=KDE;QT;Utility;<br/>
+```
+其实以上代码可在/path/to/wiznote/share/applications/wiznote中找到。<br/>
+Name是启动栏里显示的名称，Exec是打开路径，Icon是图标路径，Categories是归类，可以填Network.</p>
+]]></content>
+  </entry>
+  
+</feed>

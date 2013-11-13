@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: octopress | 郭润民的博客]]></title>
-  <link href="http://grunmin.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <title><![CDATA[Tag: octopress | 郭润民的博客]]></title>
+  <link href="http://grunmin.github.io/tags/octopress/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
   <updated>2013-11-13T21:19:06+08:00</updated>
   <id>http://grunmin.github.io/</id>
