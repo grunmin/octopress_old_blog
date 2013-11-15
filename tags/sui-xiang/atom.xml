@@ -1,115 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>关于知道不知道的几点理解 - 郭润民的博客</title>
-  <meta name="author" content="Grunmin">
-
-  
-  <meta name="description" content="关于大学学习的四个层次:
-不知道自己不知道
-知道自己不知道
-不知道自己知道
-知道自己知道 通常我们的理解是这样：甫入大学，在没有对大学尤其是专业进行深入的了解之前，没能认识到自己知识的匮乏，此谓之不知道不知道。随着专业的学习，渐渐接触更多东西，开始感觉自己原有的知识不足以解决新的问题， &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="郭润民的博客" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-42775487-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">郭润民的博客</a></h1>
-  
-    <h2>Learn for Learning</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:grunmin.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">首页</a></li>
-  <li><a href="/blog/archives">归档</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div>
-<article class="hentry" role="article">
-  
-  <header>
+  <title><![CDATA[Tag: 随想 | 郭润民的博客]]></title>
+  <link href="http://grunmin.github.io/tags/sui-xiang/atom.xml" rel="self"/>
+  <link href="http://grunmin.github.io/"/>
+  <updated>2013-11-15T21:46:54+08:00</updated>
+  <id>http://grunmin.github.io/</id>
+  <author>
+    <name><![CDATA[Grunmin]]></name>
     
-      <h1 class="entry-title">关于知道不知道的几点理解</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
+  <entry>
+    <title type="html"><![CDATA[广工打铁记]]></title>
+    <link href="http://grunmin.github.io/blog/2013/11/15/yan-gong-da-tie-ji/"/>
+    <updated>2013-11-15T21:30:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/11/15/yan-gong-da-tie-ji</id>
+    <content type="html"><![CDATA[<h3>day1</h3>
+
+<p>广工的老师与华师的老师的一个比较大的区别是，华师的老师讲课时比较幽默风趣，广工的老师则不是很爱笑。也许这跟专业环境和学生群体有关。老师们说话很有条理，充分体现理工科的思维优势，我很喜欢。因为这跟我很像。当我讲技术的时候，我只讲技术，力争将其讲清楚，而不会去追求其他。不过也确实，纯手熟的专业，没有多少技巧性艺术性可言，只要愿意去做，都会懂的。</p>
+
+<!-- more -->
 
 
-<time datetime="2013-08-05T11:24:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time>
-        
-         | <a href="#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
+<p>8点30分，金工实习前的安全教育，老师播放的视频不知道时什么年代的了，画面失真，声音也时常高八度低八度。9点，开始焊工课程。教电焊的是位高大威猛的男老师，在一间间隔成茅厕摸样的车间连讲带吓，让我们去摸那把夹在焊钳上的，带着火花的铁锤。接下来的实操是相当有趣的，电弧，火花，发红的铁水，在一间间“茅厕”里释放自己短暂的青春。我焊了两次都意犹未尽，听说有同学被弧光吓得大叫而不敢下手，呵呵。</p>
 
+<p>下午的内容是塑料焊，就不是那么有趣了。一来时间短，二来不像焊工。因为我们花了绝大多数时间来讨论和设计，切片，最后时间不够用了，草草交了一份作品，是个坦克模型。最后被当作垃圾处理了，这是后话。</p>
 
-<div class="entry-content"><p>关于大学学习的四个层次:<br/>
+<p>说到广工，不能不提到它的食堂。有人说，吃在华师，我不能同意。广工的食堂整体上更加高端大气（真的高端，每一餐都好贵），尤其是一饭，装㶇得像个宾馆，重点是，饭菜的味道还不赖，而且款式比华师多的多。现在回来看看华师食堂里每个窗口同样的饭菜，内心深深觉得华师的厨师都应该拖出去枪毙。每个窗口都是千篇一律，毫无新意，而且每一种都拖泥带水，就像家洲所说，在华师吃饭，就像“在地牢里吃屎”。不过呢，广工的食堂好不好，还需要一段时间才能评定。值得一提的是，我大光一在广工依然发挥优良传统，吃饭时必然成群结伙。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[关于知道不知道的几点理解]]></title>
+    <link href="http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/"/>
+    <updated>2013-08-05T11:24:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie</id>
+    <content type="html"><![CDATA[<p>关于大学学习的四个层次:<br/>
 <strong>不知道自己不知道</strong><br/>
 <strong>知道自己不知道</strong><br/>
 <strong>不知道自己知道</strong><br/>
@@ -185,180 +114,7 @@
 <p>同样的事情，有的人绞尽脑汁也解不出来，有的人轻易解出来了。解不出的人讥讽，这有什么稀罕的？只不过一时没有想到而已。 也许真是这样，但问题是，没有那个解出来了的人的存在，没想到常常是永远都想不到了。一旦问题解出来了，很多人就跳出来表示自己也会。砸个鸡蛋大家当然都是会的，问题是不知道要砸，或者，用另外一个办法，转它。</p>
 
 <p>对于我而言，大学四层次的第二种描述能让我保持一种正确的姿态来对待生活中的各种问题，保持对智慧的不懈探索和追求。我愿意在以后的日子，尽我所能地做到这一点。</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
+]]></content>
+  </entry>
   
-
-<span class="byline author vcard">Posted by <span class="fn">Grunmin</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-08-05T11:24:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/thinking/'>Thinking</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/" data-via="" data-counturl="http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/" >Tweet</a>
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/" title="Previous Post: linux安装 Zend Frame 笔记">&laquo; linux安装 Zend Frame 笔记</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/11/03/rhce-note-1/" title="Next Post: RHCE note 1">RHCE note 1 &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
-  <section>
-    <h1>Comments</h1>
-    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-  </section>
-
-</div>
-
-<aside class="sidebar">
-  
-    <section>
-  <h1>Tags</h1>
-  <ul class="tag-cloud">
-    <a style="font-size: 210%" href="/tags/linux/">linux</a>
-<a style="font-size: 90%" href="/tags/octopress/">octopress</a>
-<a style="font-size: 142%" href="/tags/rhce/">rhce</a>
-<a style="font-size: 90%" href="/tags/wiznote/">wiznote</a>
-<a style="font-size: 90%" href="/tags/zend/">zend</a>
-<a style="font-size: 142%" href="/tags/sui-xiang/">随想</a>
-
-  </ul>
-</section>
-<section>
-  <h1>分类目录</h1>
-  <ul id="categories">
-    <li class='category'><a href='/blog/categories/thinking/'>Thinking (2)</a></li>
-<li class='category'><a href='/blog/categories/linux/'>linux (6)</a></li>
-<li class='category'><a href='/blog/categories/octopress/'>octopress (1)</a></li>
-
-  </ul>
-</section>
-<section>
-  <h1>近期文章</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/11/15/yan-gong-da-tie-ji/">广工打铁记</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/03/rhce-note-1/">RHCE Note 1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/">关于知道不知道的几点理解</a>
-      </li>
-    
-  </ul>
-</section>
-
-
-
-
-<section>
-  <h1>About Me</h1>
-  <li>
-  <p>南中国一般大学大光电学子</p>
-  </li>
-  <li>
-  <p>linux 爱好者</p>
-  </li>
-</section>
-
-  
-</aside>
-
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Grunmin -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'grunmin';
-      
-        
-        // var disqus_developer = 1;
-        var disqus_identifier = 'http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/';
-        var disqus_url = 'http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/';
-        var disqus_script = 'embed.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>
