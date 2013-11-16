@@ -152,7 +152,7 @@ Liquid::Template.register_tag('category_list', Jekyll::CategoryListTag)
 <section>
   <h1>Categories</h1>
   <ul id="categories">
-    {\% category_list \%} #代码中应去掉\
+    {%raw%}{% category_list %}{%endraw%} 
   </ul>
 </section>
 ```
