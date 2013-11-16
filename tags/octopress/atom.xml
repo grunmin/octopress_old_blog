@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: octopress | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/tags/octopress/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-11-15T21:46:54+08:00</updated>
+  <updated>2013-11-16T08:59:14+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -172,7 +172,7 @@ end</p>
   <h1>Categories</h1>
   <ul id="categories"></p>
 
-<pre><code>{\% category_list \%} #代码中应去掉\
+<pre><code>{% category_list %} 
 </code></pre>
 
 <p>  </ul>

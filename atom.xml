@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-11-15T21:46:54+08:00</updated>
+  <updated>2013-11-16T08:59:14+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -252,7 +252,7 @@
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;section&gt;
 </span><span class='line'>  &lt;h1&gt;Categories&lt;/h1&gt;
 </span><span class='line'>  &lt;ul id="categories"&gt;
-</span><span class='line'>    {\% category_list \%} #代码中应去掉\
+</span><span class='line'>    {% category_list %} 
 </span><span class='line'>  &lt;/ul&gt;
 </span><span class='line'>&lt;/section&gt;</span></code></pre></td></tr></table></div></figure>
 
