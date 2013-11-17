@@ -18,9 +18,9 @@ categories: vim
 -  安装[中文帮助](http://vimcdoc.sourceforge.net/)
 
 -  下载linux下的[vim](http://pan.baidu.com/s/1tcJSm)文件  
-- 将.vim的plugin和doc夹下的全部内容添加到windows的vim的安装目录下对应的文件夹。并将.vimrc重命名为_vimrc,覆盖掉原有的_vimrc文件。
+- 将.vim的plugin和doc夹下的全部内容添加到windows的vim的安装目录下对应的文件夹。并将.vimrc重命名为\_vimrc,覆盖掉原有的\_vimrc文件。
 
-- 在_vimrc中添加以下命令以支持中文编码：    
+- 在\_vimrc中添加以下命令以支持中文编码：    
 ```
 set encoding=utf-8
 set termencoding=utf-8
@@ -28,7 +28,7 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,chinese,cp936
 ```
 
-- 修改_vimrc中迁移后产生的个别路径错误问题。
+- 修改\_vimrc中迁移后产生的个别路径错误问题。
 
 配置好后的vim是[这样](http://pan.baidu.com/s/1kpsLc)的。   
 
