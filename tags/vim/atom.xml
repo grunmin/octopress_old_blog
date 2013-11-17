@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: vim | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/tags/vim/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-11-17T17:25:20+08:00</updated>
+  <updated>2013-11-17T18:12:35+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -29,7 +29,7 @@
 <li><p><a href="http://www.vim.org/download.php#pc">安装Gvim</a></p></li>
 <li><p>安装<a href="http://vimcdoc.sourceforge.net/">中文帮助</a></p></li>
 <li><p>下载linux下的<a href="http://pan.baidu.com/s/1tcJSm">vim</a>文件</p></li>
-<li><p>将.vim的plugin和doc夹下的全部内容添加到windows的vim的安装目录下对应的文件夹。并将.vimrc重命名为<em>vimrc,覆盖掉原有的</em>vimrc文件。</p></li>
+<li><p>将.vim的plugin和doc夹下的全部内容添加到windows的vim的安装目录下对应的文件夹。并将.vimrc重命名为_vimrc,覆盖掉原有的_vimrc文件。</p></li>
 <li><p>在_vimrc中添加以下命令以支持中文编码：  <br/>
 <code>
 set encoding=utf-8
