@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Thinking | 郭润民的博客]]></title>
-  <link href="http://grunmin.github.io/blog/categories/thinking/atom.xml" rel="self"/>
+  <title><![CDATA[Category: 随想 | 郭润民的博客]]></title>
+  <link href="http://grunmin.github.io/blog/categories/sui-xiang/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-11-16T19:11:03+08:00</updated>
+  <updated>2013-11-17T17:23:34+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,26 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[广工打铁记]]></title>
-    <link href="http://grunmin.github.io/blog/2013/11/15/yan-gong-da-tie-ji/"/>
-    <updated>2013-11-15T21:30:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2013/11/15/yan-gong-da-tie-ji</id>
-    <content type="html"><![CDATA[<h3>day1</h3>
-
-<p>广工的老师与华师的老师的一个比较大的区别是，华师的老师讲课时比较幽默风趣，广工的老师则不是很爱笑。也许这跟专业环境和学生群体有关。老师们说话很有条理，充分体现理工科的思维优势，我很喜欢。因为这跟我很像。当我讲技术的时候，我只讲技术，力争将其讲清楚，而不会去追求其他。不过也确实，纯手熟的专业，没有多少技巧性艺术性可言，只要愿意去做，都会懂的。</p>
-
-<!-- more -->
-
-
-<p>8点30分，金工实习前的安全教育，老师播放的视频不知道时什么年代的了，画面失真，声音也时常高八度低八度。9点，开始焊工课程。教电焊的是位高大威猛的男老师，在一间间隔成茅厕摸样的车间连讲带吓，让我们去摸那把夹在焊钳上的，带着火花的铁锤。接下来的实操是相当有趣的，电弧，火花，发红的铁水，在一间间“茅厕”里释放自己短暂的青春。我焊了两次都意犹未尽，听说有同学被弧光吓得大叫而不敢下手，呵呵。</p>
-
-<p>下午的内容是塑料焊，就不是那么有趣了。一来时间短，二来不像焊工。因为我们花了绝大多数时间来讨论和设计，切片，最后时间不够用了，草草交了一份作品，是个坦克模型。最后被当作垃圾处理了，这是后话。</p>
-
-<p>说到广工，不能不提到它的食堂。有人说，吃在华师，我不能同意。广工的食堂整体上更加高端大气（真的高端，每一餐都好贵），尤其是一饭，装㶇得像个宾馆，重点是，饭菜的味道还不赖，而且款式比华师多的多。现在回来看看华师食堂里每个窗口同样的饭菜，内心深深觉得华师的厨师都应该拖出去枪毙。每个窗口都是千篇一律，毫无新意，而且每一种都拖泥带水，就像家洲所说，在华师吃饭，就像“在地牢里吃屎”。不过呢，广工的食堂好不好，还需要一段时间才能评定。值得一提的是，我大光一在广工依然发挥优良传统，吃饭时必然成群结伙。</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[关于知道不知道的几点理解]]></title>

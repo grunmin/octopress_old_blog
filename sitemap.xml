@@ -22,7 +22,7 @@
         <loc>
             http://grunmin.github.io/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/
         </loc>
-        <lastmod>2013-11-16T19:10:26+08:00</lastmod>
+        <lastmod>2013-11-17T17:23:09+08:00</lastmod>
     </url>
     <url>
         <loc>http://grunmin.github.io/blog/2013/11/03/rhce-note-1/</loc>
@@ -40,7 +40,11 @@
     </url>
     <url>
         <loc>http://grunmin.github.io/blog/2013/11/15/yan-gong-da-tie-ji/</loc>
-        <lastmod>2013-11-16T19:10:37+08:00</lastmod>
+        <lastmod>2013-11-17T17:22:56+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://grunmin.github.io/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi/</loc>
+        <lastmod>2013-11-17T17:21:37+08:00</lastmod>
     </url>
     <url>
         <loc>http://grunmin.github.io/robots.txt</loc>
@@ -48,10 +52,10 @@
     </url>
     <url>
         <loc>http://grunmin.github.io/blog/archives/</loc>
-        <lastmod>2013-11-16T19:10:37+08:00</lastmod>
+        <lastmod>2013-11-17T17:23:09+08:00</lastmod>
     </url>
     <url>
         <loc>http://grunmin.github.io/</loc>
-        <lastmod>2013-11-16T19:10:37+08:00</lastmod>
+        <lastmod>2013-11-17T17:23:09+08:00</lastmod>
     </url>
 </urlset>
