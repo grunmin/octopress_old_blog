@@ -4,7 +4,7 @@ title: "RHCE note 9"
 date: 2013-11-03 23:20
 comments: true
 categories: linux
-tags: [linux,rhce]
+tags: linux rhce
 ---
 <!-- more -->
 ##unit 2
