@@ -4,7 +4,7 @@
   <title><![CDATA[Category: octopress | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/blog/categories/octopress/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-11-23T16:54:48+08:00</updated>
+  <updated>2013-12-22T00:24:06+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -161,24 +161,6 @@ git commit -m "comment"
 git push origin souce
 </code></p>
 
-<h3>从新电脑上恢复博客内容：</h3>
-
-<p>找到博客仓库的url，执行
-<code>
-git clone -b source (url) octopress   #把source 克隆到本地octopress目录上
-</code>
-<code>
-cd octopress
-git clone (url) _deploy   #克隆master分支，它存放着博客内容。
-</code>
-<code>
-gem install bundler
-bundle install
-rake install
-rake setup_github_pages
-</code>
-之后操作同上，有问题照葫芦画瓢。</p>
-
 <h3>octopress博客的个性化配置</h3>
 
 <h4>添加文章分类（category)</h4>
@@ -259,6 +241,35 @@ disqus_show_comment_count: false
 
 
 <p>```</p>
+
+<h3>从新电脑上恢复博客内容：</h3>
+
+<p>如果电脑重装了系统，或者要在另一台电脑编写博客，可以这样设置。
+找到博客仓库的url，执行
+<code>
+git clone -b source (url) octopress   #把source 克隆到本地octopress目录上
+</code>
+<code>
+cd octopress
+git clone (url) _deploy   #克隆master分支，它存放着博客内容。
+</code>
+<code>
+gem install bundler
+bundle install
+rake install
+rake setup_github_pages
+</code>
+之后操作同上，有问题照葫芦画瓢。</p>
+
+<h3>其他问题</h3>
+
+<p>如果不能生成或者推送博客了，可以采取下述措施：</p>
+
+<ul>
+<li>在命令行输入<code>/bin/bash --login</code>，重试</li>
+<li>查看ruby的版本，如果不是1.9.3的话，执行<code>rvm use 1.9.3</code></li>
+</ul>
+
 
 <p><strong>持续更新…………</strong></p>
 
