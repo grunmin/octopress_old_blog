@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2013-12-22T00:24:06+08:00</updated>
+  <updated>2013-12-25T13:02:57+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[一年来使用工具的感想]]></title>
+    <link href="http://grunmin.github.io/blog/2013/12/25/yi-nian-lai-shi-yong-gong-ju-de-gan-xiang/"/>
+    <updated>2013-12-25T12:56:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/12/25/yi-nian-lai-shi-yong-gong-ju-de-gan-xiang</id>
+    <content type="html"><![CDATA[<p> 只有当收集的资料转化为内在的知识和技能，成为成长进步的阶梯后，它才称得上是有益有用的。</p>
+
+<!--more-->
+
+
+<p>我自诩尝试过许多工具，以此来提高工作效率。但是今天，我在简书上看到的文章<a href="http://jianshu.io/p/d4b2XY">哪儿有那么多逼可装</a>。犹如当头一棒。我想我正是作者笔下的，为工具所束缚的装逼者。</p>
+
+<p> 我对工具有很高的追求，直到现在都在执着地去寻找易用，高效的工具，并且最大程度的将其用于日常生活中。比如我尝试用过安卓手机上大多数的词典。从彩虹，深蓝，mdict到形形色色叫不出名字的app，我一个一个下载试用不厌其烦。在谷歌阅读器即将下架的时候，我搜索了许多替代品，从网页版到移动端，不停地导入和导出rss。我也花了很多时间寻找笔记软件，比如印象，有道，为知，了解它们的用法和特性，慎重地选择一到两个。我用谷歌表单做调查问卷，而不是大多数人用的问卷星。我用vim写php代码，而不是IDE。我用linux（事实上我只是个学生，不需要用到linux来工作），用markdown，用octopress，用irc。我听说这东西很好所以去用，我认为学会了以后一定会有大用。</p>
+
+<p>事实上，我隔上几天才会用到词典，阅读器已经有几个月时间没有打开过，谷歌表单其实没有问卷星好用，用vim的效率提不上来，octopress几乎没有人上去过，irc频道里一直冷冷清清。只有为知笔记是一直在用着的。（linux版也即将支持markdown了）</p>
+
+<p>我考虑过收支比，内心清楚这是亏本的买卖。但是我不以为然，或者说，不愿意去相信，又或者是装逼的内在需求使然。我一如既往地花费大量时间，乐此不疲。</p>
+
+<p>过度追求工具的优化会让人忘记使用工具的初衷。在接触linux之后，我深刻认同效率，内容至上的观点。初学的盲目，让我陷入这一深沼之中。反思一下过去，希望今后有所改进，回到踏实勤勉的主线上来。</p>
+
+<p>以此为记。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[用stackedit保存笔记]]></title>
