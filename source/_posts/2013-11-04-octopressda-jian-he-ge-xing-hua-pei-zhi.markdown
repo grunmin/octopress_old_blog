@@ -103,23 +103,6 @@ git push origin souce
 ```
 
 
-###从新电脑上恢复博客内容：
-找到博客仓库的url，执行
-```
-git clone -b source (url) octopress   #把source 克隆到本地octopress目录上
-```
-```
-cd octopress
-git clone (url) _deploy   #克隆master分支，它存放着博客内容。
-```
-```
-gem install bundler
-bundle install
-rake install
-rake setup_github_pages
-```
-之后操作同上，有问题照葫芦画瓢。
-
 
 ###octopress博客的个性化配置
 
@@ -187,6 +170,32 @@ disqus_show_comment_count: false
   <li><a href="{{ root_url }}/about">关于</a></li> 
 </ul>
 ```
+
+###从新电脑上恢复博客内容：
+如果电脑重装了系统，或者要在另一台电脑编写博客，可以这样设置。
+找到博客仓库的url，执行
+```
+git clone -b source (url) octopress   #把source 克隆到本地octopress目录上
+```
+```
+cd octopress
+git clone (url) _deploy   #克隆master分支，它存放着博客内容。
+```
+```
+gem install bundler
+bundle install
+rake install
+rake setup_github_pages
+```
+之后操作同上，有问题照葫芦画瓢。
+
+
+###其他问题
+如果不能生成或者推送博客了，可以采取下述措施：
+
+  - 在命令行输入`/bin/bash --login`，重试
+  - 查看ruby的版本，如果不是1.9.3的话，执行`rvm use 1.9.3`
+
 
   
 **持续更新…………**
