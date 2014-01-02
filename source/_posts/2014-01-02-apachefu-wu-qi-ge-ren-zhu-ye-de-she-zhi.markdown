@@ -32,7 +32,12 @@ mkdir ~/www
 cd ~/www
 echo "Test home dir" >> index.html
 ```
-- 重启服务器，用浏览器打开`http://localhost/~username`，应该出现403页面。将selinux关闭，查看是否可以访问。
+- 重启服务器，用浏览器打开`http://localhost/~username`，应该会出现403页面。
+```
+client denied by server configuration
+```
+
+将selinux关闭，查看是否可以访问。
 
 - 如果不能访问，添加下面的代码到`/etc/httpd/conf/httpd.conf`文件中
 
