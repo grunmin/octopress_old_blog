@@ -5,11 +5,15 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>我的gvim安装和配置 - 郭润民的博客</title>
+  <title>apache服务器个人主页的设置 - 郭润民的博客</title>
   <meta name="author" content="Grunmin">
 
   
-  <meta name="description" content="我将自己正在学习的小东西放到了github上，想要充分发挥云端服务器的优势，希望在其他windows电脑也能coding，因此草草配置了一下gvim。 我在linux下已经对vim有了很好的配置，在编写php文件时十分顺利方便。不想在windows下也重复这一过程（ &hellip;">
+  <meta name="description" content="查看apache版本 1
+httpd -v 我的版本是2.4.6，个人主页相关的配置文件在
+/etc/httpd/conf.modules.d/00-base.conf
+和
+etc/httpd/conf.d/userdir.conf 查看/etc/httpd/conf.modules.d/00- &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +22,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://grunmin.github.io/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi">
+  <link rel="canonical" href="http://grunmin.github.io/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="郭润民的博客" type="application/atom+xml">
@@ -80,7 +84,7 @@
   
   <header>
     
-      <h1 class="entry-title">我的gvim安装和配置</h1>
+      <h1 class="entry-title">Apache服务器个人主页的设置</h1>
     
     
       <p class="meta">
@@ -96,7 +100,7 @@
   
 
 
-<time datetime="2013-11-17T17:14:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
+<time datetime="2014-01-02T16:16:00+08:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2014</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -105,19 +109,51 @@
   </header>
 
 
-<div class="entry-content"><p>我将自己正在学习的小东西放到了github上，想要充分发挥云端服务器的优势，希望在其他windows电脑也能coding，因此草草配置了一下gvim。</p>
+<div class="entry-content"><ul>
+<li>查看apache版本</li>
+</ul>
 
-<!-- more -->
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>httpd -v</span></code></pre></td></tr></table></div></figure>
 
 
-<p>我在linux下已经对vim有了很好的配置，在编写php文件时十分顺利方便。不想在windows下也重复这一过程（我配置linux下的vim花了几天时间才宣告满意收工），因此把linux下的所有文件都拿了过来，用极其简单粗暴的方式放进gvim的安装文件中。到目前为止，除了一些小问题，工作得还顺利，因此将这一过程记录下来。</p>
+<p>我的版本是2.4.6，个人主页相关的配置文件在<br/>
+<code>/etc/httpd/conf.modules.d/00-base.conf</code><br/>
+和
+<code>etc/httpd/conf.d/userdir.conf</code></p>
+
+<!--more-->
+
 
 <ul>
-<li><p><a href="http://www.vim.org/download.php#pc">安装Gvim</a></p></li>
-<li><p>安装<a href="http://vimcdoc.sourceforge.net/">中文帮助</a></p></li>
-<li><p>下载linux下的<a href="http://pan.baidu.com/s/1tcJSm">vim</a>文件</p></li>
-<li><p>将.vim的plugin和doc夹下的全部内容添加到windows的vim的安装目录下对应的文件夹。并将.vimrc重命名为_vimrc,覆盖掉原有的_vimrc文件。</p></li>
-<li><p>在_vimrc中添加以下命令以支持中文编码：</p></li>
+<li>查看<code>/etc/httpd/conf.modules.d/00-base.conf</code>，必须有<code>userdir_module</code>模块，如：</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/httpd/conf.modules.d/00-base.conf | grep userdir
+</span><span class='line'>LoadModule userdir_module modules/mod_userdir.so</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>进入<code>/etc/httpd/conf.d/userdir.conf</code>设置，将第17行的<code>UserDir disabled</code>加上注释并取消24行<code>UserDir public</code>的注释(可以更改UserDir后面文件夹的名字，比如<code>UserDir www</code>)</p></li>
+<li><p>进入个人家目录，创建一个文件夹www和测试页面</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir ~/www
+</span><span class='line'>cd ~/www
+</span><span class='line'>echo "Test home dir" &gt;&gt; index.html</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>重启服务器，用浏览器打开<code>http://localhost/~username</code>，应该出现403页面。将selinux关闭，查看是否可以访问。</p></li>
+<li><p>如果不能访问，添加下面的代码到<code>/etc/httpd/conf/httpd.conf</code>文件中</p></li>
 </ul>
 
 
@@ -125,20 +161,42 @@
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>set encoding=utf-8
-</span><span class='line'>set termencoding=utf-8
-</span><span class='line'>set fileencoding=utf-8
-</span><span class='line'>set fileencodings=ucs-bom,utf-8,chinese,cp936</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> #将name和username按情况替换掉
+</span><span class='line'>&lt;Directory "/home/username/www"&gt;
+</span><span class='line'>    AllowOverride None
+</span><span class='line'>    Options Indexes FollowSymLinks
+</span><span class='line'>    Require all granted
+</span><span class='line'>&lt;/Directory&gt;</span></code></pre></td></tr></table></div></figure>
 
+
+<p>这里要注意的是，apache2.4版本已经取消了</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Order Deny,Allow
+</span><span class='line'>Allow from All</span></code></pre></td></tr></table></div></figure>
+
+
+<p>的使用，而采用</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Require all granted</span></code></pre></td></tr></table></div></figure>
+
+
+<p>来设置对目录的访问。</p>
 
 <ul>
-<li>修改_vimrc中迁移后产生的个别路径错误问题。</li>
+<li>设置别名</li>
 </ul>
 
 
-<p>配置好后的vim是<a href="http://pan.baidu.com/s/1kpsLc">这样</a>的。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Alias /name/ "/home/usename/www/" </span></code></pre></td></tr></table></div></figure>
 
-<p>直接打开vim时依然会出现乱码，但是右键一个文件以vim打开时则不会，以后有时间再完善一下。</p>
+
+<p>到此个人目录可以使用，将代码放到~/www目录下吧^_^。</p>
 </div>
 
 
@@ -161,12 +219,12 @@
   
 
 
-<time datetime="2013-11-17T17:14:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
+<time datetime="2014-01-02T16:16:00+08:00" pubdate data-updated="true">Jan 2<span>nd</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/vim/'>vim</a>
+    <a class='category' href='/blog/categories/linux/'>linux</a>
   
 </span>
 
@@ -175,7 +233,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://grunmin.github.io/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi/" data-via="" data-counturl="http://grunmin.github.io/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://grunmin.github.io/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi/" data-via="" data-counturl="http://grunmin.github.io/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi/" >Tweet</a>
   
   
   
@@ -184,10 +242,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/11/15/yan-gong-da-tie-ji/" title="Previous Post: 广工打铁记">&laquo; 广工打铁记</a>
+        <a class="basic-alignment left" href="/blog/2014/01/01/wo-ying-gai-ru-he-qu-xue-xi/" title="Previous Post: 我应该如何去学习">&laquo; 我应该如何去学习</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke/" title="Next Post: 用马克飞象写博客">用马克飞象写博客 &raquo;</a>
       
     </p>
   </footer>
@@ -284,8 +340,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://grunmin.github.io/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi/';
-        var disqus_url = 'http://grunmin.github.io/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi/';
+        var disqus_identifier = 'http://grunmin.github.io/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi/';
+        var disqus_url = 'http://grunmin.github.io/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi/';
         var disqus_script = 'embed.js';
       
     (function () {

@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-01-01T17:17:05+08:00</updated>
+  <updated>2014-01-02T16:25:23+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,6 +12,102 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[apache服务器个人主页的设置]]></title>
+    <link href="http://grunmin.github.io/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi/"/>
+    <updated>2014-01-02T16:16:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi</id>
+    <content type="html"><![CDATA[<ul>
+<li>查看apache版本</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>httpd -v</span></code></pre></td></tr></table></div></figure>
+
+
+<p>我的版本是2.4.6，个人主页相关的配置文件在<br/>
+<code>/etc/httpd/conf.modules.d/00-base.conf</code><br/>
+和
+<code>etc/httpd/conf.d/userdir.conf</code></p>
+
+<!--more-->
+
+
+<ul>
+<li>查看<code>/etc/httpd/conf.modules.d/00-base.conf</code>，必须有<code>userdir_module</code>模块，如：</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat /etc/httpd/conf.modules.d/00-base.conf | grep userdir
+</span><span class='line'>LoadModule userdir_module modules/mod_userdir.so</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>进入<code>/etc/httpd/conf.d/userdir.conf</code>设置，将第17行的<code>UserDir disabled</code>加上注释并取消24行<code>UserDir public</code>的注释(可以更改UserDir后面文件夹的名字，比如<code>UserDir www</code>)</p></li>
+<li><p>进入个人家目录，创建一个文件夹www和测试页面</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir ~/www
+</span><span class='line'>cd ~/www
+</span><span class='line'>echo "Test home dir" &gt;&gt; index.html</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li><p>重启服务器，用浏览器打开<code>http://localhost/~username</code>，应该出现403页面。将selinux关闭，查看是否可以访问。</p></li>
+<li><p>如果不能访问，添加下面的代码到<code>/etc/httpd/conf/httpd.conf</code>文件中</p></li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> #将name和username按情况替换掉
+</span><span class='line'>&lt;Directory "/home/username/www"&gt;
+</span><span class='line'>    AllowOverride None
+</span><span class='line'>    Options Indexes FollowSymLinks
+</span><span class='line'>    Require all granted
+</span><span class='line'>&lt;/Directory&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>这里要注意的是，apache2.4版本已经取消了</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Order Deny,Allow
+</span><span class='line'>Allow from All</span></code></pre></td></tr></table></div></figure>
+
+
+<p>的使用，而采用</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Require all granted</span></code></pre></td></tr></table></div></figure>
+
+
+<p>来设置对目录的访问。</p>
+
+<ul>
+<li>设置别名</li>
+</ul>
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Alias /name/ "/home/usename/www/" </span></code></pre></td></tr></table></div></figure>
+
+
+<p>到此个人目录可以使用，将代码放到~/www目录下吧^_^。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[我应该如何去学习]]></title>
