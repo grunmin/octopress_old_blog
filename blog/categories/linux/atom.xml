@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-01-02T16:25:23+08:00</updated>
+  <updated>2014-01-02T23:00:49+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -46,8 +46,17 @@ mkdir ~/www
 cd ~/www
 echo "Test home dir" &gt;&gt; index.html
 </code></p></li>
-<li><p>重启服务器，用浏览器打开<code>http://localhost/~username</code>，应该出现403页面。将selinux关闭，查看是否可以访问。</p></li>
-<li><p>如果不能访问，添加下面的代码到<code>/etc/httpd/conf/httpd.conf</code>文件中</p></li>
+<li>重启服务器，用浏览器打开<code>http://localhost/~username</code>，应该会出现403页面。
+<code>
+client denied by server configuration
+</code></li>
+</ul>
+
+
+<p>将selinux关闭，查看是否可以访问。</p>
+
+<ul>
+<li>如果不能访问，添加下面的代码到<code>/etc/httpd/conf/httpd.conf</code>文件中</li>
 </ul>
 
 
