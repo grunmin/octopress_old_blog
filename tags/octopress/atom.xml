@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: octopress | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/tags/octopress/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-03-13T00:43:55+08:00</updated>
+  <updated>2014-03-13T00:46:07+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,73 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[用stackedit保存笔记]]></title>
-    <link href="http://grunmin.github.io/blog/2013/11/23/yong-stackeditbao-cun-bi-ji/"/>
-    <updated>2013-11-23T16:49:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2013/11/23/yong-stackeditbao-cun-bi-ji</id>
-    <content type="html"><![CDATA[<p>在<a href="http://grunmin.github.io/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke/">上一篇文章</a>里写到用马克飞象写博客，不知对用印象笔记的读者有没有帮助。我对工具有近乎狂热的追求，花了很多时间来尝试不同工具，试图找出其中最高效率的，最简约的，最人性化的。比如云盘，云相册，linux发行版，以及各种编辑器等。在写上一篇博客的时候其实也用到了其他的工具，我在此将其写下来。</p>
-
-<!-- more -->
-
-
-<p>马克飞象编辑器显然对markdown的支持没有专业工具那么好（还有上文提到的硬伤)，在发表一片博文之前，我都要将其拷贝到stackedit上查看格式是否有误，在stackedit上修改之后又拷贝到笔记里。过程繁琐，于是我寻思，是否有更加简单的方式来完成同样的工作。</p>
-
-<p>其实stackedit提供了我需要的功能。它支持编辑器与谷歌云端硬盘和dropbox之间文件的同步。也就是说，在stackedit上编辑的文件可以保存到谷歌和dropbox的服务器中，这其实就是用markdown来写笔记。</p>
-
-<p>点击stackedit页面左上角的图标<img src="https://lh3.googleusercontent.com/DeduTfgiszvG6lZ-SjC0XvCWAJELtr6026s9wQWR9g=s0" alt="enter image description here" />，在SYNCHRONIZE下有谷歌云端硬盘和dropbox的图标，点击<code>Export to Google Drive</code>就可以将文章保存到云端硬盘中，dropbox也是如此。</p>
-
-<p>如此，我发表博文的过程相对简单了。直接在stackedit上编辑（支持离线编辑）好，保存到云端，然后把代码交给octopress处理即可。</p>
-
-<p>用stackedit有另一个好处是可以直接插入谷歌相册里的图片，或者直接上传本地图片到相册上直接用。</p>
-
-<p>到目前为止，我发现的唯一缺点是谷歌文档不能预览或编辑stackedit写好的笔记，需要通过stackedit来打开和编辑。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[用马克飞象写博客]]></title>
-    <link href="http://grunmin.github.io/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke/"/>
-    <updated>2013-11-23T15:46:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke</id>
-    <content type="html"><![CDATA[<p>用octopress搭建博客之后，大爱markdown的简约，因此我对云笔记的要求又多了一项：支持markdown格式编辑和保存。</p>
-
-<p>我之前尝试用过一些云笔记产品，比如印象笔记，为之笔记，有道云笔记等。印象笔记的网页版很好，但是linux下没有官方的客户端（这意味着不能离线查看笔记）。为之笔记我一直在用着，因为它有linux客户端，但它的是网页版很糟糕，而且最近出现了网页版加载不了笔记的情况，因此有换个笔记的想法。有道云就不提了，目前没发现什么优势。</p>
-
-<!-- more -->
-
-
-<p>在写octopress博客的时候，我先在为之笔记上写好txt格式的正文，将其复制到stackedit上进行markdown处理，再将转化后的内容写进octopress的文件中。这样，在为之笔记上的博客内容就和octopress上的不同了，而且，笔记上无格式的正文也十分难看。</p>
-
-<p>今天在chrome商店上看到了一个应用，据称是专为印象笔记打造的markdown编辑器，叫马克飞象。这是图标<br/>
-<img src="https://lh5.googleusercontent.com/-hOEvL1TOB-o/UpBepDGUAhI/AAAAAAAAAGY/WHZ5qubwNeE/s0/2013-11-23-151125_118x133_scrot.png" title="2013-11-23-151125_118x133_scrot.png" alt="enter image description here" /></p>
-
-<p>绑定笔记帐号后在上面编辑可以实时查看效果，并将处理后的笔记保存到印象笔记中。效果如图：
-<img src="https://lh6.googleusercontent.com/-N6XlKlK81F8/UpBe4QtcpWI/AAAAAAAAAGk/GtCzYl-__PY/s0/2013-11-23-153122_422x354_scrot.png" title="2013-11-23-153122_422x354_scrot.png" alt="enter image description here" /></p>
-
-<p>用马克飞象编辑的文章保存到笔记中是markdown解释过的语言（笔记不会显示源代码），这样保存下来的笔记比无格式或者markdown源代码格式的好看多了。  相对于stackedit与谷歌云端硬盘的优势也是十分明显的，它可以直接在印象笔记中查看。</p>
-
-<p>马克飞象支持将所编辑的笔记分类和加标签，使用<code>@(categories)[tags|tags]</code>即可，同一文章中只能出现一次，且必须与其他内容隔一些距离。</p>
-
-<p>用马克飞象编辑的笔记在右上角会显示一个链接，点击链接后会用启用马克飞象编辑文章，因此不用担心后续更新的问题。</p>
-
-<p><img src="https://lh6.googleusercontent.com/-aipDbqSYjS0/UpBe_0jaxzI/AAAAAAAAAGw/giigXjHPP2A/s0/2013-11-23-153132_937x329_scrot.png" title="2013-11-23-153132_937x329_scrot.png" alt="enter image description here" /></p>
-
-<p>我是用马克飞象编辑的这篇博客，在编辑过程中也发现了一些问题。问题有三：</p>
-
-<ul>
-<li>插入的图片不能显示<br/>
-编辑时插入图片不能显示，保存到印象笔记后也是如此。</li>
-<li>编辑器的光标显示位置不准确<br/>
-这是个更大的问题，光标显示所在的位置不是其真实位置，在添删个别文字时特别麻烦。</li>
-<li>跟其他编辑有部分不兼容(比如stackedit)</li>
-</ul>
-
-
-<p>总体来说马克飞象还是十分实用的，特别是对程序员，用马克飞象记录代码显得如虎添翼。</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[octopress博客搭建和个性化配置]]></title>

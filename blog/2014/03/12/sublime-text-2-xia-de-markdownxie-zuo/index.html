@@ -1,0 +1,361 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>sublime text 2 下的Markdown写作 - 郭润民的博客</title>
+  <meta name="author" content="Grunmin">
+
+  
+  <meta name="description" content="作为Windows/Mac/Linux下强大的文本编辑器，st提供了对Markdown语言的支持。通过设置可实现markdown预览和转换功能。而本文介绍的Markdown Preview支持Mathjax语法和目录自动生成。(Windows下） 安装Package Control &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://grunmin.github.io/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="郭润民的博客" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-42775487-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">郭润民的博客</a></h1>
+  
+    <h2>Learn for Learning</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:grunmin.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">首页</a></li>
+  <li><a href="/blog/archives">归档</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Sublime Text 2 下的Markdown写作</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-12T22:48:00+08:00" pubdate data-updated="true">Mar 12<span>th</span>, 2014</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>作为Windows/Mac/Linux下强大的文本编辑器，st提供了对Markdown语言的支持。通过设置可实现markdown预览和转换功能。而本文介绍的<code>Markdown Preview</code>支持Mathjax语法和目录自动生成。(Windows下）</p>
+
+<!-- more -->
+
+
+<h2>安装Package Control</h2>
+
+<p>安装包控制扩展可以方便地为st添加拓展。
+打开st，按下组合键`Control + &#8220;，出现控制台，输入</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')</span></code></pre></td></tr></table></div></figure>
+
+
+<p>当看到代码最后一行提示的时候说明安装成功，此时重启st，可在<code>Preferences -&gt; Package Settings</code>看到<code>Package Control</code>。</p>
+
+<h2>安装markdown preview</h2>
+
+<p>按下键<code>Ctrl+Shift+p</code>调出命令面板，找到<code>Package Control: install Pakage</code>这一项。搜索markdown preview，点击安装。</p>
+
+<h2>使用</h2>
+
+<p>Markdown Preview较常用的功能是<code>preview in browser</code>和<code>Export HTML in Sublime Text</code>，前者可以在浏览器看到预览效果，后者可将markdown保存为html文件。</p>
+
+<p><code>preview in browser</code>据称是实时的，但是实践上还是需要在st保存，然后浏览器刷新才能看到新的效果，好在markdown写得多的话也不需要每敲一行看一次效果。</p>
+
+<h2>快捷键</h2>
+
+<p>st支持自定义快捷键，<code>markdown preview</code>默认没有快捷键，我们可以自己为<code>preview in browser</code>设置快捷键。方法是在<code>Preferences -&gt; Key Bindings User</code>打开的文件的中括号中添加以下代码(可在Key Bindings Default找到格式)：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'> { "keys": ["alt+m"], "command": "markdown_preview", "args": { "target": "browser"} }</span></code></pre></td></tr></table></div></figure>
+
+
+<p>&ldquo;alt+m&#8221;可设置为自己喜欢的按键。</p>
+
+<h2>设置语法高亮和mathjax支持</h2>
+
+<p>在<code>Preferences -&gt;Package Settings-&gt;Markdown Preview-&gt;Setting Default</code>中的第31行和36行找到</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/*
+</span><span class='line'>       Enable or not mathjax support.
+</span><span class='line'>    */
+</span><span class='line'>    "enable_mathjax": false,
+</span><span class='line'>
+</span><span class='line'>    /*
+</span><span class='line'>        Enable or not highlight.js support for syntax highlighting.
+</span><span class='line'>    */
+</span><span class='line'>    "enable_highlight": false,</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将 两个false改为true即可。
+语法高亮跟编辑器的主题有关，可以在<code>Preferences -&gt;Color Scheme</code>找自己喜欢的主题。
+关于目录生成，只要文章是按照markdown语法写作的。在需要生成目录的地方写</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[TOC]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>即可。</p>
+
+<blockquote><p>如果你这里没有看到目录而只是看到代码，说明简书不支持目录自动生成哈哈</p></blockquote>
+
+<h2>打印成pdf</h2>
+
+<p>将markdown转换为pdf应该有很多种方法的。我没有再折腾，直接用谷歌浏览器虚拟打印功能生成。
+利用<code>Markdown Preview</code>的<code>Preview in Browser</code>功能可以在浏览器上看到htm效果。在页面<code>右键-&gt;打印-&gt;另存为pdf-&gt;调节页边距</code>即可将pdf文件下载下来。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Grunmin</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-12T22:48:00+08:00" pubdate data-updated="true">Mar 12<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/windows/'>Windows</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://grunmin.github.io/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo/" data-via="" data-counturl="http://grunmin.github.io/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi/" title="Previous Post: apache服务器个人主页的设置">&laquo; apache服务器个人主页的设置</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/03/12/wamp-apachewu-fa-qi-dong-de-jie-jue-fang-fa/" title="Next Post: wamp apache无法启动的解决方法">wamp apache无法启动的解决方法 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Tags</h1>
+  <ul class="tag-cloud">
+    <a style="font-size: 210%" href="/tags/linux/">linux</a>
+<a style="font-size: 90%" href="/tags/octopress/">octopress</a>
+<a style="font-size: 130%" href="/tags/rhce/">rhce</a>
+<a style="font-size: 153%" href="/tags/windows/">windows</a>
+<a style="font-size: 130%" href="/tags/bo-ke/">博客</a>
+<a style="font-size: 183%" href="/tags/gong-ju/">工具</a>
+<a style="font-size: 170%" href="/tags/si-kao/">思考</a>
+<a style="font-size: 90%" href="/tags/wen-zi/">文字</a>
+<a style="font-size: 90%" href="/tags/jing-li/">经历</a>
+<a style="font-size: 130%" href="/tags/bian-cheng/">编程</a>
+
+  </ul>
+</section>
+
+<section>
+  <h1>Tag Cloud</h1>
+    <span id="tag-cloud"><embed type='application/x-shockwave-flash' src='/javascripts/tagcloud.swf'width='100%' height='250' bgcolor='#f2f2f2' id='tagcloudflash' name='tagcloudflash' quality='high' allowscriptaccess='always'flashvars="tcolor=0x333333&amp;tcolor2=0x333333&amp;hicolor=0x000000&amp;tspeed=100&amp;distr=true&amp;mode=tags&amp;tagcloud=%3Ctags%3E%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Flinux%27+style%3D%27font-size%3A+50.0%25%27%3Elinux%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Foctopress%27+style%3D%27font-size%3A+15.0%25%27%3Eoctopress%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fvim%27+style%3D%27font-size%3A+15.0%25%27%3Evim%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fwindows%27+style%3D%27font-size%3A+20.0%25%27%3Ewindows%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fwindows%27+style%3D%27font-size%3A+15.0%25%27%3EWindows%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fbo-ke%27+style%3D%27font-size%3A+20.0%25%27%3E%E5%8D%9A%E5%AE%A2%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fsi-kao%27+style%3D%27font-size%3A+30.0%25%27%3E%E6%80%9D%E8%80%83%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fwen-zi%27+style%3D%27font-size%3A+15.0%25%27%3E%E6%96%87%E5%AD%97%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fjing-li%27+style%3D%27font-size%3A+15.0%25%27%3E%E7%BB%8F%E5%8E%86%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fbian-cheng%27+style%3D%27font-size%3A+15.0%25%27%3E%E7%BC%96%E7%A8%8B%3C%2Fa%3E+%3C%2Ftags%3E"></span>
+</section>
+
+<section>
+  <h1>近期文章</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/13/fedora-xia-diao-jie-wai-fang-yin-liang-he-ping-mu-liang-du/">Fedora 下调节外放音量和屏幕亮度</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/12/wamp-apachewu-fa-qi-dong-de-jie-jue-fang-fa/">Wamp Apache无法启动的解决方法</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo/">Sublime Text 2 下的Markdown写作</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi/">Apache服务器个人主页的设置</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/01/01/wo-ying-gai-ru-he-qu-xue-xi/">我应该如何去学习</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+<section>
+  <h1>About Me</h1>
+  <li>
+  <p>南中国一般大学大光电学子</p>
+  </li>
+  <li>
+  <p>linux 爱好者</p>
+  </li>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Grunmin -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'grunmin';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://grunmin.github.io/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo/';
+        var disqus_url = 'http://grunmin.github.io/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

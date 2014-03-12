@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Tag: windows | 郭润民的博客]]></title>
+  <link href="http://grunmin.github.io/tags/windows/atom.xml" rel="self"/>
+  <link href="http://grunmin.github.io/"/>
+  <updated>2014-03-13T00:46:07+08:00</updated>
+  <id>http://grunmin.github.io/</id>
+  <author>
+    <name><![CDATA[Grunmin]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[wamp apache无法启动的解决方法]]></title>
+    <link href="http://grunmin.github.io/blog/2014/03/12/wamp-apachewu-fa-qi-dong-de-jie-jue-fang-fa/"/>
+    <updated>2014-03-12T22:48:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/03/12/wamp-apachewu-fa-qi-dong-de-jie-jue-fang-fa</id>
+    <content type="html"><![CDATA[<p>如题，近日在安装wamp的时候出现了apache无法启动的情况。wamp图标一直显示橙色。网上搜索了许多资料都无效，最后还是我自己发现问题并予以解决了。</p>
+
+<!-- more -->
+
+
+<h3>VC的问题？</h3>
+
+<p>我的电脑是新装的win8.1企业版。因此我怀疑是VC2008和2010没有安装的缘故，因此上官网下载了这两个安装包安装，结果如故。</p>
+
+<h3>没有安装服务？</h3>
+
+<p>直接<code>apache-&gt;service-&gt;remove service</code>，再install service ，重新打开wamp，结果如故。</p>
+
+<h3>80端口被占用？</h3>
+
+<p>用apache里service的test port 80，显示<code>Your port 80 is not actually used</code>。在cmd里用netstat -an 查找，没有一个软件占用80端口。为保险起见修改httpd.conf文件，修改其端口为8080，重启，结果如故。</p>
+
+<h3>netbios解析失败？</h3>
+
+<p>打开网络共享中心，点击<code>本地连接-&gt;属性-&gt;Internet协议版本-&gt;属性-&gt;高级-&gt;WINS</code>，勾掉<code>启用LMHOST</code>查找。重启服务，结果如故。</p>
+
+<h3>httpd.conf修改后语法错误？</h3>
+
+<p>新装的wamp，初始的配置文件怎么可能有语法错误……</p>
+
+<p>于是把wamp卸了又装装了又卸，问题得不到解决。</p>
+
+<p>换另一种方法，自己分开安装wamp。</p>
+
+<h3>失败！</h3>
+
+<p>在安装apache的时候显示找不到***文件，请检查路径之类的问题，安装程序出错，此举以失败告终。</p>
+
+<p>因此我再装一次wamp，查看httpd.conf，在其中看到的路径中包含了中文名。是不是因为名称的问题导致的呢？我不敢确定，因为同样是中文路径，mysqld服务可以成功启动。</p>
+
+<h3>成功！</h3>
+
+<p>接下来的事就简单了，不过也比较刺激。因为为了解决这个问题我搜索了两天，真的只是该死的中文路径名的问题。</p>
+
+<p>这次问题的解决再次提醒我注意之前多次遇到的问题，即windows下中文路径名的问题。即使转移到windows下，也不要忘了linux下良好的命名习惯呀。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[sublime text 2 下的Markdown写作]]></title>
+    <link href="http://grunmin.github.io/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo/"/>
+    <updated>2014-03-12T22:48:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo</id>
+    <content type="html"><![CDATA[<p>作为Windows/Mac/Linux下强大的文本编辑器，st提供了对Markdown语言的支持。通过设置可实现markdown预览和转换功能。而本文介绍的<code>Markdown Preview</code>支持Mathjax语法和目录自动生成。(Windows下）</p>
+
+<!-- more -->
+
+
+<h2>安装Package Control</h2>
+
+<p>安装包控制扩展可以方便地为st添加拓展。
+打开st，按下组合键<code>Control + \``，出现控制台，输入
+```
+import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')
+```
+当看到代码最后一行提示的时候说明安装成功，此时重启st，可在</code>Preferences &ndash;> Package Settings<code>看到</code>Package Control`。</p>
+
+<h2>安装markdown preview</h2>
+
+<p>按下键<code>Ctrl+Shift+p</code>调出命令面板，找到<code>Package Control: install Pakage</code>这一项。搜索markdown preview，点击安装。</p>
+
+<h2>使用</h2>
+
+<p>Markdown Preview较常用的功能是<code>preview in browser</code>和<code>Export HTML in Sublime Text</code>，前者可以在浏览器看到预览效果，后者可将markdown保存为html文件。</p>
+
+<p><code>preview in browser</code>据称是实时的，但是实践上还是需要在st保存，然后浏览器刷新才能看到新的效果，好在markdown写得多的话也不需要每敲一行看一次效果。</p>
+
+<h2>快捷键</h2>
+
+<p>st支持自定义快捷键，<code>markdown preview</code>默认没有快捷键，我们可以自己为<code>preview in browser</code>设置快捷键。方法是在<code>Preferences -&gt; Key Bindings User</code>打开的文件的中括号中添加以下代码(可在Key Bindings Default找到格式)：
+<code>
+ { "keys": ["alt+m"], "command": "markdown_preview", "args": { "target": "browser"} }
+</code>
+&ldquo;alt+m"可设置为自己喜欢的按键。</p>
+
+<h2>设置语法高亮和mathjax支持</h2>
+
+<p>在<code>Preferences -&gt;Package Settings-&gt;Markdown Preview-&gt;Setting Default</code>中的第31行和36行找到
+```
+/*</p>
+
+<pre><code>   Enable or not mathjax support.
+*/
+"enable_mathjax": false,
+
+/*
+    Enable or not highlight.js support for syntax highlighting.
+*/
+"enable_highlight": false,
+</code></pre>
+
+<p><code>
+将 两个false改为true即可。
+语法高亮跟编辑器的主题有关，可以在`Preferences -&gt;Color Scheme`找自己喜欢的主题。
+关于目录生成，只要文章是按照markdown语法写作的。在需要生成目录的地方写
+</code>
+[TOC]
+```
+即可。</p>
+
+<blockquote><p>如果你这里没有看到目录而只是看到代码，说明简书不支持目录自动生成哈哈</p></blockquote>
+
+<h2>打印成pdf</h2>
+
+<p>将markdown转换为pdf应该有很多种方法的。我没有再折腾，直接用谷歌浏览器虚拟打印功能生成。
+利用<code>Markdown Preview</code>的<code>Preview in Browser</code>功能可以在浏览器上看到htm效果。在页面<code>右键-&gt;打印-&gt;另存为pdf-&gt;调节页边距</code>即可将pdf文件下载下来。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[我的gvim安装和配置]]></title>
+    <link href="http://grunmin.github.io/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi/"/>
+    <updated>2013-11-17T17:14:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi</id>
+    <content type="html"><![CDATA[<p>我将自己正在学习的小东西放到了github上，想要充分发挥云端服务器的优势，希望在其他windows电脑也能coding，因此草草配置了一下gvim。</p>
+
+<!-- more -->
+
+
+<p>我在linux下已经对vim有了很好的配置，在编写php文件时十分顺利方便。不想在windows下也重复这一过程（我配置linux下的vim花了几天时间才宣告满意收工），因此把linux下的所有文件都拿了过来，用极其简单粗暴的方式放进gvim的安装文件中。到目前为止，除了一些小问题，工作得还顺利，因此将这一过程记录下来。</p>
+
+<ul>
+<li><p><a href="http://www.vim.org/download.php#pc">安装Gvim</a></p></li>
+<li><p>安装<a href="http://vimcdoc.sourceforge.net/">中文帮助</a></p></li>
+<li><p>下载linux下的<a href="http://pan.baidu.com/s/1tcJSm">vim</a>文件</p></li>
+<li><p>将.vim的plugin和doc夹下的全部内容添加到windows的vim的安装目录下对应的文件夹。并将.vimrc重命名为_vimrc,覆盖掉原有的_vimrc文件。</p></li>
+<li><p>在_vimrc中添加以下命令以支持中文编码：  <br/>
+<code>
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=ucs-bom,utf-8,chinese,cp936
+</code></p></li>
+<li><p>修改_vimrc中迁移后产生的个别路径错误问题。</p></li>
+</ul>
+
+
+<p>配置好后的vim是<a href="http://pan.baidu.com/s/1kpsLc">这样</a>的。</p>
+
+<p>直接打开vim时依然会出现乱码，但是右键一个文件以vim打开时则不会，以后有时间再完善一下。</p>
+]]></content>
+  </entry>
+  
+</feed>
