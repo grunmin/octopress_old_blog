@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 工具 | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/tags/gong-ju/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-01-02T23:00:49+08:00</updated>
+  <updated>2014-03-12T22:59:10+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -34,6 +34,293 @@
 <p>过度追求工具的优化会让人忘记使用工具的初衷。在接触linux之后，我深刻认同效率，内容至上的观点。初学的盲目，让我陷入这一深沼之中。反思一下过去，希望今后有所改进，回到踏实勤勉的主线上来。</p>
 
 <p>以此为记。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用stackedit保存笔记]]></title>
+    <link href="http://grunmin.github.io/blog/2013/11/23/yong-stackeditbao-cun-bi-ji/"/>
+    <updated>2013-11-23T16:49:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/11/23/yong-stackeditbao-cun-bi-ji</id>
+    <content type="html"><![CDATA[<p>在<a href="http://grunmin.github.io/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke/">上一篇文章</a>里写到用马克飞象写博客，不知对用印象笔记的读者有没有帮助。我对工具有近乎狂热的追求，花了很多时间来尝试不同工具，试图找出其中最高效率的，最简约的，最人性化的。比如云盘，云相册，linux发行版，以及各种编辑器等。在写上一篇博客的时候其实也用到了其他的工具，我在此将其写下来。</p>
+
+<!-- more -->
+
+
+<p>马克飞象编辑器显然对markdown的支持没有专业工具那么好（还有上文提到的硬伤)，在发表一片博文之前，我都要将其拷贝到stackedit上查看格式是否有误，在stackedit上修改之后又拷贝到笔记里。过程繁琐，于是我寻思，是否有更加简单的方式来完成同样的工作。</p>
+
+<p>其实stackedit提供了我需要的功能。它支持编辑器与谷歌云端硬盘和dropbox之间文件的同步。也就是说，在stackedit上编辑的文件可以保存到谷歌和dropbox的服务器中，这其实就是用markdown来写笔记。</p>
+
+<p>点击stackedit页面左上角的图标<img src="https://lh3.googleusercontent.com/DeduTfgiszvG6lZ-SjC0XvCWAJELtr6026s9wQWR9g=s0" alt="enter image description here" />，在SYNCHRONIZE下有谷歌云端硬盘和dropbox的图标，点击<code>Export to Google Drive</code>就可以将文章保存到云端硬盘中，dropbox也是如此。</p>
+
+<p>如此，我发表博文的过程相对简单了。直接在stackedit上编辑（支持离线编辑）好，保存到云端，然后把代码交给octopress处理即可。</p>
+
+<p>用stackedit有另一个好处是可以直接插入谷歌相册里的图片，或者直接上传本地图片到相册上直接用。</p>
+
+<p>到目前为止，我发现的唯一缺点是谷歌文档不能预览或编辑stackedit写好的笔记，需要通过stackedit来打开和编辑。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[用马克飞象写博客]]></title>
+    <link href="http://grunmin.github.io/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke/"/>
+    <updated>2013-11-23T15:46:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke</id>
+    <content type="html"><![CDATA[<p>用octopress搭建博客之后，大爱markdown的简约，因此我对云笔记的要求又多了一项：支持markdown格式编辑和保存。</p>
+
+<p>我之前尝试用过一些云笔记产品，比如印象笔记，为之笔记，有道云笔记等。印象笔记的网页版很好，但是linux下没有官方的客户端（这意味着不能离线查看笔记）。为之笔记我一直在用着，因为它有linux客户端，但它的是网页版很糟糕，而且最近出现了网页版加载不了笔记的情况，因此有换个笔记的想法。有道云就不提了，目前没发现什么优势。</p>
+
+<!-- more -->
+
+
+<p>在写octopress博客的时候，我先在为之笔记上写好txt格式的正文，将其复制到stackedit上进行markdown处理，再将转化后的内容写进octopress的文件中。这样，在为之笔记上的博客内容就和octopress上的不同了，而且，笔记上无格式的正文也十分难看。</p>
+
+<p>今天在chrome商店上看到了一个应用，据称是专为印象笔记打造的markdown编辑器，叫马克飞象。这是图标<br/>
+<img src="https://lh5.googleusercontent.com/-hOEvL1TOB-o/UpBepDGUAhI/AAAAAAAAAGY/WHZ5qubwNeE/s0/2013-11-23-151125_118x133_scrot.png" title="2013-11-23-151125_118x133_scrot.png" alt="enter image description here" /></p>
+
+<p>绑定笔记帐号后在上面编辑可以实时查看效果，并将处理后的笔记保存到印象笔记中。效果如图：
+<img src="https://lh6.googleusercontent.com/-N6XlKlK81F8/UpBe4QtcpWI/AAAAAAAAAGk/GtCzYl-__PY/s0/2013-11-23-153122_422x354_scrot.png" title="2013-11-23-153122_422x354_scrot.png" alt="enter image description here" /></p>
+
+<p>用马克飞象编辑的文章保存到笔记中是markdown解释过的语言（笔记不会显示源代码），这样保存下来的笔记比无格式或者markdown源代码格式的好看多了。  相对于stackedit与谷歌云端硬盘的优势也是十分明显的，它可以直接在印象笔记中查看。</p>
+
+<p>马克飞象支持将所编辑的笔记分类和加标签，使用<code>@(categories)[tags|tags]</code>即可，同一文章中只能出现一次，且必须与其他内容隔一些距离。</p>
+
+<p>用马克飞象编辑的笔记在右上角会显示一个链接，点击链接后会用启用马克飞象编辑文章，因此不用担心后续更新的问题。</p>
+
+<p><img src="https://lh6.googleusercontent.com/-aipDbqSYjS0/UpBe_0jaxzI/AAAAAAAAAGw/giigXjHPP2A/s0/2013-11-23-153132_937x329_scrot.png" title="2013-11-23-153132_937x329_scrot.png" alt="enter image description here" /></p>
+
+<p>我是用马克飞象编辑的这篇博客，在编辑过程中也发现了一些问题。问题有三：</p>
+
+<ul>
+<li>插入的图片不能显示<br/>
+编辑时插入图片不能显示，保存到印象笔记后也是如此。</li>
+<li>编辑器的光标显示位置不准确<br/>
+这是个更大的问题，光标显示所在的位置不是其真实位置，在添删个别文字时特别麻烦。</li>
+<li>跟其他编辑有部分不兼容(比如stackedit)</li>
+</ul>
+
+
+<p>总体来说马克飞象还是十分实用的，特别是对程序员，用马克飞象记录代码显得如虎添翼。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[linux搭建lamp环境笔记]]></title>
+    <link href="http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/"/>
+    <updated>2013-07-21T11:20:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji</id>
+    <content type="html"><![CDATA[<p>在学习php编程的过程中，了解了lamp环境的重要性，因此尝试自行搭建。在这个过程中经历了很多困难，为了便于查阅和再次搭建，在此将过程都记录下来。有错漏或可以改进的地方，欢迎指出拨正。</p>
+
+<!-- more -->
+
+
+<p>此前都是用源码包安装，其实用rpm包安装省时省力。</p>
+
+<h2>从软件包安装</h2>
+
+<p>```</p>
+
+<h1>yum groupinstall &lsquo;web-server&rsquo; -y</h1>
+
+<h1>yum install -y php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt pcre-devel libxml2-devel mysql-devel apr apr-devel apr-util apr-util-devel curl-devel libpng-devel mysql-server</h1>
+
+<p>```</p>
+
+<h2>源码包安装</h2>
+
+<h3>前期工作</h3>
+
+<p><strong>第1步</strong>： 在终端输入
+<code>
+$ sudo yum update  # 更新系统
+</code>
+<strong>第2步</strong>：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包</p>
+
+<p><strong>第3步</strong>：
+<code>
+$ sudo yum install gcc gcc-c++ libxml2 libxml2-devel pcre pcre-devel #安装依赖软件包
+</code>
+<strong>第4步</strong>：tar -zxvf 解压apache,mysql,php,pcre 等压缩包， sudo mv 移动到/usr/local目录下<br/>
+<code>
+$ sudo cd /usr/local/pcre;./configure --prefix=/usr/local/pcre #安装pcre
+</code>
+（非必需，如果安装apache时显示未安装pcre可按照此法安装）<br/>
+<strong>第5步</strong>： cd httpd/srclib/ 解压apr,apr-util 到目录下，修改文件名（不带版本号，如apr-util）</p>
+
+<h3>安装apache:</h3>
+
+<p><code>
+$ cd /usr/local/httpd  # 进入安装目录  
+$ sudo ./configure --prefix=/usr/local/apache2 --enable-so --with-mpm=worker --with-pcre=/usr/local/pcre --with-included-apr # 配置（注意./configure的/前有个小点，若没有按照上文安装pcre，可去掉--with-pcre后面的路径）
+$ sudo make
+$ sudo make install
+ #(--prefix指定安装目录，配置文件在/usr/local/apache2/conf目录下，--enable-so启动加载共享模块的功能，--with-mpm=worker吿诉apache使用多线程化多处理模块worker.)
+</code>
+<strong>启动apache</strong>:<br/>
+<code>
+$ sudo /usr/local/apache2/bin/httpd -k start | stop
+</code>
+ 或
+<code>
+$ sudo /usr/local/apache2/bin/apachectl start | stop
+</code>
+(可用ps -e | grep httpd 查看apache是否已开启）</p>
+
+<h3>安装mysql：</h3>
+
+<p><code>
+$ cd /usr/local
+$ sudo ln -s /usr/local/mysql-××× mysql #链接源码到一个文件夹
+$ cd mysql
+$ scripts/mysql_install_db --user=[username]    #（username为自己的用户名，中括号不用打进去，下同）
+$ sudo chown -R root .     #（注意末尾有个小点）
+$ sudo chown -R [username] data
+$ sudo chgrp -R [username] .
+</code>
+<strong>启动mysql</strong>:<br/>
+<code>
+ sudo /usr/local/mysql/bin/mysqld_safe --user=[username] &amp;
+</code>
+<strong>设置开机启动Mysql</strong>：
+<code>
+$ sudo cp support-files/mysql.server /etc/init.d/[username]
+$ sudo cp support-files/mysqld_multi.server /etc/init.d/[username]
+$ sudo chmod +x /etc/init.d/[username]
+$ sudo chkconfig --add [username]
+</code>
+<strong>测试</strong>：
+<code>
+$ sudo /usr/local/mysql/bin/mysqladmin -u root -p version
+$ sudo /usr/local/mysql/bin/mysqlshow
+</code>
+<strong>修改密码，删除匿名用户</strong>：
+<code>
+$ sudo /usr/local/mysql/bin/mysqladmin -u root -p password [password]
+$ sudo /usr/local/mysql/bin/mysql -u root -p
+</code>
+[password]可以不输入，上面两个命令是修改密码用，此时进入mysql命令界面<br/>
+<code>
+mysql&gt; delete from mysql.user where host='localhost' and user='';
+mysql&gt; flush privileges;
+</code></p>
+
+<h3>安装php</h3>
+
+<p><code>
+$ cd /usr/local/php-5__
+$ sudo ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/local/mysql
+$ make
+$ sudo make install
+$ sudo cp /usr/local/php___/php.ini-__ /usr/local/php/lib/php.ini  
+</code>
+修改httpd.conf 添加AddType application/x-httpd-php .php<br/>
+在DirectoryIndex index.html 后加入index.php<br/>
+<strong>重启apache</strong>:
+<code>
+sudo /usr/local/apache2/bin/apachectl restart
+</code></p>
+
+<h3>安装phpMyAdmin:</h3>
+
+<p><code>
+tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs
+</code>
+到此全部完成</p>
+
+<h3>Q1</h3>
+
+<p>如果测试mysql时没有显示版本信息等界面，而是显示Can&rsquo;t connect to local MySQL server through socket &lsquo;/tmp/mysql.sock&rsquo;(2)则极有可能是mysql没有安装成功。解决办法是删除系统自带的mysql服务，
+<code>
+$ rpm -qa | grep mysql
+</code>
+若有输出结果，则直接用rpm -e删除之，再输入
+<code>
+$ chkconfig --list | grep -i mysql
+</code>
+检查mysql服务，有的话再删除之
+<code>
+$ sudo chkconfig --del mysql
+</code>
+然后按照安装mysql的步骤再安装一次即可。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[为知笔记使用笔记(1)-启动方式]]></title>
+    <link href="http://grunmin.github.io/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/"/>
+    <updated>2013-07-21T10:40:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi</id>
+    <content type="html"><![CDATA[<p>linux下软件的启动方式有多种，双击快捷方式对为知笔记这个软件并不管用，因此我们寻求其他更有linux风格的方式。<br/>
+文中的方法对于所有应用程序都是通用的。</p>
+
+<!-- more -->
+
+
+<h3><strong>为知笔记下载：</strong></h3>
+
+<p><a href="http://www.wiz.cn/download.html">为知笔记下载</a></p>
+
+<p>解压包到自己名下的文件夹，启动图标在bin文件夹里。</p>
+
+<h3>方式1 创建变量</h3>
+
+<p>在加环境变量后可以直接在命令行启动
+```</p>
+
+<h1>vi /etc/profile</h1>
+
+<h1>export PATH=&ldquo;$PATH:/home/username/path/wiznote/bin/&rdquo;</h1>
+
+<h1>source /etc/profile #重新加载环境变量</h1>
+
+<p>```
+然后就可以在命令行下直接输入wiznote启动。</p>
+
+<h3>方式2 使用alias</h3>
+
+<p>其实我们可以在命令行直接输入/path/to/wiznote/bin/wiznote来启动，不过每次都需要输入很长的一段命令，因此可以用alias来使命令更简单<br/>
+<code>
+$ vi .bashrc  #打开bash配置文件  
+</code>
+在文档末尾添加一行
+<code>
+alias note="/path/to/wiznote/bin/wiznote"
+</code>
+保存，重新启动终端模拟器，输入note即可启动<br/>
+（/path/to…… 需要根据自己的解压目录具体修改）</p>
+
+<h3>方式3 创建桌面快捷方式</h3>
+
+<p>直接复制bin/wiznote到桌面是不能正常使用wiznote的，需要为其创建一个链接，具体如下：
+在终端输入<br/>
+<code>
+$ ln -s /path/to/wiznote/bin/wiznote /path/want/to/locate
+</code>
+第一个path是原来wiznote的目录，第二个path是要安放快捷方式的地方。<br/>
+直接双击图标即可启动。</p>
+
+<h3>方式4 添加到快捷启动栏</h3>
+
+<p>```</p>
+
+<h1>vi /usr/share/applications/wiznote.desktop</h1>
+
+<p><code>
+复制一下代码到文件中：
+</code>
+[Desktop Entry]<br/>
+Name=wiznote<br/>
+GenericName=cloud note-taking application<br/>
+Comment=taking note and manage information<br/>
+Exec=/pate/to/wiznote/bin/wiznote<br/>
+Terminal=false<br/>
+Type=Application<br/>
+StartupNotify=true<br/>
+Icon=/path/toznote/share/wiznote/skins/wiznote64.png<br/>
+Categories=KDE;QT;Utility;<br/>
+```
+其实以上代码可在/path/to/wiznote/share/applications/wiznote中找到。<br/>
+Name是启动栏里显示的名称，Exec是打开路径，Icon是图标路径，Categories是归类，可以填Network.</p>
 ]]></content>
   </entry>
   
