@@ -75,15 +75,21 @@
         <lastmod>2014-01-02T23:00:00+08:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://grunmin.github.io/blog/2014/03/13/fedora-xia-diao-jie-wai-fang-yin-liang-he-ping-mu-liang-du/
+        </loc>
+        <lastmod>2014-03-13T00:43:47+08:00</lastmod>
+    </url>
+    <url>
+        <loc>http://grunmin.github.io/</loc>
+        <lastmod>2014-03-13T00:43:47+08:00</lastmod>
+    </url>
+    <url>
         <loc>http://grunmin.github.io/robots.txt</loc>
         <lastmod>2013-12-04T19:38:18+08:00</lastmod>
     </url>
     <url>
         <loc>http://grunmin.github.io/blog/archives/</loc>
-        <lastmod>2014-01-02T23:00:00+08:00</lastmod>
-    </url>
-    <url>
-        <loc>http://grunmin.github.io/</loc>
-        <lastmod>2014-01-02T23:00:00+08:00</lastmod>
+        <lastmod>2014-03-13T00:43:47+08:00</lastmod>
     </url>
 </urlset>

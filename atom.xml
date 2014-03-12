@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-01-02T23:00:49+08:00</updated>
+  <updated>2014-03-13T00:43:55+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,6 +12,34 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[fedora 下调节外放音量和屏幕亮度]]></title>
+    <link href="http://grunmin.github.io/blog/2014/03/13/fedora-xia-diao-jie-wai-fang-yin-liang-he-ping-mu-liang-du/"/>
+    <updated>2014-03-13T00:43:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/03/13/fedora-xia-diao-jie-wai-fang-yin-liang-he-ping-mu-liang-du</id>
+    <content type="html"><![CDATA[<h3>声音</h3>
+
+<p>fedora系统下笔记本外放功能可能有受到一些限制。接耳机的时候声音是正常的，但是拔下耳机后电脑并不能外放声音。网上搜到的方法是：</p>
+
+<!-- more -->
+
+
+<p>终端运行alsamixer->按F6键，选中对应硬件，应该会出现这样的画面<img src="https://lh4.googleusercontent.com/-Pj4Qb92Mz3M/UyCOC4GBLFI/AAAAAAAAAJ0/IZSLgP3Xxqs/w614-h346-no/2014-03-13-002941_614x346_scrot.png" alt="" />，调高第三条的音量即可实现外放。</p>
+
+<h3>显示</h3>
+
+<p>1、可用命令行xgamma -gamma X暂时调节笔记本的屏幕亮度X的值在1以下。
+2、<code>/sys/class/backlight/intel_backlight/brightness</code>是调节屏幕亮度的，文件中的数字即代表亮度。
+用vim编辑器改是不可以的，因此用重定向的方法：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># echo 100 &gt; /sys/class/backlight/intel_backlight/brightness</span></code></pre></td></tr></table></div></figure>
+
+
+<p>数值大概在100到200之间（我的默认是187,后改为100）。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[apache服务器个人主页的设置]]></title>
