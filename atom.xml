@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-03-13T00:46:07+08:00</updated>
+  <updated>2014-03-13T00:49:59+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -29,8 +29,9 @@
 
 <h3>显示</h3>
 
-<p>1、可用命令行xgamma -gamma X暂时调节笔记本的屏幕亮度X的值在1以下。
-2、<code>/sys/class/backlight/intel_backlight/brightness</code>是调节屏幕亮度的，文件中的数字即代表亮度。
+<p>1、可用命令行<code>xgamma -gamma X</code>暂时调节笔记本的屏幕亮度X的值在1以下。</p>
+
+<p>2、<code>/sys/class/backlight/intel_backlight/brightness</code>是调节屏幕亮度的，文件中的数字即代表亮度。
 用vim编辑器改是不可以的，因此用重定向的方法：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
