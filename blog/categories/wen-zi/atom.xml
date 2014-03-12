@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Tag: 随想 | 郭润民的博客]]></title>
-  <link href="http://grunmin.github.io/tags/sui-xiang/atom.xml" rel="self"/>
+  <title><![CDATA[Category: 文字 | 郭润民的博客]]></title>
+  <link href="http://grunmin.github.io/blog/categories/wen-zi/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-03-12T22:59:10+08:00</updated>
+  <updated>2014-03-12T23:04:43+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
