@@ -4,7 +4,7 @@ title: "linux搭建lamp环境笔记"
 date: 2013-07-21 11:20
 comments: true
 categories: linux
-tags: linux
+tags: linux 工具
 ---
 在学习php编程的过程中，了解了lamp环境的重要性，因此尝试自行搭建。在这个过程中经历了很多困难，为了便于查阅和再次搭建，在此将过程都记录下来。有错漏或可以改进的地方，欢迎指出拨正。  
 <!-- more -->

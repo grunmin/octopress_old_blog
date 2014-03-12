@@ -3,8 +3,8 @@ layout: post
 title: "一年来使用工具的感想"
 date: 2013-12-25 12:56
 comments: true
-categories: 随想
-tags: 工具
+categories: 思考
+tags: 工具 思考
 ---
  
  只有当收集的资料转化为内在的知识和技能，成为成长进步的阶梯后，它才称得上是有益有用的。

@@ -3,8 +3,8 @@ layout: post
 title: "小短文"
 date: 2014-01-01 17:11
 comments: true
-categories: 随想
-tags: 随想
+categories: 文字
+tags: 文字
 ---
 
 <!--more-->

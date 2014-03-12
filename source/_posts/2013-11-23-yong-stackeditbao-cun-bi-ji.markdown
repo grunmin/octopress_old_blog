@@ -3,8 +3,8 @@ layout: post
 title: "用stackedit保存笔记"
 date: 2013-11-23 16:49
 comments: true
-categories: 随记
-tags: octopress 笔记 随记
+categories: 博客
+tags: 博客 工具
 ---
 在[上一篇文章](http://grunmin.github.io/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke/)里写到用马克飞象写博客，不知对用印象笔记的读者有没有帮助。我对工具有近乎狂热的追求，花了很多时间来尝试不同工具，试图找出其中最高效率的，最简约的，最人性化的。比如云盘，云相册，linux发行版，以及各种编辑器等。在写上一篇博客的时候其实也用到了其他的工具，我在此将其写下来。  
 
