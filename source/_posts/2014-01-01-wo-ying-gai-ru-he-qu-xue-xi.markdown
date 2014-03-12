@@ -3,8 +3,8 @@ layout: post
 title: "我应该如何去学习"
 date: 2014-01-01 17:15
 comments: true
-categories: 随想
-tags: 随想
+categories: 思考
+tags: 思考
 ---
 面试或考试过后，没有人记得我考的怎样。多年后不会有人问我，大学排名多少。我也无法从成绩中再取得什么收获。就像现在不会有人问我，中考考多少分，高考多少分。
 

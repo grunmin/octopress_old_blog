@@ -3,8 +3,8 @@ layout: post
 title: "我的gvim安装和配置"
 date: 2013-11-17 17:14
 comments: true
-tags: vim
-categories: vim
+tags: vim windows
+categories: vim windows
 ---
 我将自己正在学习的小东西放到了github上，想要充分发挥云端服务器的优势，希望在其他windows电脑也能coding，因此草草配置了一下gvim。
 <!-- more -->

@@ -4,7 +4,7 @@ title: "为知笔记使用笔记(1)-启动方式"
 date: 2013-07-21 10:40
 comments: true
 categories: linux
-tags: wiznote 
+tags: linux 工具
 ---
 linux下软件的启动方式有多种，双击快捷方式对为知笔记这个软件并不管用，因此我们寻求其他更有linux风格的方式。  
 文中的方法对于所有应用程序都是通用的。
