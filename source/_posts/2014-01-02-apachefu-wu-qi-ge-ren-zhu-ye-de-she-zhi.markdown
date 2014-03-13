@@ -67,3 +67,5 @@ client denied by server configuration
 Alias /name/ "/home/usename/www/" 
 ```
 到此个人目录可以使用，将代码放到~/www目录下吧^_^。
+
+>如果服务器总是显示403的话，检查以下你的家目录是否具有执行权限，修改为755即可。
