@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-03-15T23:31:51+08:00</updated>
+  <updated>2014-03-16T21:14:00+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,6 +12,170 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Openshift 安装使用教程]]></title>
+    <link href="http://grunmin.github.io/blog/2014/03/16/openshift-an-zhuang-shi-yong-jiao-cheng/"/>
+    <updated>2014-03-16T21:09:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/03/16/openshift-an-zhuang-shi-yong-jiao-cheng</id>
+    <content type="html"><![CDATA[<p>声明：配置环境是fedora 20，这里是<a href="https://access.redhat.com/site/documentation/en-US/OpenShift_Online/2.0/html/User_Guide/index.html">官方文档</a>，找文档是解决问题最有效的方式。</p>
+
+<h3>介绍</h3>
+
+<blockquote><p>OpenShift是红帽公司推出的一个云计算服务平台，开发人员可以用它来构建和发布web应用。Openshift广泛支持多种编程语言和框架，如Java，Ruby和PHP等。另外它还提供了多种集成开发工具如Eclipse integration，JBoss Developer Studio和 Jenkins等。OpenShift 基于一个开源生态系统为移动应用，数据库服务等，提供支持。
+——来自百度百科</p></blockquote>
+
+<p>简言之，就是一个面向开源开发人员开放的平台即服务(PaaS)。</p>
+
+<p>使用openshift首先需要一个账户，注册十分简单，不在此赘述。
+配置自己的openshift可以通过几种方式，比如web端，命令行。web端适合刚刚接触的新手，建议新用户多点点链接，熟悉一下大体的使用方法和功能。当准备好创建应用时即往下看。本文是介绍命令行下的配置，毕竟修改代码什么的都需要在本地修改后再提交。而openshift的客户端就是基于命令行的。</p>
+
+<h3>安装</h3>
+
+<h5>安装命令行客户端</h5>
+
+<p><code>
+sudo yum install rubygem-rhc -y
+</code></p>
+
+<h5>初始化设置</h5>
+
+<p><code>
+sudo rhc setup
+</code>
+此时需要输入帐号和密码，即为自己在openshift注册时的帐号。</p>
+
+<p>令人费解的是使用我的本地账户运行<code>rhc</code>显示找不到命令，切换为root运行也是如此。只能使用<code>sudo rhc</code>的方式，后面运行<code>git push</code>也是如此，必须是<code>sudo git push</code>。如果你知道原因，烦请不吝赐教。</p>
+
+<h5>使用gem更新rhc</h5>
+
+<p><code>
+sudo gem update rhc
+</code>
+然后看看自己的账户
+<code>
+sudo rhc account
+</code>
+在安装rhc的时候本地用户已和云端绑定，ssh公钥也导入了，因此之后的操作一般不需要再作验证。</p>
+
+<h5>查看自己的app</h5>
+
+<p><code>
+sudo rhc apps
+</code>
+可以看到自己账户下有多少个app（免费账户最多3个），应用名，git仓库地址，主机地址，绑定的域名，以及模块，数据库版本，数据库用户和密码等等。比如我的wordpress（数据库账户和密码被我屏蔽）。
+```</p>
+
+<h2>blog @ <a href="http://blog-grunmin.rhcloud.com/">http://blog-grunmin.rhcloud.com/</a> (uuid: 5325520fe0b8cd3a830009ff)</h2>
+
+<p>  Domain:          grunmin
+  Created:         3:26 PM
+  Gears:           1 (defaults to small)
+  Git URL:         ssh://5325520fe0b8cd3a830009ff@blog-grunmin.rhcloud.com/~/git/blog.git/
+  Initial Git URL: <a href="https://github.com/openshift/wordpress-example.git">https://github.com/openshift/wordpress-example.git</a>
+  SSH:             5325520<a href="&#109;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x66;&#x65;&#x30;&#98;&#56;&#99;&#100;&#51;&#97;&#56;&#x33;&#x30;&#48;&#48;&#x39;&#x66;&#x66;&#x40;&#x62;&#x6c;&#x6f;&#x67;&#45;&#x67;&#x72;&#117;&#110;&#x6d;&#105;&#110;&#46;&#x72;&#x68;&#99;&#108;&#x6f;&#117;&#100;&#46;&#99;&#111;&#x6d;">&#x66;&#x65;&#x30;&#98;&#56;&#99;&#100;&#x33;&#x61;&#x38;&#x33;&#x30;&#48;&#48;&#57;&#102;&#x66;&#64;&#98;&#108;&#111;&#x67;&#45;&#103;&#114;&#117;&#110;&#109;&#x69;&#110;&#x2e;&#114;&#x68;&#x63;&#x6c;&#x6f;&#x75;&#x64;&#x2e;&#x63;&#111;&#109;</a>
+  Deployment:      auto (on git push)
+  Aliases:         wp.guorunmin.cn</p>
+
+<p>  mysql-5.1 (MySQL 5.1)</p>
+
+<hr />
+
+<pre><code>Gears:          Located with php-5.3
+Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
+Database Name:  blog
+Password:       ********
+Username:       ******
+</code></pre>
+
+<p>  php-5.3 (PHP 5.3)</p>
+
+<hr />
+
+<pre><code>Gears: Located with mysql-5.1
+</code></pre>
+
+<p>```</p>
+
+<h3>创建应用</h3>
+
+<h5>创建</h5>
+
+<p>看别人的东西干过瘾，不如自己创建一个，创建的方法也很简单，只需一个命令
+<code>
+sudo rhc app create AppName
+</code>
+Openshift 支持Java，Ruby，Node.js，PHP，Perl和Python，在AppName 后面可以加其他参数，例如php应用是：
+<code>
+sudo rhc app create AppName php-5.4
+</code>
+有一种是diy模式，即自行搭建语言环境的，面对一台陌生的机器，我没有任何信心能完成这样的工作^_^。刚开始的时候，我找不到CI框架的环境（有ZF），所以选择新建空应用，以为我自己的代码可以在服务器上运行，想想还是比较天真哈哈哈
+如果是安装环境了，改代码的之前需要将仓库克隆到本地。如果新建空应用，那么rhc会自动将仓库克隆下来。</p>
+
+<p>更多参数可以参见<a href="https://access.redhat.com/site/documentation/en-US/OpenShift_Online/2.0/html/User_Guide/Creating_an_Application5.html">官方文档</a>，不用担心看不懂英文，我翻了一遍，文档大体都能看懂。</p>
+
+<h5>添加mysql和phpmyadmin模块</h5>
+
+<p>既然是php应用，mysql和phpmyadmin怎么能少呢！让我们添加一下
+<code>
+sudo rhc cartridge add mysql-5.1 -a AppName
+sudo rhc cartridge add phpmyadmin -a AppName
+</code>
+此时新建的应用信息大概就是你看到的上面那个。建议保存一下有用的信息，比如phpmyadmin的地址，用户名和密码，尤其是使用web端创建的同学*_*</p>
+
+<p><em>安装wordpress后还需登陆网站添加安装配置信息</em></p>
+
+<p>如果要删除应用，执行
+<code>
+sudo rhc app delete AppName
+</code></p>
+
+<h3>开始码字</h3>
+
+<p>如果安装的是wordpress这些成熟的应用，因为它提供了管理界面，大概不用去修改代码。如果是自己开发的应用呢？Openshift支持git的方式修改云端上的代码。大体流程应该是这样：
+克隆代码到本地->进入应用目录->进入代码目录->修改代码->git add,commit,push->服务器上的应用关闭->一系列编译布置->应用重启->完成</p>
+
+<p>克隆操作
+<code>
+sudo rhc git-clone AppName
+</code>
+或者知道仓库地址，像这样
+<code>
+sudo git clone ssh://53257e56e0b8cd671500019b@app-grunmin.rhcloud.com/~/git/app.git/
+</code>
+php应用根目录下默认有两个文件夹，.git和.openshift。（安装wordpress时候还有另外三个目录：libs,misc,php，但是我找不到wordpress的代码）.openshift目录的作用官网的说明挺详细，我只知道是存放git动作触发的脚本文件，没有深入研究。根目录下还有index.php文件，就是登陆AppName-AccountName.rhcloud.com时看到的页面。这样的设计应该很明朗了，我们直接将代码放在应用根目录下即可。或许你可以写个测试文件看看php的环境，比如"welcome.php"
+```
+&lt;?php</p>
+
+<pre><code>     phpinfo();
+</code></pre>
+
+<p>?>
+```</p>
+
+<p>另外我们可以ssh进去主机看看里面的文件。如果想了解的话还是自己找找资料吧，比如<a href="http://www.dashashi.com/index.php/2013/01/1435">openshift用ssh登陆后的目录结构</a>。</p>
+
+<h3>访问</h3>
+
+<p>虽说是否被墙是判断一个服务好坏的标准，不过眼看着这么好的服务被墙还是挺让人窝火。因此我也希望我们能够好好利用openshift，不要见缝插针，浪费资源。</p>
+
+<p>如果是博客，那么有一个自己的域名当然比较好。如果不是的话，为了避免被墙，建议也绑定一个，虽然不一定能起作用。绑定域名，也是一个命令搞定：
+<code>
+sudo rhc alias add AppName YourDomain
+</code>
+当然，你需要在域名提供商那里添加一个CNAME记录，指向你的openshift域名。
+<em>因为缓存的原因，域名解析不会立刻生效。</em></p>
+
+<p>或者使用https的方式访问。</p>
+
+<p>其他跨栏的姿势很多，不赘述。</p>
+
+<p>参考：
+<a href="http://www.live-in.org/archives/1818.html">openshift使用方法介绍</a></p>
+
+<p><a href="http://www.live-in.org/archives/1818.html">openshift用ssh登陆后的目录结构</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[android 下用脚本备份文件到dropbox的实现]]></title>
@@ -498,666 +662,6 @@ chage命令可以调整属性</p>
   gpg -e -armor -r key-id file<br/>
   user1运用私钥解密文件，用私钥前需输入密码。<br/>
   gpg -d file > file_without_encrypt</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[RHCE note 1]]></title>
-    <link href="http://grunmin.github.io/blog/2013/11/03/rhce-note-1/"/>
-    <updated>2013-11-03T02:07:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2013/11/03/rhce-note-1</id>
-    <content type="html"><![CDATA[<!-- more -->
-
-
-<h2>unit 1</h2>
-
-<ul>
-<li><p>查看系统版本<br/>
-cat /etc/redhat-release</p></li>
-<li><p>查看网络参数<br/>
-ifconfig</p></li>
-<li><p>查看主机名<br/>
-hostname</p></li>
-<li><p>查看shell<br/>
-cat /etc/shells</p></li>
-<li><p>查看当前用户名称<br/>
-whoami</p></li>
-<li><p>查看当前位置<br/>
-pwd</p></li>
-<li><p>修改用户密码<br/>
-passwd username</p></li>
-<li><p>查看当前用户id<br/>
-id</p></li>
-<li><p>切换用户<br/>
-su &ndash; username</p></li>
-<li><p>查看历史命令并执行<br/>
-history<br/>
-!number<br/>
-或者!加命令前面几个字母<br/>
-实例：
-<code>
-[root@instructor 920]# !ca
-cat /etc/shells
-/bin/sh
-/bin/bash
-/sbin/nologin
-/bin/tcsh
-/bin/csh
-</code></p></li>
-<li><p>快捷输入前一个参数<br/>
-Alt+.</p></li>
-<li><p>查看后台任务，更改到前台运行，更改到后台运行<br/>
-jobs，fg number，bg number<br/>
-实例：
-<code>
-[root@instructor 920]# jobs
-[1]-  Running                 gedit day1.txt &amp;
-[2]+  Stopped                 firefox
-[root@instructor 920]#
-[root@instructor 920]#
-[root@instructor 920]# fg 2
-firefox
-</code></p></li>
-<li><p>暂停当前任务并移到后台，停止当前命令：<br/>
-Ctrl+z，Ctrl+c</p></li>
-</ul>
-
-
-<h2>unit 6</h2>
-
-<h3>创建文件系统</h3>
-
-<ul>
-<li> mbr区域有512B大小，其中16*4的大小用来记录四个主分区</li>
-<li>主分区，扩展分区和逻辑分区总数不能超过15</li>
-<li>查看磁盘信息<br/>
-实例：
-```
-[root@instructor 920]# fdisk -l /dev/sda
-Disk /dev/sda: 320.1 GB, 320072933376 bytes
-255 heads, 63 sectors/track, 38913 cylinders
-Units = cylinders of 16065 * 512 = 8225280 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk identifier: 0x0007213a</li>
-</ul>
-
-
-<p>   Device Boot      Start         End      Blocks   Id  System
-/dev/sda1   *           1          17      131072   83  Linux
-Partition 1 does not end on cylinder boundary.
-/dev/sda2              17        4096    32768000   8e  Linux LVM
-/dev/sda3            4096        6646    20480000   8e  Linux LVM
-/dev/sda4            6646       38914   259190784    5  Extended
-/dev/sda5            6646        7952    10485760   83  Linux
-/dev/sda6            7952        8605     5251727   83  Linux
-/dev/sda7            8606        8657      417658+  8e  Linux LVM
-/dev/sda8            8658        8785     1028128+  8e  Linux LVM
-/dev/sda9            8786        8888      827316   8e  Linux LVM
-/dev/sda10           8889       16722    62926573+  8e  Linux LVM
-/dev/sda11          16723       18812    16787893+  8e  Linux LVM
-<code>
-  - 基本流程：  
-  fdisk 分区 --&gt;  mkfs  格式化 --&gt; mount 挂载  
-1、分区  
-实例：
-</code>
-fdisk /dev/vda
-Command (m for help): m
-Command action
-   a   toggle a bootable flag
-   b   edit bsd disklabel
-   c   toggle the dos compatibility flag
-   d   delete a partition
-   l   list known partition types
-   m   print this menu
-   n   add a new partition
-   o   create a new empty DOS partition table
-   p   print the partition table
-   q   quit without saving changes
-   s   create a new empty Sun disklabel
-   t   change a partition&rsquo;s system id
-   u   change display/entry units
-   v   verify the partition table
-   w   write table to disk and exit
-   x   extra functionality (experts only)
-Command (m for help): n
-Command action
-   e   extended
-   p   primary partition (1-4)
-e
-Partition number (1-4): 3
-First cylinder (1-27046, default 1): 21328
-Last cylinder, +cylinders or +size{K,M,G} (21328-27046, default 27046):
-Using default value 27046
-Command (m for help): p
-Disk /dev/vda: 14.0 GB, 13958643712 bytes
-16 heads, 63 sectors/track, 27046 cylinders
-Units = cylinders of 1008 * 512 = 516096 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk identifier: 0x00064009
-   Device Boot      Start         End      Blocks   Id  System
-/dev/vda1   *           3         523      262144   83  Linux
-Partition 1 does not end on cylinder boundary.
-/dev/vda2             523       21328    10485760   8e  Linux LVM
-Partition 2 does not end on cylinder boundary.
-/dev/vda3           21328       27046     2882256    5  Extended
-Command (m for help): n
-Command action
-   l   logical (5 or over)
-   p   primary partition (1-4)
-l
-First cylinder (21328-27046, default 21328):
-Using default value 21328
-Last cylinder, +cylinders or +size{K,M,G} (21328-27046, default 27046): +100M
-Command (m for help): p
-Disk /dev/vda: 14.0 GB, 13958643712 bytes
-16 heads, 63 sectors/track, 27046 cylinders
-Units = cylinders of 1008 * 512 = 516096 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk identifier: 0x00064009
-   Device Boot      Start         End      Blocks   Id  System
-/dev/vda1   *           3         523      262144   83  Linux
-Partition 1 does not end on cylinder boundary.
-/dev/vda2             523       21328    10485760   8e  Linux LVM
-Partition 2 does not end on cylinder boundary.
-/dev/vda3           21328       27046     2882256    5  Extended
-/dev/vda5           21328       21531      102664+  83  Linux
-Command (m for help): w
-The partition table has been altered!
-Calling ioctl() to re-read partition table.
-WARNING: Re-reading the partition table failed with error 16: Device or resource busy.
-The kernel still uses the old table. The new table will be used at
-the next reboot or after you run partprobe(8) or kpartx(8)
-Syncing disks.
-[root@demo ~]# partx -a /dev/vda
-BLKPG: Device or resource busy
-error adding partition 1
-BLKPG: Device or resource busy
-error adding partition 2
-[root@demo ~]#
-[root@demo ~]# partx -a /dev/vda
-BLKPG: Device or resource busy
-error adding partition 1
-BLKPG: Device or resource busy
-error adding partition 2
-BLKPG: Device or resource busy
-error adding partition 3
-BLKPG: Device or resource busy
-error adding partition 5
-```</p>
-
-<p>  2、格式化<br/>
-实例：
-```
-[root@demo ~]# mkfs -t ext4 /dev/vda5
-mke2fs 1.41.12 (17-May-2010)
-Filesystem label=
-OS type: Linux
-Block size=1024 (log=0)
-Fragment size=1024 (log=0)
-Stride=0 blocks, Stripe width=0 blocks
-25688 inodes, 102664 blocks
-5133 blocks (5.00%) reserved for the super user
-First data block=1
-Maximum filesystem blocks=67371008
-13 block groups
-8192 blocks per group, 8192 fragments per group
-1976 inodes per group
-Superblock backups stored on blocks:</p>
-
-<pre><code>8193, 24577, 40961, 57345, 73729
-</code></pre>
-
-<p>Writing inode tables: done                          <br/>
-Creating journal (4096 blocks): done
-Writing superblocks and filesystem accounting information: done
-This filesystem will be automatically checked every 23 mounts or
-180 days, whichever comes first.  Use tune2fs -c or -i to override.
-```</p>
-
-<p>  3、挂载<br/>
-实例：
-<code>
-[root@demo ~]# mkdir /togogo
-[root@demo ~]#
-[root@demo ~]# mount /dev/vda5 /togogo/
-[root@demo media]# mount | grep vda
-(ro,nosuid,nodev,uhelper=udisks,uid=0,gid=0,iocharset=utf8,mode=0400,dmode=0500)
-/dev/vda5 on /togogo type ext4 (rw)
-</code></p>
-
-<p>  4、修改配置文件<br/>
-实例：
-```
-[root@demo ~]# cat /etc/fstab
-#</p>
-
-<h1>/etc/fstab</h1>
-
-<h1>Created by anaconda on Sun Sep  1 09:14:16 2013</h1>
-
-<p>#</p>
-
-<h1>Accessible filesystems, by reference, are maintained under &lsquo;/dev/disk&rsquo;</h1>
-
-<h1>See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info</h1>
-
-<p>#
-/dev/mapper/vgsrv-root  /                       ext4    defaults        1 1
-UUID=af186298-194c-4d01-8c3e-a21b28c45740 /boot                   ext4    defaults        1 2
-/dev/mapper/vgsrv-common /common                 ext4    defaults        1 2
-/dev/mapper/vgsrv-home  /home                   ext4    defaults        1 2
-/dev/mapper/vgsrv-shrink /shrink                 ext4    defaults        1 2
-/dev/mapper/vgsrv-swap  swap                    swap    defaults        0 0
-tmpfs                   /dev/shm                tmpfs   defaults        0 0
-devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
-sysfs                   /sys                    sysfs   defaults        0 0
-proc                    /proc                   proc    defaults        0 0
-UUID=c061f12f-efa2-4aa2-8091-de8e73549bae   /data   ext4    defaults,_netdev    0 0
-/dev/vda5       /togogo         ext4    defaults    0 0
-```
-mount -a 可自动挂载已写在配置文件下的分区。</p>
-
-<h2>unit 7</h2>
-
-<h3>创建逻辑卷</h3>
-
-<p>逻辑卷相对于普通分区的好处是可以动态修改卷的大小，以使用卷内文件数量的变化。
-&ndash; 基本流程：<br/>
-fdisk 分区 &mdash;> pvcreate 创建物理卷 &mdash;> vgcreate 创建卷组 &mdash;> lvcreate 创建逻辑卷 &mdash;> mkfs 格式化 &mdash;> mount 挂载<br/>
-实例：<br/>
-  1、分区，修改分区ID号
-```
-[root@demo ~]# fdisk /dev/vda
-WARNING: DOS-compatible mode is deprecated. It&rsquo;s strongly recommended to</p>
-
-<pre><code>     switch off the mode (command 'c') and change display units to
-     sectors (command 'u').
-</code></pre>
-
-<p>Command (m for help): n
-Command action
-   l   logical (5 or over)
-   p   primary partition (1-4)
-l
-First cylinder (21532-27046, default 21532):
-Using default value 21532
-Last cylinder, +cylinders or +size{K,M,G} (21532-27046, default 27046): +200M
-Command (m for help): n
-Command action
-   l   logical (5 or over)
-   p   primary partition (1-4)
-l
-First cylinder (21939-27046, default 21939):
-Using default value 21939
-Last cylinder, +cylinders or +size{K,M,G} (21939-27046, default 27046): +300M
-Command (m for help): p
-Disk /dev/vda: 14.0 GB, 13958643712 bytes
-16 heads, 63 sectors/track, 27046 cylinders
-Units = cylinders of 1008 * 512 = 516096 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk identifier: 0x00064009
-   Device Boot      Start         End      Blocks   Id  System
-/dev/vda1   *           3         523      262144   83  Linux
-Partition 1 does not end on cylinder boundary.
-/dev/vda2             523       21328    10485760   8e  Linux LVM
-Partition 2 does not end on cylinder boundary.
-/dev/vda3           21328       27046     2882256    5  Extended
-/dev/vda5           21328       21531      102664+  83  Linux
-/dev/vda6           21532       21938      205096+  83  Linux
-/dev/vda7           21939       22549      307912+  83  Linux
-Command (m for help): m
-Command action
-   a   toggle a bootable flag
-   b   edit bsd disklabel
-   c   toggle the dos compatibility flag
-   d   delete a partition
-   l   list known partition types
-   m   print this menu
-   n   add a new partition
-   o   create a new empty DOS partition table
-   p   print the partition table
-   q   quit without saving changes
-   s   create a new empty Sun disklabel
-   t   change a partition&rsquo;s system id
-   u   change display/entry units
-   v   verify the partition table
-   w   write table to disk and exit
-   x   extra functionality (experts only)
-Command (m for help): t
-Partition number (1-7): 6
-Hex code (type L to list codes): 8e
-Changed system type of partition 6 to 8e (Linux LVM)
-Command (m for help): t
-Partition number (1-7): 7
-Hex code (type L to list codes): 8e
-Changed system type of partition 7 to 8e (Linux LVM)
-Command (m for help): p
-Disk /dev/vda: 14.0 GB, 13958643712 bytes
-16 heads, 63 sectors/track, 27046 cylinders
-Units = cylinders of 1008 * 512 = 516096 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
-I/O size (minimum/optimal): 512 bytes / 512 bytes
-Disk identifier: 0x00064009
-   Device Boot      Start         End      Blocks   Id  System
-/dev/vda1   *           3         523      262144   83  Linux
-Partition 1 does not end on cylinder boundary.
-/dev/vda2             523       21328    10485760   8e  Linux LVM
-Partition 2 does not end on cylinder boundary.
-/dev/vda3           21328       27046     2882256    5  Extended
-/dev/vda5           21328       21531      102664+  83  Linux
-/dev/vda6           21532       21938      205096+  8e  Linux LVM
-/dev/vda7           21939       22549      307912+  8e  Linux LVM
-Command (m for help): w
-The partition table has been altered!
-Calling ioctl() to re-read partition table.
-[root@demo ~]# partx -a /dev/vda
-BLKPG: Device or resource busy
-error adding partition 1
-BLKPG: Device or resource busy
-error adding partition 2
-BLKPG: Device or resource busy
-error adding partition 3
-BLKPG: Device or resource busy
-error adding partition 5
-[root@demo ~]#
-[root@demo ~]# partx -a /dev/vda
-BLKPG: Device or resource busy
-error adding partition 1
-BLKPG: Device or resource busy
-error adding partition 2
-BLKPG: Device or resource busy
-error adding partition 3
-BLKPG: Device or resource busy
-error adding partition 5
-BLKPG: Device or resource busy
-error adding partition 6
-BLKPG: Device or resource busy
-error adding partition 7
-```</p>
-
-<p>  2、创建物理卷
-<code>
-[root@demo ~]# pvcreate /dev/vda6
-  Writing physical volume data to disk "/dev/vda6"
-  Physical volume "/dev/vda6" successfully created
-[root@demo ~]# pvcreate /dev/vda7
-  Writing physical volume data to disk "/dev/vda7"
-  Physical volume "/dev/vda7" successfully created
-</code>
-  3、创建卷组
-<code>
-[root@demo ~]# vgcreate togogovg /dev/vda6 /dev/vda7
-  Volume group "togogovg" successfully created
-[root@demo ~]# vgdisplay togogovg
-  --- Volume group ---
-  VG Name               togogovg
-  System ID             
-  Format                lvm2
-  Metadata Areas        2
-  Metadata Sequence No  1
-  VG Access             read/write
-  VG Status             resizable
-  MAX LV                0
-  Cur LV                0
-  Open LV               0
-  Max PV                0
-  Cur PV                2
-  Act PV                2
-  VG Size               492.00 MiB
-  PE Size               4.00 MiB
-  Total PE              123
-  Alloc PE / Size       0 / 0   
-  Free  PE / Size       123 / 492.00 MiB
-  VG UUID               fd7wDW-R1Ov-8oQh-iyvN-tBur-RMoG-VcYQ5d
-</code>
-4、创建逻辑卷
-<code>
-[root@demo ~]# lvcreate -n lv01 -L 150M togogovg
-  Rounding up size to full physical extent 152.00 MiB
-  Logical volume "lv01" created
-</code>
-5、格式化
-```
-[root@demo ~]# mkfs -t ext4 /dev/mapper/togogovg-lv01
-mke2fs 1.41.12 (17-May-2010)
-Filesystem label=
-OS type: Linux
-Block size=1024 (log=0)
-Fragment size=1024 (log=0)
-Stride=0 blocks, Stripe width=0 blocks
-38912 inodes, 155648 blocks
-7782 blocks (5.00%) reserved for the super user
-First data block=1
-Maximum filesystem blocks=67371008
-19 block groups
-8192 blocks per group, 8192 fragments per group
-2048 inodes per group
-Superblock backups stored on blocks:</p>
-
-<pre><code>8193, 24577, 40961, 57345, 73729
-</code></pre>
-
-<p>Writing inode tables: done                          <br/>
-Creating journal (4096 blocks): done
-Writing superblocks and filesystem accounting information: done
-This filesystem will be automatically checked every 20 mounts or
-180 days, whichever comes first.  Use tune2fs -c or -i to override.
-<code>
-6、挂载
-</code>
-[root@demo ~]# mkdir /lv01
-[root@demo ~]# blkid /dev/mapper/togogovg-lv01
-/dev/mapper/togogovg-lv01: UUID=&ldquo;2460a9a1-f1ea-4aae-95ea-c39762380480&rdquo; TYPE=&ldquo;ext4&rdquo;
-[root@demo ~]# cat /etc/fstab
-#</p>
-
-<h1>/etc/fstab</h1>
-
-<h1>Created by anaconda on Sun Sep  1 09:14:16 2013</h1>
-
-<p>#</p>
-
-<h1>Accessible filesystems, by reference, are maintained under &lsquo;/dev/disk&rsquo;</h1>
-
-<h1>See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info</h1>
-
-<p>#
-/dev/mapper/vgsrv-root  /                       ext4    defaults        1 1
-UUID=af186298-194c-4d01-8c3e-a21b28c45740 /boot                   ext4    defaults        1 2
-/dev/mapper/vgsrv-common /common                 ext4    defaults        1 2
-/dev/mapper/vgsrv-home  /home                   ext4    defaults        1 2
-/dev/mapper/vgsrv-shrink /shrink                 ext4    defaults        1 2
-/dev/mapper/vgsrv-swap  swap                    swap    defaults        0 0
-tmpfs                   /dev/shm                tmpfs   defaults        0 0
-devpts                  /dev/pts                devpts  gid=5,mode=620  0 0
-sysfs                   /sys                    sysfs   defaults        0 0
-proc                    /proc                   proc    defaults        0 0
-UUID=c061f12f-efa2-4aa2-8091-de8e73549bae   /data   ext4    defaults,_netdev    0 0
-/dev/vda5       /togogo         ext4    defaults    0 0
-UUID=2460a9a1-f1ea-4aae-95ea-c39762380480   /lv01   ext4    defaults    0 0
-[root@demo ~]# mount
-/dev/mapper/vgsrv-root on / type ext4 (rw)
-proc on /proc type proc (rw)
-sysfs on /sys type sysfs (rw)
-devpts on /dev/pts type devpts (rw,gid=5,mode=620)
-tmpfs on /dev/shm type tmpfs (rw,rootcontext=&ldquo;system_u:object_r:tmpfs_t:s0&rdquo;)
-/dev/vda1 on /boot type ext4 (rw)
-/dev/mapper/vgsrv-common on /common type ext4 (rw)
-/dev/mapper/vgsrv-home on /home type ext4 (rw)
-/dev/mapper/vgsrv-shrink on /shrink type ext4 (rw)
-none on /proc/sys/fs/binfmt_misc type binfmt_misc (rw)
-sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw)
-/dev/vda5 on /togogo type ext4 (rw)
-/dev/mapper/togogovg-lv01 on /lv01 type ext4 (rw)
-<code>
-- 扫描，查看物理卷，卷组，逻辑卷信息：  
-pvscan,pvdisplay  
-vgscan,vgdisplay  
-lvscan,lvdisplay  
-实例：  
-</code>
-[root@demo ~]# vgscan
-  Reading all physical volumes.  This may take a while&hellip;
-  Found volume group &ldquo;togogovg&rdquo; using metadata type lvm2
-  Found volume group &ldquo;vgsrv&rdquo; using metadata type lvm2
-[root@demo ~]#
-[root@demo ~]# pvscan
-  PV /dev/vda6   VG togogovg   lvm2 [196.00 MiB / 44.00 MiB free]
-  PV /dev/vda7   VG togogovg   lvm2 [296.00 MiB / 296.00 MiB free]
-  PV /dev/vda2   VG vgsrv      lvm2 [9.97 GiB / 4.75 GiB free]
-  Total: 3 [10.45 GiB] / in use: 3 [10.45 GiB] / in no VG: 0 [0   ]
-[root@demo ~]# pvdisplay /dev/vda6
-  &mdash;&ndash; Physical volume &mdash;&ndash;
-  PV Name               /dev/vda6
-  VG Name               togogovg
-  PV Size               200.29 MiB / not usable 4.29 MiB
-  Allocatable           yes
-  PE Size               4.00 MiB
-  Total PE              49
-  Free PE               11
-  Allocated PE          38
-  PV UUID               pjxkza-zEAg-3JF6-G7Gg-1oju-xcuZ-bJdF5x
-[root@demo ~]# vgdisplay togogovg
-  &mdash;&ndash; Volume group &mdash;&ndash;
-  VG Name               togogovg
-  System ID           <br/>
-  Format                lvm2
-  Metadata Areas        2
-  Metadata Sequence No  2
-  VG Access             read/write
-  VG Status             resizable
-  MAX LV                0
-  Cur LV                1
-  Open LV               1
-  Max PV                0
-  Cur PV                2
-  Act PV                2
-  VG Size               492.00 MiB
-  PE Size               4.00 MiB
-  Total PE              123
-  Alloc PE / Size       38 / 152.00 MiB
-  Free  PE / Size       85 / 340.00 MiB
-  VG UUID               fd7wDW-R1Ov-8oQh-iyvN-tBur-RMoG-VcYQ5d
-[root@demo ~]# lvdisplay /dev/mapper/togogovg-lv01
-  &mdash;&ndash; Logical volume &mdash;&ndash;
-  LV Path                /dev/togogovg/lv01
-  LV Name                lv01
-  VG Name                togogovg
-  LV UUID                BMsz8a-ye5Q-77oH-rm5y-O3I6-moKB-YeOXmP
-  LV Write Access        read/write
-  LV Creation host, time demo.example.com, 2013-09-15 14:56:43 -0400
-  LV Status              available
-  # open                 1
-  LV Size                152.00 MiB
-  Current LE             38
-  Segments               1
-  Allocation             inherit
-  Read ahead sectors     auto
-  &ndash; currently set to     256
-  Block device           253:5
-```</p>
-
-<h3>扩展逻辑卷</h3>
-
-<ul>
-<li><p>一般流程：<br/>
-新建一个物理卷&mdash;>将物理卷加入卷组&mdash;>扩展逻辑卷<br/>
-实例：<br/>
-1、创建物理卷（略）<br/>
-2、扩展卷组<br/>
-```
-[root@demo ~]# vgextend togogovg /dev/vda8
-Volume group &ldquo;togogovg&rdquo; successfully extended
-[root@demo ~]# vgdisplay togogovg</p>
-
-<p>VG Name               togogovg
-System ID           <br/>
-Format                lvm2
-Metadata Areas        3
-Metadata Sequence No  3
-VG Access             read/write
-VG Status             resizable
-MAX LV                0
-Cur LV                1
-Open LV               1
-Max PV                0
-Cur PV                3
-Act PV                3
-VG Size               788.00 MiB
-PE Size               4.00 MiB
-Total PE              197
-Alloc PE / Size       38 / 152.00 MiB
-Free  PE / Size       159 / 636.00 MiB
-VG UUID               fd7wDW-R1Ov-8oQh-iyvN-tBur-RMoG-VcYQ5d
-<code>
-3、扩展逻辑卷
-</code>
-[root@demo ~]# lvextend -L +148M /dev/mapper/togogovg-lv01
-Extending logical volume lv01 to 300.00 MiB
-Logical volume lv01 successfully resized
-[root@demo ~]# lvdisplay /dev/mapper/togogovg-lv01
-&mdash;&ndash; Logical volume &mdash;&ndash;
-LV Path                /dev/togogovg/lv01
-LV Name                lv01
-VG Name                togogovg
-LV UUID                BMsz8a-ye5Q-77oH-rm5y-O3I6-moKB-YeOXmP
-LV Write Access        read/write
-LV Creation host, time demo.example.com, 2013-09-15 14:56:43 -0400
-LV Status              available</p>
-
-<h1>open                 1</h1>
-
-LV Size                300.00 MiB
-Current LE             75
-Segments               2
-Allocation             inherit
-Read ahead sectors     auto
-
-<ul>
-<li>currently set to     256
-Block device           253:5
-[root@demo ~]# df -h
-Filesystem            Size  Used Avail Use% Mounted on
-/dev/mapper/vgsrv-root 4.0G  2.6G  1.3G  68% /
-tmpfs                 499M   88K  499M   1% /dev/shm
-/dev/vda1             248M   33M  203M  14% /boot
-/dev/mapper/vgsrv-common 124M  5.6M  113M   5% /common
-/dev/mapper/vgsrv-home 248M   46M  191M  20% /home
-/dev/mapper/vgsrv-shrink 310M   11M  284M   4% /shrink
-/dev/vda5              98M  5.6M   87M   6% /togogo
-/dev/mapper/togogovg-lv01 148M  5.6M  135M   4% /lv01
-[root@demo ~]# resize2fs /dev/mapper/togogovg-lv01
-resize2fs 1.41.12 (17-May-2010)
-Filesystem at /dev/mapper/togogovg-lv01 is mounted on /lv01; on-line resizing required
-old desc_blocks = 1, new_desc_blocks = 2
-Performing an on-line resize of /dev/mapper/togogovg-lv01 to 307200 (1k) blocks.
-The filesystem on /dev/mapper/togogovg-lv01 is now 307200 blocks long.
-[root@demo ~]# df -h
-Filesystem            Size  Used Avail Use% Mounted on
-/dev/mapper/vgsrv-root 4.0G  2.6G  1.3G  68% /
-tmpfs                 499M   88K  499M   1% /dev/shm
-/dev/vda1             248M   33M  203M  14% /boot
-/dev/mapper/vgsrv-common 124M  5.6M  113M   5% /common
-/dev/mapper/vgsrv-home 248M   46M  191M  20% /home
-/dev/mapper/vgsrv-shrink 310M   11M  284M   4% /shrink
-/dev/vda5              98M  5.6M   87M   6% /togogo
-/dev/mapper/togogovg-lv01  291M  6.1M  270M   3% /lv01
-[root@demo ~]# pvscan
-PV /dev/vda6   VG togogovg   lvm2 [196.00 MiB / 0    free]
-PV /dev/vda7   VG togogovg   lvm2 [296.00 MiB / 192.00 MiB free]
-PV /dev/vda8   VG togogovg   lvm2 [296.00 MiB / 296.00 MiB free]
-PV /dev/vda2   VG vgsrv      lvm2 [9.97 GiB / 4.75 GiB free]
-Total: 4 [10.74 GiB] / in use: 4 [10.74 GiB] / in no VG: 0 [0   ]
-```</li>
-</ul>
-</li>
-</ul>
-
 ]]></content>
   </entry>
   
