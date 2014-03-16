@@ -8,6 +8,7 @@ tags: linux
 ---
 声明：配置环境是fedora 20，这里是[官方文档](https://access.redhat.com/site/documentation/en-US/OpenShift_Online/2.0/html/User_Guide/index.html)，找文档是解决问题最有效的方式。
 
+<!-- more -->
 
 ###介绍
 >OpenShift是红帽公司推出的一个云计算服务平台，开发人员可以用它来构建和发布web应用。Openshift广泛支持多种编程语言和框架，如Java，Ruby和PHP等。另外它还提供了多种集成开发工具如Eclipse integration，JBoss Developer Studio和 Jenkins等。OpenShift 基于一个开源生态系统为移动应用，数据库服务等，提供支持。
