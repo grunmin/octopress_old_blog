@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: linux | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/tags/linux/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-03-16T21:14:00+08:00</updated>
+  <updated>2014-03-16T21:15:25+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -19,6 +19,9 @@
     <updated>2014-03-16T21:09:00+08:00</updated>
     <id>http://grunmin.github.io/blog/2014/03/16/openshift-an-zhuang-shi-yong-jiao-cheng</id>
     <content type="html"><![CDATA[<p>声明：配置环境是fedora 20，这里是<a href="https://access.redhat.com/site/documentation/en-US/OpenShift_Online/2.0/html/User_Guide/index.html">官方文档</a>，找文档是解决问题最有效的方式。</p>
+
+<!-- more -->
+
 
 <h3>介绍</h3>
 
@@ -73,7 +76,7 @@ sudo rhc apps
   Gears:           1 (defaults to small)
   Git URL:         ssh://5325520fe0b8cd3a830009ff@blog-grunmin.rhcloud.com/~/git/blog.git/
   Initial Git URL: <a href="https://github.com/openshift/wordpress-example.git">https://github.com/openshift/wordpress-example.git</a>
-  SSH:             5325520<a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x66;&#x65;&#48;&#x62;&#x38;&#99;&#x64;&#x33;&#97;&#x38;&#51;&#48;&#x30;&#x30;&#57;&#x66;&#x66;&#64;&#98;&#x6c;&#x6f;&#x67;&#45;&#103;&#114;&#x75;&#110;&#109;&#105;&#x6e;&#46;&#114;&#104;&#99;&#x6c;&#111;&#117;&#100;&#x2e;&#99;&#x6f;&#x6d;">&#x66;&#x65;&#48;&#x62;&#56;&#99;&#x64;&#x33;&#x61;&#x38;&#51;&#48;&#x30;&#x30;&#x39;&#x66;&#x66;&#64;&#x62;&#x6c;&#111;&#x67;&#x2d;&#x67;&#x72;&#117;&#x6e;&#109;&#105;&#x6e;&#46;&#x72;&#104;&#99;&#108;&#111;&#117;&#100;&#x2e;&#99;&#x6f;&#109;</a>
+  SSH:             5325520<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x66;&#101;&#x30;&#x62;&#x38;&#99;&#x64;&#51;&#x61;&#56;&#51;&#x30;&#48;&#48;&#57;&#102;&#102;&#64;&#98;&#108;&#x6f;&#x67;&#45;&#x67;&#x72;&#117;&#110;&#x6d;&#105;&#110;&#46;&#x72;&#104;&#99;&#108;&#111;&#117;&#x64;&#46;&#x63;&#x6f;&#109;">&#102;&#x65;&#48;&#98;&#x38;&#x63;&#100;&#x33;&#x61;&#x38;&#51;&#x30;&#x30;&#x30;&#x39;&#x66;&#x66;&#x40;&#x62;&#x6c;&#111;&#x67;&#x2d;&#103;&#x72;&#x75;&#x6e;&#x6d;&#105;&#110;&#x2e;&#x72;&#104;&#99;&#x6c;&#x6f;&#x75;&#100;&#x2e;&#99;&#x6f;&#x6d;</a>
   Deployment:      auto (on git push)
   Aliases:         wp.guorunmin.cn</p>
 
