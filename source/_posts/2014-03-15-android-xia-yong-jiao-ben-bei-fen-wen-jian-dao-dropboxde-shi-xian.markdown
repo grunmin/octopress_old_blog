@@ -3,8 +3,8 @@ layout: post
 title: "android 下用脚本备份文件到dropbox的实现"
 date: 2014-03-15 23:28
 comments: true
-categories: linux android
-tags: android
+categories: 技术
+tags: android linux
 ---
 
 前些日子寻找linux下上传文件到云的脚本，以实现远程服务器上资料的云端备份。

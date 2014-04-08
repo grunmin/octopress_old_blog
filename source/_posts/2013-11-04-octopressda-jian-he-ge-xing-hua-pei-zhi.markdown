@@ -3,8 +3,8 @@ layout: post
 title: "octopress博客搭建和个性化配置"
 date: 2013-11-04 15:02
 comments: true
-categories: octopress
-tags: octopress
+categories: 技术
+tags: octopress linux 工具
 ---
 使用octopress搭建博客的人，大概都会喜欢写关于如何搭建配置octopress的文章。因为它的高定制性，为极客们带来很多乐趣。从首页的配置，到分类，评论，个人信息，社会化分享等的配置，内容繁多。而且这是我第二次搭建octopress环境了，发现上一次的配置有一部分不能clone到本机上。因此，把配置的过程记录下来是十分有必要的。  
 我的意愿是记录配置的过程，顺便整理大牛们关于这方面的一些说明。网络上相关资料有很多，没有实践过的没有摘录在这里。所有的代码实现都是直接引用前辈们的。另外，本博的配置环境是linux fedora 18.  

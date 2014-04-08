@@ -3,7 +3,7 @@ layout: post
 title: "apache服务器个人主页的设置"
 date: 2014-01-02 16:16
 comments: true
-categories: linux
+categories: 技术
 tags: linux
 ---
 

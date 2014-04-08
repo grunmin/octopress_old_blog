@@ -3,8 +3,8 @@ layout: post
 title: "用马克飞象写博客"
 date: 2013-11-23 15:46
 comments: true
-categories: 博客
-tags: 博客 工具
+categories: 技术
+tags: 工具
 ---
 
 用octopress搭建博客之后，大爱markdown的简约，因此我对云笔记的要求又多了一项：支持markdown格式编辑和保存。  

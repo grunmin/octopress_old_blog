@@ -4,7 +4,7 @@ title: "小短文"
 date: 2014-01-01 17:11
 comments: true
 categories: 文字
-tags: 文字
+tags: 诗
 ---
 
 <!--more-->

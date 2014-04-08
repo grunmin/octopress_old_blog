@@ -3,8 +3,8 @@ layout: post
 title: "wamp apache无法启动的解决方法"
 date: 2014-03-12 22:48
 comments: true
-categories: windows
-tags: windows
+categories: 技术
+tags: wamp windows
 ---
 
 如题，近日在安装wamp的时候出现了apache无法启动的情况。wamp图标一直显示橙色。网上搜索了许多资料都无效，最后还是我自己发现问题并予以解决了。

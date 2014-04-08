@@ -3,8 +3,8 @@ layout: post
 title: "sublime text 2 下的Markdown写作"
 date: 2014-03-12 22:48
 comments: true
-categories: Windows
-tags: windows
+categories: 技术
+tags: windows 工具
 ---
 
 作为Windows/Mac/Linux下强大的文本编辑器，st提供了对Markdown语言的支持。通过设置可实现markdown预览和转换功能。而本文介绍的`Markdown Preview`支持Mathjax语法和目录自动生成。(Windows下）

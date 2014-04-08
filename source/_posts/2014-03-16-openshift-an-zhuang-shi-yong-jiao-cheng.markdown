@@ -3,8 +3,8 @@ layout: post
 title: "Openshift 安装使用教程"
 date: 2014-03-16 21:09
 comments: true
-categories: linux 
-tags: linux
+categories: 技术
+tags: linux 工具
 ---
 声明：配置环境是fedora 20，这里是[官方文档](https://access.redhat.com/site/documentation/en-US/OpenShift_Online/2.0/html/User_Guide/index.html)，找文档是解决问题最有效的方式。
 

@@ -3,7 +3,7 @@ layout: post
 title: "fedora 下调节外放音量和屏幕亮度"
 date: 2014-03-13 00:43
 comments: true
-categories: linux
+categories: 技术
 tags: linux
 ---
 ###声音

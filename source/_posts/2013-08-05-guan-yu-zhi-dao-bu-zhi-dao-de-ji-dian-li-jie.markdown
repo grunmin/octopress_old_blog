@@ -4,7 +4,7 @@ title: "关于知道不知道的几点理解"
 date: 2013-08-05 11:24
 comments: true
 categories: 思考
-tags: 思考
+tags: 大学
 ---
 
 关于大学学习的四个层次:  
