@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: 工具 | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/tags/gong-ju/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-03-16T21:17:05+08:00</updated>
+  <updated>2014-04-08T16:18:52+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,6 +12,244 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Openshift 安装使用教程]]></title>
+    <link href="http://grunmin.github.io/blog/2014/03/16/openshift-an-zhuang-shi-yong-jiao-cheng/"/>
+    <updated>2014-03-16T21:09:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/03/16/openshift-an-zhuang-shi-yong-jiao-cheng</id>
+    <content type="html"><![CDATA[<p>声明：配置环境是fedora 20，这里是<a href="https://access.redhat.com/site/documentation/en-US/OpenShift_Online/2.0/html/User_Guide/index.html">官方文档</a>，找文档是解决问题最有效的方式。</p>
+
+<!-- more -->
+
+
+<h3>介绍</h3>
+
+<blockquote><p>OpenShift是红帽公司推出的一个云计算服务平台，开发人员可以用它来构建和发布web应用。Openshift广泛支持多种编程语言和框架，如Java，Ruby和PHP等。另外它还提供了多种集成开发工具如Eclipse integration，JBoss Developer Studio和 Jenkins等。OpenShift 基于一个开源生态系统为移动应用，数据库服务等，提供支持。
+——来自百度百科</p></blockquote>
+
+<p>简言之，就是一个面向开源开发人员开放的平台即服务(PaaS)。</p>
+
+<p>使用openshift首先需要一个账户，注册十分简单，不在此赘述。
+配置自己的openshift可以通过几种方式，比如web端，命令行。web端适合刚刚接触的新手，建议新用户多点点链接，熟悉一下大体的使用方法和功能。当准备好创建应用时即往下看。本文是介绍命令行下的配置，毕竟修改代码什么的都需要在本地修改后再提交。而openshift的客户端就是基于命令行的。</p>
+
+<h3>安装</h3>
+
+<h5>安装命令行客户端</h5>
+
+<p><code>
+sudo yum install rubygem-rhc -y
+</code></p>
+
+<h5>初始化设置</h5>
+
+<p><code>
+sudo rhc setup
+</code>
+此时需要输入帐号和密码，即为自己在openshift注册时的帐号。</p>
+
+<p>令人费解的是使用我的本地账户运行<code>rhc</code>显示找不到命令，切换为root运行也是如此。只能使用<code>sudo rhc</code>的方式，后面运行<code>git push</code>也是如此，必须是<code>sudo git push</code>。如果你知道原因，烦请不吝赐教。</p>
+
+<h5>使用gem更新rhc</h5>
+
+<p><code>
+sudo gem update rhc
+</code>
+然后看看自己的账户
+<code>
+sudo rhc account
+</code>
+在安装rhc的时候本地用户已和云端绑定，ssh公钥也导入了，因此之后的操作一般不需要再作验证。</p>
+
+<h5>查看自己的app</h5>
+
+<p><code>
+sudo rhc apps
+</code>
+可以看到自己账户下有多少个app（免费账户最多3个），应用名，git仓库地址，主机地址，绑定的域名，以及模块，数据库版本，数据库用户和密码等等。比如我的wordpress（数据库账户和密码被我屏蔽）。
+```</p>
+
+<h2>blog @ <a href="http://blog-grunmin.rhcloud.com/">http://blog-grunmin.rhcloud.com/</a> (uuid: 5325520fe0b8cd3a830009ff)</h2>
+
+<p>  Domain:          grunmin
+  Created:         3:26 PM
+  Gears:           1 (defaults to small)
+  Git URL:         ssh://5325520fe0b8cd3a830009ff@blog-grunmin.rhcloud.com/~/git/blog.git/
+  Initial Git URL: <a href="https://github.com/openshift/wordpress-example.git">https://github.com/openshift/wordpress-example.git</a>
+  SSH:             5325520<a href="&#109;&#x61;&#105;&#108;&#x74;&#111;&#x3a;&#102;&#x65;&#48;&#x62;&#x38;&#99;&#100;&#51;&#97;&#x38;&#51;&#48;&#x30;&#x30;&#x39;&#x66;&#x66;&#64;&#98;&#x6c;&#x6f;&#103;&#x2d;&#x67;&#114;&#117;&#x6e;&#109;&#x69;&#x6e;&#x2e;&#x72;&#104;&#99;&#108;&#111;&#117;&#100;&#46;&#99;&#x6f;&#109;">&#102;&#101;&#48;&#x62;&#56;&#x63;&#x64;&#51;&#97;&#56;&#51;&#x30;&#x30;&#x30;&#x39;&#x66;&#x66;&#x40;&#98;&#x6c;&#111;&#x67;&#x2d;&#x67;&#x72;&#x75;&#x6e;&#x6d;&#105;&#x6e;&#46;&#114;&#x68;&#99;&#108;&#x6f;&#x75;&#x64;&#x2e;&#x63;&#111;&#109;</a>
+  Deployment:      auto (on git push)
+  Aliases:         wp.guorunmin.cn</p>
+
+<p>  mysql-5.1 (MySQL 5.1)</p>
+
+<hr />
+
+<pre><code>Gears:          Located with php-5.3
+Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
+Database Name:  blog
+Password:       ********
+Username:       ******
+</code></pre>
+
+<p>  php-5.3 (PHP 5.3)</p>
+
+<hr />
+
+<pre><code>Gears: Located with mysql-5.1
+</code></pre>
+
+<p>```</p>
+
+<h3>创建应用</h3>
+
+<h5>创建</h5>
+
+<p>看别人的东西干过瘾，不如自己创建一个，创建的方法也很简单，只需一个命令
+<code>
+sudo rhc app create AppName
+</code>
+Openshift 支持Java，Ruby，Node.js，PHP，Perl和Python，在AppName 后面可以加其他参数，例如php应用是：
+<code>
+sudo rhc app create AppName php-5.4
+</code>
+有一种是diy模式，即自行搭建语言环境的，面对一台陌生的机器，我没有任何信心能完成这样的工作^_^。刚开始的时候，我找不到CI框架的环境（有ZF），所以选择新建空应用，以为我自己的代码可以在服务器上运行，想想还是比较天真哈哈哈
+如果是安装环境了，改代码的之前需要将仓库克隆到本地。如果新建空应用，那么rhc会自动将仓库克隆下来。</p>
+
+<p>更多参数可以参见<a href="https://access.redhat.com/site/documentation/en-US/OpenShift_Online/2.0/html/User_Guide/Creating_an_Application5.html">官方文档</a>，不用担心看不懂英文，我翻了一遍，文档大体都能看懂。</p>
+
+<h5>添加mysql和phpmyadmin模块</h5>
+
+<p>既然是php应用，mysql和phpmyadmin怎么能少呢！让我们添加一下
+<code>
+sudo rhc cartridge add mysql-5.1 -a AppName
+sudo rhc cartridge add phpmyadmin -a AppName
+</code>
+此时新建的应用信息大概就是你看到的上面那个。建议保存一下有用的信息，比如phpmyadmin的地址，用户名和密码，尤其是使用web端创建的同学*_*</p>
+
+<p><em>安装wordpress后还需登陆网站添加安装配置信息</em></p>
+
+<p>如果要删除应用，执行
+<code>
+sudo rhc app delete AppName
+</code></p>
+
+<h3>开始码字</h3>
+
+<p>如果安装的是wordpress这些成熟的应用，因为它提供了管理界面，大概不用去修改代码。如果是自己开发的应用呢？Openshift支持git的方式修改云端上的代码。大体流程应该是这样：
+克隆代码到本地->进入应用目录->进入代码目录->修改代码->git add,commit,push->服务器上的应用关闭->一系列编译布置->应用重启->完成</p>
+
+<p>克隆操作
+<code>
+sudo rhc git-clone AppName
+</code>
+或者知道仓库地址，像这样
+<code>
+sudo git clone ssh://53257e56e0b8cd671500019b@app-grunmin.rhcloud.com/~/git/app.git/
+</code>
+php应用根目录下默认有两个文件夹，.git和.openshift。（安装wordpress时候还有另外三个目录：libs,misc,php，但是我找不到wordpress的代码）.openshift目录的作用官网的说明挺详细，我只知道是存放git动作触发的脚本文件，没有深入研究。根目录下还有index.php文件，就是登陆AppName-AccountName.rhcloud.com时看到的页面。这样的设计应该很明朗了，我们直接将代码放在应用根目录下即可。或许你可以写个测试文件看看php的环境，比如"welcome.php"
+```
+&lt;?php</p>
+
+<pre><code>     phpinfo();
+</code></pre>
+
+<p>?>
+```</p>
+
+<p>另外我们可以ssh进去主机看看里面的文件。如果想了解的话还是自己找找资料吧，比如<a href="http://www.dashashi.com/index.php/2013/01/1435">openshift用ssh登陆后的目录结构</a>。</p>
+
+<h3>访问</h3>
+
+<p>虽说是否被墙是判断一个服务好坏的标准，不过眼看着这么好的服务被墙还是挺让人窝火。因此我也希望我们能够好好利用openshift，不要见缝插针，浪费资源。</p>
+
+<p>如果是博客，那么有一个自己的域名当然比较好。如果不是的话，为了避免被墙，建议也绑定一个，虽然不一定能起作用。绑定域名，也是一个命令搞定：
+<code>
+sudo rhc alias add AppName YourDomain
+</code>
+当然，你需要在域名提供商那里添加一个CNAME记录，指向你的openshift域名。
+<em>因为缓存的原因，域名解析不会立刻生效。</em></p>
+
+<p>或者使用https的方式访问。</p>
+
+<p>其他跨栏的姿势很多，不赘述。</p>
+
+<p>参考：
+<a href="http://www.live-in.org/archives/1818.html">openshift使用方法介绍</a></p>
+
+<p><a href="http://www.live-in.org/archives/1818.html">openshift用ssh登陆后的目录结构</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[sublime text 2 下的Markdown写作]]></title>
+    <link href="http://grunmin.github.io/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo/"/>
+    <updated>2014-03-12T22:48:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/03/12/sublime-text-2-xia-de-markdownxie-zuo</id>
+    <content type="html"><![CDATA[<p>作为Windows/Mac/Linux下强大的文本编辑器，st提供了对Markdown语言的支持。通过设置可实现markdown预览和转换功能。而本文介绍的<code>Markdown Preview</code>支持Mathjax语法和目录自动生成。(Windows下）</p>
+
+<!-- more -->
+
+
+<h2>安装Package Control</h2>
+
+<p>安装包控制扩展可以方便地为st添加拓展。
+打开st，按下组合键<code>Control + \``，出现控制台，输入
+```
+import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')
+```
+当看到代码最后一行提示的时候说明安装成功，此时重启st，可在</code>Preferences &ndash;> Package Settings<code>看到</code>Package Control`。</p>
+
+<h2>安装markdown preview</h2>
+
+<p>按下键<code>Ctrl+Shift+p</code>调出命令面板，找到<code>Package Control: install Pakage</code>这一项。搜索markdown preview，点击安装。</p>
+
+<h2>使用</h2>
+
+<p>Markdown Preview较常用的功能是<code>preview in browser</code>和<code>Export HTML in Sublime Text</code>，前者可以在浏览器看到预览效果，后者可将markdown保存为html文件。</p>
+
+<p><code>preview in browser</code>据称是实时的，但是实践上还是需要在st保存，然后浏览器刷新才能看到新的效果，好在markdown写得多的话也不需要每敲一行看一次效果。</p>
+
+<h2>快捷键</h2>
+
+<p>st支持自定义快捷键，<code>markdown preview</code>默认没有快捷键，我们可以自己为<code>preview in browser</code>设置快捷键。方法是在<code>Preferences -&gt; Key Bindings User</code>打开的文件的中括号中添加以下代码(可在Key Bindings Default找到格式)：
+<code>
+ { "keys": ["alt+m"], "command": "markdown_preview", "args": { "target": "browser"} }
+</code>
+&ldquo;alt+m"可设置为自己喜欢的按键。</p>
+
+<h2>设置语法高亮和mathjax支持</h2>
+
+<p>在<code>Preferences -&gt;Package Settings-&gt;Markdown Preview-&gt;Setting Default</code>中的第31行和36行找到
+```
+/*</p>
+
+<pre><code>   Enable or not mathjax support.
+*/
+"enable_mathjax": false,
+
+/*
+    Enable or not highlight.js support for syntax highlighting.
+*/
+"enable_highlight": false,
+</code></pre>
+
+<p><code>
+将 两个false改为true即可。
+语法高亮跟编辑器的主题有关，可以在`Preferences -&gt;Color Scheme`找自己喜欢的主题。
+关于目录生成，只要文章是按照markdown语法写作的。在需要生成目录的地方写
+</code>
+[TOC]
+```
+即可。</p>
+
+<blockquote><p>如果你这里没有看到目录而只是看到代码，说明简书不支持目录自动生成哈哈</p></blockquote>
+
+<h2>打印成pdf</h2>
+
+<p>将markdown转换为pdf应该有很多种方法的。我没有再折腾，直接用谷歌浏览器虚拟打印功能生成。
+利用<code>Markdown Preview</code>的<code>Preview in Browser</code>功能可以在浏览器上看到htm效果。在页面<code>右键-&gt;打印-&gt;另存为pdf-&gt;调节页边距</code>即可将pdf文件下载下来。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[一年来使用工具的感想]]></title>
@@ -101,226 +339,6 @@
 
 
 <p>总体来说马克飞象还是十分实用的，特别是对程序员，用马克飞象记录代码显得如虎添翼。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[linux搭建lamp环境笔记]]></title>
-    <link href="http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji/"/>
-    <updated>2013-07-21T11:20:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2013/07/21/fedoraan-zhuang-lamphuan-jing-bi-ji</id>
-    <content type="html"><![CDATA[<p>在学习php编程的过程中，了解了lamp环境的重要性，因此尝试自行搭建。在这个过程中经历了很多困难，为了便于查阅和再次搭建，在此将过程都记录下来。有错漏或可以改进的地方，欢迎指出拨正。</p>
-
-<!-- more -->
-
-
-<p>此前都是用源码包安装，其实用rpm包安装省时省力。</p>
-
-<h2>从软件包安装</h2>
-
-<p>```</p>
-
-<h1>yum groupinstall &lsquo;web-server&rsquo; -y</h1>
-
-<h1>yum install -y php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt pcre-devel libxml2-devel mysql-devel apr apr-devel apr-util apr-util-devel curl-devel libpng-devel mysql-server</h1>
-
-<p>```</p>
-
-<h2>源码包安装</h2>
-
-<h3>前期工作</h3>
-
-<p><strong>第1步</strong>： 在终端输入
-<code>
-$ sudo yum update  # 更新系统
-</code>
-<strong>第2步</strong>：下载apache,mysql,apr,apr-util,phpMyAdmin,php,pcre(非必需）安装包</p>
-
-<p><strong>第3步</strong>：
-<code>
-$ sudo yum install gcc gcc-c++ libxml2 libxml2-devel pcre pcre-devel #安装依赖软件包
-</code>
-<strong>第4步</strong>：tar -zxvf 解压apache,mysql,php,pcre 等压缩包， sudo mv 移动到/usr/local目录下<br/>
-<code>
-$ sudo cd /usr/local/pcre;./configure --prefix=/usr/local/pcre #安装pcre
-</code>
-（非必需，如果安装apache时显示未安装pcre可按照此法安装）<br/>
-<strong>第5步</strong>： cd httpd/srclib/ 解压apr,apr-util 到目录下，修改文件名（不带版本号，如apr-util）</p>
-
-<h3>安装apache:</h3>
-
-<p><code>
-$ cd /usr/local/httpd  # 进入安装目录  
-$ sudo ./configure --prefix=/usr/local/apache2 --enable-so --with-mpm=worker --with-pcre=/usr/local/pcre --with-included-apr # 配置（注意./configure的/前有个小点，若没有按照上文安装pcre，可去掉--with-pcre后面的路径）
-$ sudo make
-$ sudo make install
- #(--prefix指定安装目录，配置文件在/usr/local/apache2/conf目录下，--enable-so启动加载共享模块的功能，--with-mpm=worker吿诉apache使用多线程化多处理模块worker.)
-</code>
-<strong>启动apache</strong>:<br/>
-<code>
-$ sudo /usr/local/apache2/bin/httpd -k start | stop
-</code>
- 或
-<code>
-$ sudo /usr/local/apache2/bin/apachectl start | stop
-</code>
-(可用ps -e | grep httpd 查看apache是否已开启）</p>
-
-<h3>安装mysql：</h3>
-
-<p><code>
-$ cd /usr/local
-$ sudo ln -s /usr/local/mysql-××× mysql #链接源码到一个文件夹
-$ cd mysql
-$ scripts/mysql_install_db --user=[username]    #（username为自己的用户名，中括号不用打进去，下同）
-$ sudo chown -R root .     #（注意末尾有个小点）
-$ sudo chown -R [username] data
-$ sudo chgrp -R [username] .
-</code>
-<strong>启动mysql</strong>:<br/>
-<code>
- sudo /usr/local/mysql/bin/mysqld_safe --user=[username] &amp;
-</code>
-<strong>设置开机启动Mysql</strong>：
-<code>
-$ sudo cp support-files/mysql.server /etc/init.d/[username]
-$ sudo cp support-files/mysqld_multi.server /etc/init.d/[username]
-$ sudo chmod +x /etc/init.d/[username]
-$ sudo chkconfig --add [username]
-</code>
-<strong>测试</strong>：
-<code>
-$ sudo /usr/local/mysql/bin/mysqladmin -u root -p version
-$ sudo /usr/local/mysql/bin/mysqlshow
-</code>
-<strong>修改密码，删除匿名用户</strong>：
-<code>
-$ sudo /usr/local/mysql/bin/mysqladmin -u root -p password [password]
-$ sudo /usr/local/mysql/bin/mysql -u root -p
-</code>
-[password]可以不输入，上面两个命令是修改密码用，此时进入mysql命令界面<br/>
-<code>
-mysql&gt; delete from mysql.user where host='localhost' and user='';
-mysql&gt; flush privileges;
-</code></p>
-
-<h3>安装php</h3>
-
-<p><code>
-$ cd /usr/local/php-5__
-$ sudo ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2/bin/apxs --with-mysql=/usr/local/mysql
-$ make
-$ sudo make install
-$ sudo cp /usr/local/php___/php.ini-__ /usr/local/php/lib/php.ini  
-</code>
-修改httpd.conf 添加AddType application/x-httpd-php .php<br/>
-在DirectoryIndex index.html 后加入index.php<br/>
-<strong>重启apache</strong>:
-<code>
-sudo /usr/local/apache2/bin/apachectl restart
-</code></p>
-
-<h3>安装phpMyAdmin:</h3>
-
-<p><code>
-tar -zxvf phpMyAdmin___ -C /usr/local/apache2/htdocs
-</code>
-到此全部完成</p>
-
-<h3>Q1</h3>
-
-<p>如果测试mysql时没有显示版本信息等界面，而是显示Can&rsquo;t connect to local MySQL server through socket &lsquo;/tmp/mysql.sock&rsquo;(2)则极有可能是mysql没有安装成功。解决办法是删除系统自带的mysql服务，
-<code>
-$ rpm -qa | grep mysql
-</code>
-若有输出结果，则直接用rpm -e删除之，再输入
-<code>
-$ chkconfig --list | grep -i mysql
-</code>
-检查mysql服务，有的话再删除之
-<code>
-$ sudo chkconfig --del mysql
-</code>
-然后按照安装mysql的步骤再安装一次即可。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[为知笔记使用笔记(1)-启动方式]]></title>
-    <link href="http://grunmin.github.io/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/"/>
-    <updated>2013-07-21T10:40:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi</id>
-    <content type="html"><![CDATA[<p>linux下软件的启动方式有多种，双击快捷方式对为知笔记这个软件并不管用，因此我们寻求其他更有linux风格的方式。<br/>
-文中的方法对于所有应用程序都是通用的。</p>
-
-<!-- more -->
-
-
-<h3><strong>为知笔记下载：</strong></h3>
-
-<p><a href="http://www.wiz.cn/download.html">为知笔记下载</a></p>
-
-<p>解压包到自己名下的文件夹，启动图标在bin文件夹里。</p>
-
-<h3>方式1 创建变量</h3>
-
-<p>在加环境变量后可以直接在命令行启动
-```</p>
-
-<h1>vi /etc/profile</h1>
-
-<h1>export PATH=&ldquo;$PATH:/home/username/path/wiznote/bin/&rdquo;</h1>
-
-<h1>source /etc/profile #重新加载环境变量</h1>
-
-<p>```
-然后就可以在命令行下直接输入wiznote启动。</p>
-
-<h3>方式2 使用alias</h3>
-
-<p>其实我们可以在命令行直接输入/path/to/wiznote/bin/wiznote来启动，不过每次都需要输入很长的一段命令，因此可以用alias来使命令更简单<br/>
-<code>
-$ vi .bashrc  #打开bash配置文件  
-</code>
-在文档末尾添加一行
-<code>
-alias note="/path/to/wiznote/bin/wiznote"
-</code>
-保存，重新启动终端模拟器，输入note即可启动<br/>
-（/path/to…… 需要根据自己的解压目录具体修改）</p>
-
-<h3>方式3 创建桌面快捷方式</h3>
-
-<p>直接复制bin/wiznote到桌面是不能正常使用wiznote的，需要为其创建一个链接，具体如下：
-在终端输入<br/>
-<code>
-$ ln -s /path/to/wiznote/bin/wiznote /path/want/to/locate
-</code>
-第一个path是原来wiznote的目录，第二个path是要安放快捷方式的地方。<br/>
-直接双击图标即可启动。</p>
-
-<h3>方式4 添加到快捷启动栏</h3>
-
-<p>```</p>
-
-<h1>vi /usr/share/applications/wiznote.desktop</h1>
-
-<p><code>
-复制一下代码到文件中：
-</code>
-[Desktop Entry]<br/>
-Name=wiznote<br/>
-GenericName=cloud note-taking application<br/>
-Comment=taking note and manage information<br/>
-Exec=/pate/to/wiznote/bin/wiznote<br/>
-Terminal=false<br/>
-Type=Application<br/>
-StartupNotify=true<br/>
-Icon=/path/toznote/share/wiznote/skins/wiznote64.png<br/>
-Categories=KDE;QT;Utility;<br/>
-```
-其实以上代码可在/path/to/wiznote/share/applications/wiznote中找到。<br/>
-Name是启动栏里显示的名称，Exec是打开路径，Icon是图标路径，Categories是归类，可以填Network.</p>
 ]]></content>
   </entry>
   
