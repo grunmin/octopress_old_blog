@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: linux | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/tags/linux/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-04-08T16:25:07+08:00</updated>
+  <updated>2014-04-30T14:37:26+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -76,7 +76,7 @@ sudo rhc apps
   Gears:           1 (defaults to small)
   Git URL:         ssh://5325520fe0b8cd3a830009ff@blog-grunmin.rhcloud.com/~/git/blog.git/
   Initial Git URL: <a href="https://github.com/openshift/wordpress-example.git">https://github.com/openshift/wordpress-example.git</a>
-  SSH:             5325520<a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#102;&#101;&#48;&#98;&#56;&#x63;&#100;&#51;&#x61;&#x38;&#x33;&#x30;&#x30;&#x30;&#57;&#x66;&#x66;&#x40;&#98;&#x6c;&#x6f;&#103;&#x2d;&#103;&#114;&#117;&#x6e;&#109;&#x69;&#x6e;&#46;&#x72;&#x68;&#x63;&#x6c;&#x6f;&#117;&#100;&#x2e;&#x63;&#x6f;&#x6d;">&#x66;&#x65;&#48;&#x62;&#56;&#x63;&#100;&#x33;&#x61;&#56;&#x33;&#48;&#48;&#x30;&#57;&#x66;&#102;&#x40;&#98;&#108;&#111;&#x67;&#x2d;&#103;&#114;&#117;&#110;&#109;&#x69;&#x6e;&#x2e;&#114;&#104;&#x63;&#108;&#x6f;&#117;&#100;&#46;&#x63;&#111;&#x6d;</a>
+  SSH:             5325520<a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x66;&#x65;&#x30;&#98;&#x38;&#99;&#x64;&#x33;&#x61;&#56;&#51;&#x30;&#x30;&#x30;&#x39;&#x66;&#x66;&#x40;&#98;&#x6c;&#111;&#x67;&#x2d;&#103;&#114;&#x75;&#x6e;&#x6d;&#105;&#110;&#46;&#114;&#x68;&#99;&#108;&#x6f;&#117;&#x64;&#46;&#x63;&#x6f;&#109;">&#x66;&#101;&#x30;&#98;&#x38;&#x63;&#x64;&#x33;&#97;&#56;&#x33;&#x30;&#48;&#x30;&#57;&#x66;&#102;&#x40;&#x62;&#108;&#x6f;&#x67;&#45;&#x67;&#114;&#117;&#110;&#109;&#105;&#x6e;&#x2e;&#x72;&#x68;&#99;&#x6c;&#111;&#x75;&#x64;&#x2e;&#x63;&#x6f;&#109;</a>
   Deployment:      auto (on git push)
   Aliases:         wp.guorunmin.cn</p>
 
@@ -263,7 +263,7 @@ Dropbox Uploader的数据传输是加密的，前面的那些设置并没有包�
 
 <p>1、可用命令行<code>xgamma -gamma X</code>暂时调节笔记本的屏幕亮度,X的值在1以下。</p>
 
-<p>2、<code>/sys/class/backlight/intel_backlight/brightness</code>是调节屏幕亮度的，文件中的数字即代表亮度。
+<p>2、如果用英特尔集成显卡，则<code>/sys/class/backlight/intel_backlight/brightness</code>是调节屏幕亮度的，文件中的数字即代表亮度。
 用vim编辑器改是不可以的，因此用重定向的方法：
 ```</p>
 
@@ -271,6 +271,37 @@ Dropbox Uploader的数据传输是加密的，前面的那些设置并没有包�
 
 <p>```
 数值大概在100到200之间（我的默认是187,后改为100）。</p>
+
+<p>如果用NVIDIA显卡，则存在<code>/sys/class/backlight/acpi_video0/brightness</code>这个文件，更改方法如上。</p>
+
+<p>这两个方法都不能永久性地更改亮度。不过我们可以通过脚本的方式，让计算机启动的时候执行这些命令，以达到开机即调整亮度的需求。</p>
+
+<p>在/etc/rc.d/init.d/目录下，新建一脚本，比如命名为brightness，写入以下内容
+```</p>
+
+<h1>add for chkconfig</h1>
+
+<h1>chkconfig:2345 70 30</h1>
+
+<h1>description:modify brightness</h1>
+
+<h1>processname:brightness</h1>
+
+<p>xgamma -gamma 0.7
+echo 50 > /sys/class/backlight/intel_backlight/brightness
+echo 50 > /sys/class/backlight/acpi_video0/brightness
+```
+其中2345表示脚本在哪一运行级别生效，70和30表示开机/关机时启动/关闭的顺序，数字越大越靠后。processname即为服务的名称，作标识用。</p>
+
+<p>给脚本可执行权限
+<code>
+chmod +x brightness
+</code>
+将脚本添加入服务控制列表
+<code>
+chkconfig --add brightness
+</code>
+此时用<code>chkconfig --list</code>可查看brightness服务在2345运行级别里是默认开启的。</p>
 ]]></content>
   </entry>
   

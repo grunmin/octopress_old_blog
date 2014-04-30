@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-04-08T16:25:07+08:00</updated>
+  <updated>2014-04-30T14:37:26+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -392,7 +392,7 @@ Dropbox Uploader的数据传输是加密的，前面的那些设置并没有包�
 
 <p>1、可用命令行<code>xgamma -gamma X</code>暂时调节笔记本的屏幕亮度,X的值在1以下。</p>
 
-<p>2、<code>/sys/class/backlight/intel_backlight/brightness</code>是调节屏幕亮度的，文件中的数字即代表亮度。
+<p>2、如果用英特尔集成显卡，则<code>/sys/class/backlight/intel_backlight/brightness</code>是调节屏幕亮度的，文件中的数字即代表亮度。
 用vim编辑器改是不可以的，因此用重定向的方法：</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -400,6 +400,44 @@ Dropbox Uploader的数据传输是加密的，前面的那些设置并没有包�
 
 
 <p>数值大概在100到200之间（我的默认是187,后改为100）。</p>
+
+<p>如果用NVIDIA显卡，则存在<code>/sys/class/backlight/acpi_video0/brightness</code>这个文件，更改方法如上。</p>
+
+<p>这两个方法都不能永久性地更改亮度。不过我们可以通过脚本的方式，让计算机启动的时候执行这些命令，以达到开机即调整亮度的需求。</p>
+
+<p>在/etc/rc.d/init.d/目录下，新建一脚本，比如命名为brightness，写入以下内容</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>#add for chkconfig
+</span><span class='line'>#chkconfig:2345 70 30
+</span><span class='line'>#description:modify brightness
+</span><span class='line'>#processname:brightness
+</span><span class='line'>xgamma -gamma 0.7
+</span><span class='line'>echo 50 &gt; /sys/class/backlight/intel_backlight/brightness
+</span><span class='line'>echo 50 &gt; /sys/class/backlight/acpi_video0/brightness</span></code></pre></td></tr></table></div></figure>
+
+
+<p>其中2345表示脚本在哪一运行级别生效，70和30表示开机/关机时启动/关闭的顺序，数字越大越靠后。processname即为服务的名称，作标识用。</p>
+
+<p>给脚本可执行权限</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>chmod +x brightness</span></code></pre></td></tr></table></div></figure>
+
+
+<p>将脚本添加入服务控制列表</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>chkconfig --add brightness</span></code></pre></td></tr></table></div></figure>
+
+
+<p>此时用<code>chkconfig --list</code>可查看brightness服务在2345运行级别里是默认开启的。</p>
 ]]></content>
   </entry>
   
