@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 技术 | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/blog/categories/ji-zhu/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-04-30T14:37:26+08:00</updated>
+  <updated>2014-11-13T23:18:07+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,6 +12,369 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我的fedora应用列表]]></title>
+    <link href="http://grunmin.github.io/blog/2014/11/13/wo-de-fedoraying-yong-lie-biao/"/>
+    <updated>2014-11-13T23:11:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/11/13/wo-de-fedoraying-yong-lie-biao</id>
+    <content type="html"><![CDATA[<p>用fedora也有接近两年时间了，现在将自己所用的应用都列出来供参考。</p>
+
+<!--more-->
+
+
+<h3>文档处理</h3>
+
+<p>wps(金山公司推出的文档处理软件，类似软件还有永中office，libreoffer等)
+evolution（系统自带，处理邮件，联系人，日历，任务等）
+wiznote（为知笔记，适合做个人知识库）
+haroopad（markdown编辑器）
+sublime text (代码编辑器)</p>
+
+<h3>即时通讯</h3>
+
+<p>pidgin（系统自带)
+empathy(系统自带)</p>
+
+<h3>互联网</h3>
+
+<p>chrome
+firefox
+bcloud（百度云客户端）</p>
+
+<h3>shell extention</h3>
+
+<p>drop down terminal
+hide top bar
+systemmonitor
+taskbar
+todo.txt
+toggle terminal</p>
+
+<h3>其他</h3>
+
+<p>smplayer（小而全的播放器，带youtube资源播放器）
+quake（个性化的shell终端）
+fcitx+搜狗输入法（完美解决linux下中文输入问题）
+vbox（虚拟机软件）
+scrot（命令行形式的截图软件）
+axel（多线程下载器）</p>
+
+<p>以及安卓，ruby，lamp，c开发环境。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fedora 下安装金山快盘同步盘]]></title>
+    <link href="http://grunmin.github.io/blog/2014/11/13/fedora-xia-an-zhuang-jin-shan-kuai-pan-tong-bu-pan/"/>
+    <updated>2014-11-13T23:07:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/11/13/fedora-xia-an-zhuang-jin-shan-kuai-pan-tong-bu-pan</id>
+    <content type="html"><![CDATA[<p>金山快盘推出了linux系统下的同步盘客户端，但是很遗憾没有红帽系的rpm安装包。尽管如此，我们可以通过一些操作在fedora下安装（mate桌面）（其他红帽系的没有尝试）</p>
+
+<!--more-->
+
+
+<ul>
+<li>进入<a href="http://www.ubuntukylin.com/applications/showimg.php?lang=cn&amp;id=21">官网</a> 下载ubuntu版本的客户端（注意系统位数）</li>
+<li>解压deb包，可看到<code>DEBIAN</code>,<code>etc</code>,<code>usr</code>,<code>opt</code>这几个文件夹（如只看到data.tar压缩包，则解压这个压缩包，可看到这几个文件夹）</li>
+<li>进入解压后文件夹根目录，将<code>usr</code>,<code>opt</code>文件夹复制到系统根目录下
+```
+
+<h1>cp -r usr /</h1>
+
+<h1>cp -r opt /</h1>
+
+<p>```</p></li>
+<li><p>安装库文件
+```</p>
+
+<h1>yum install libqxt</h1>
+
+<h1>yum install boost-iostreams</h1>
+
+<p>```
+需要什么库文件可以通过在终端启动快盘时显示的错误信息排查。如果不是这两个的话也是正常情况。</p></li>
+<li><p>创建链接
+```</p>
+
+<h1>ln /usr/bin/kuaipan4uk /home/yourhomedirectory/anywhereyoulike</h1>
+
+<p>```
+此时双击该链接即可启动快盘</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[linux服务器本地和百度云备份脚本小试]]></title>
+    <link href="http://grunmin.github.io/blog/2014/11/13/linuxfu-wu-qi-ben-di-he-bai-du-yun-bei-fen-jiao-ben-xiao-shi/"/>
+    <updated>2014-11-13T23:06:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/11/13/linuxfu-wu-qi-ben-di-he-bai-du-yun-bei-fen-jiao-ben-xiao-shi</id>
+    <content type="html"><![CDATA[<h3>本地单文件上传脚本，命名uf</h3>
+
+<p>这是在本机上做的测试，利用<code>bpcs_uploader</code>脚本实现，只是进行简单的封装，自动完善云端文件路径。
+技术要点：使用<code>dirname</code>获取文件所在目录，使用<code>pwd</code>获取文件完整路径，并作为云端文件路径。</p>
+
+<!--more-->
+
+
+<p>```</p>
+
+<h1>!/bin/bash</h1>
+
+<p>cur_dir=$(cd &ldquo;$(dirname &rdquo;$1")&ldquo;; pwd)
+name=$(basename &rdquo;$1")
+/home/grm/bin/bpcs_uploader/bpcs_uploader.php upload $1 AWIN$cur_dir/$name
+```</p>
+
+<h3>本地文件夹上传脚本，命名ud</h3>
+
+<p><code>bpcs_uploader</code>脚本只能实现单个文件上传，用此脚本可以实现目录批量上传。
+技术要点：通过<code>find</code>命令输出目录下所有文件，用<code>xargs -t -n1</code>实现单个输出，从而可以遍历目录下所有文件，并作为参数逐次赋予脚本<code>uf</code>，通过不断调用脚本<code>uf</code>实现批量上传。
+```</p>
+
+<h1>!/bin/bash</h1>
+
+<p>find $1 -name &lsquo;<em>.</em>&rsquo; |xargs -t -n1 /home/grm/bin/uf
+```</p>
+
+<h3>服务器数据库每日备份脚本，命名backupday.sh(改自鸟哥的linux私房菜)</h3>
+
+<p>技术要点：基本都是常规操作，注意<code>find</code>命令<code>-mtime</code>参数的使用
+```</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>=========================================================</h1>
+
+<h1>请输入，你想让备份数据放置到那个独立的目录去</h1>
+
+<p>basedir=/backup/daily/</p>
+
+<h1>=========================================================</h1>
+
+<p>PATH=/bin:/usr/bin:/sbin:/usr/sbin; export PATH
+export LANG=C
+basefile1=$basedir/mysql.$(date +%Y-%m-%d).tar.bz2
+basefile2=$basedir/cgi-bin.$(date +%Y-%m-%d).tar.bz2
+[ ! -d &ldquo;$basedir&rdquo; ] &amp;&amp; mkdir $basedir</p>
+
+<h1>1. MysQL (数据库目录在 /var/lib/mysql)</h1>
+
+<p>cd /var/lib
+  tar -jpc -f $basefile1 mysql</p>
+
+<h1>2. 定期删除旧备份</h1>
+
+<p>DAYS=30
+find $basedir -name &ldquo;mysql*&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+```</p>
+
+<h3>代码及其他配置每周备份脚本，命名为backupweek.sh</h3>
+
+<p>```</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>====================================================================</h1>
+
+<h1>使用者参数输入位置：</h1>
+
+<h1>basedir=你用来储存此脚本所预计备份的数据之目录(请独立文件系统)</h1>
+
+<p>basedir=/backup/weekly</p>
+
+<h1>====================================================================</h1>
+
+<h1>底下请不要修改了！用默认值即可！</h1>
+
+<p>PATH=/bin:/usr/bin:/sbin:/usr/sbin; export PATH
+export LANG=C</p>
+
+<p>D=$(date +&ldquo;%Y-%m-%d&rdquo;)</p>
+
+<h1>配置要备份的服务的配置档，以及备份的目录</h1>
+
+<p>postfixd=$basedir/postfix
+vsftpd=$basedir/vsftp
+sshd=$basedir/ssh
+wwwd=$basedir/www
+others=$basedir/others
+userinfod=$basedir/userinfo</p>
+
+<h1>判断目录是否存在，若不存在则予以创建。</h1>
+
+<p>for dirs in $postfixd $vsftpd $sshd $wwwd $others $userinfod
+do</p>
+
+<pre><code>[ ! -d "$dirs" ] &amp;&amp; mkdir -p $dirs
+</code></pre>
+
+<p>done</p>
+
+<h1>1. 将系统主要的服务之配置档分别备份下来，同时也备份 /etc 全部。</h1>
+
+<p>cd /etc/</p>
+
+<pre><code>tar -jpc -f $vsftpd/vsftpd.$D.tar.bz2 vsftpd
+</code></pre>
+
+<p>cd /etc/</p>
+
+<pre><code>tar -jpc -f $sshd/sshd.$D.tar.bz2 sshd ssh
+</code></pre>
+
+<p>cd /etc/</p>
+
+<pre><code>tar -jpc -f $wwwd/httpd.$D.tar.bz2 httpd
+</code></pre>
+
+<p>cd /var/www
+  tar -jpc -f $wwwd/html.$D.tar.bz2    html
+cd /
+  tar -jpc -f $others/etc.$D.tar.bz2   etc</p>
+
+<h1>2. 关於使用者参数方面</h1>
+
+<p>cp -a /etc/{passwd,shadow,group}    $userinfod
+cd /var/spool
+  tar -jpc -f $userinfod/mail.$D.tar.bz2   mail
+cd /
+  tar -jpc -f $userinfod/home.$D.tar.bz2   home
+cd /var/spool
+  tar -jpc -f $userinfod/cron.$D.tar.bz2   cron at</p>
+
+<h1>3. 定期删除旧备份</h1>
+
+<p>DAYS=30
+find $vsftpd -name &ldquo;vsftpd<em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $sshd -name &ldquo;sshd</em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $wwwd -name &ldquo;ht<em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $others -name &ldquo;etc</em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $userinfod -name &ldquo;cron<em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $userinfod -name &ldquo;home</em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $userinfod -name &ldquo;mail*&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+```</p>
+
+<h3>自动上传脚本auto_upload_daily.sh</h3>
+
+<p>其中upload.sh的代码与本地脚本<code>uf</code>相同。简言之，脚本<code>uf</code>是云备份的基础。
+```</p>
+
+<h1>!/bin/bash</h1>
+
+<p>LOCAL_DATA=/backup/daily
+MYSQL_BACKUP=mysql.$(date +&ldquo;%Y-%m-%d&rdquo;).tar.bz2</p>
+
+<p>upload.sh $LOCAL_DATA/$MYSQL_BACKUP
+```</p>
+
+<h3>自动上传脚本auto_upload_weekly.sh</h3>
+
+<p>```</p>
+
+<h1>!/bin/bash</h1>
+
+<p>LOCAL_DATA=/backup/weekly
+D=$(date +&ldquo;%Y-%m-%d&rdquo;)</p>
+
+<p>HTTP=www/httpd.$D.tar.bz2
+HTML=www/html.$D.tar.bz2
+ETC=others/etc.$D.tar.bz2
+HOM=userinfo/home.$D.tar.bz2
+MAIL=userinfo/mail.$D.tar.bz2
+PASSWD=userinfo/passwd.$D.tar.bz2
+SHADOW=userinfo/shadow.$D.tar.bz2
+SSHD=ssh/sshd.$D.tar.bz2
+VSFTPD=vsftpd/vsftpd.$D.tar.bz2
+CRONA=userinfo/cron.$D.tar.bz2</p>
+
+<p>upload.sh $LOCAL_DATA/$HTTP
+upload.sh $LOCAL_DATA/$HTML
+upload.sh $LOCAL_DATA/$ETC
+upload.sh $LOCAL_DATA/$HOM
+upload.sh $LOCAL_DATA/$MAIL
+upload.sh $LOCAL_DATA/$PASSWD
+upload.sh $LOCAL_DATA/$SHADOW
+upload.sh $LOCAL_DATA/$CRONA
+upload.sh $LOCAL_DATA/$SSHD
+upload.sh $LOCAL_DATA/$VSFTPD
+```</p>
+
+<h3>最后，再启动定时任务</h3>
+
+<p>为防止网络出现问题导致上传失败，重复了3次上传操作
+```</p>
+
+<h1>crontab -l</h1>
+
+<p>01 1 * * * /bin/backupday.sh 2>>/backup/errors.log
+20 1 * * 0 /bin/backupwk.sh 2>>/backup/errors.log
+01 2 * * * /bin/auto_upload_daily.sh 2>>/backup/errors.log
+01 4 * * * /bin/auto_upload_daily.sh 2>>/backup/errors.log
+01 6 * * * /bin/auto_upload_daily.sh 2>>/backup/errors.log
+20 2 * * 0 /bin/auto_upload_weekly.sh 2>>/backup/errors.log
+20 4 * * 0 /bin/auto_upload_weekly.sh 2>>/backup/errors.log
+20 6 * * 0 /bin/auto_upload_weekly.sh 2>>/backup/errors.log
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[双系统下修复grub2引导]]></title>
+    <link href="http://grunmin.github.io/blog/2014/11/13/shuang-xi-tong-xia-xiu-fu-grub2yin-dao/"/>
+    <updated>2014-11-13T22:28:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/11/13/shuang-xi-tong-xia-xiu-fu-grub2yin-dao</id>
+    <content type="html"><![CDATA[<p>我的电脑上装有fedora和windows两个系统。一般装系统的时候windows先装而linxu后装，因为linux能够查找windows系统并为其提供启动引导，而windows不能。因此当需要重装windows的时候需要修复grub2引导。</p>
+
+<!-- more -->
+
+
+<p><strong>工具</strong>
+fedora的livecd，即安装fedora时使用的安装U盘</p>
+
+<h2>步骤</h2>
+
+<h3>调整bios启动顺序，进入livecd</h3>
+
+<h3>挂载硬盘</h3>
+
+<ul>
+<li>使用<code>fdisk -l</code>查找/boot分区所在硬盘，比如我的是/dev/sda8。（在此之前需要运行<code>su</code>命令）</li>
+<li>挂载根分区<code>mount /dev/mapper/fedora-root /mnt</code></li>
+<li>挂载/boot分区<code>mount /dev/sda8 /mnt/boot</code></li>
+<li>挂载/dev分区<code>mount --bind /dev /mnt/dev</code></li>
+</ul>
+
+
+<h3>修改根目录</h3>
+
+<p><code>chroot /mnt</code></p>
+
+<h3>修复grub2</h3>
+
+<ul>
+<li><code>grub2-install /dev/sda</code></li>
+<li><code>grub2-install /dev/sda --recheck</code></li>
+</ul>
+
+
+<h3>更新引导项</h3>
+
+<p><code>grub2-mkconfig -o /boot/grub2/grub.cfg</code></p>
+
+<p>若不执行更新引导项，则启动的时候会显示过去存在的操作系统（此时并不会显示新的操作系统）</p>
+
+<p>进入fedora后，再次执行<code>grub2-mkconfig -o /boot/grub2/grub.cfg</code>，则引导项修复正常。</p>
+
+<h3>更改默认引导项</h3>
+
+<p>可以通过在<code>/boot/grub2/grub.cfg</code>添加<code>set default=X</code>（X为数字）来更改默认引导项。X从0开始，例如windows在引导菜单的第4行，则可以设置<code>set default=3</code></p>
+
+<p>但是，这样的修改方法是不推荐的。因为每次执行<code>grub2-mkconfig -o /boot/grub2/grub.cfg</code>都会更新<code>grub.cfg</code>这个文件。正确的方法是执行<code>grub2-set-default &lt;标题或名称&gt;</code>。其中，&lt;标题或名称>用命令<code>grep menuentry /boot/grub2/grub.cfg</code>找到，即menuentry后引号内的内容。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[技术改变生活(1)]]></title>
@@ -61,346 +424,6 @@ function count(){</p>
 
 <p>```
 从输出就可以知道各班缴费的人数了。然后将这个班的报名同学信息通过类似的方法提取出来，与缴费名单比较，就可以知道是哪位同学没有缴费。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Openshift 安装使用教程]]></title>
-    <link href="http://grunmin.github.io/blog/2014/03/16/openshift-an-zhuang-shi-yong-jiao-cheng/"/>
-    <updated>2014-03-16T21:09:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2014/03/16/openshift-an-zhuang-shi-yong-jiao-cheng</id>
-    <content type="html"><![CDATA[<p>声明：配置环境是fedora 20，这里是<a href="https://access.redhat.com/site/documentation/en-US/OpenShift_Online/2.0/html/User_Guide/index.html">官方文档</a>，找文档是解决问题最有效的方式。</p>
-
-<!-- more -->
-
-
-<h3>介绍</h3>
-
-<blockquote><p>OpenShift是红帽公司推出的一个云计算服务平台，开发人员可以用它来构建和发布web应用。Openshift广泛支持多种编程语言和框架，如Java，Ruby和PHP等。另外它还提供了多种集成开发工具如Eclipse integration，JBoss Developer Studio和 Jenkins等。OpenShift 基于一个开源生态系统为移动应用，数据库服务等，提供支持。
-——来自百度百科</p></blockquote>
-
-<p>简言之，就是一个面向开源开发人员开放的平台即服务(PaaS)。</p>
-
-<p>使用openshift首先需要一个账户，注册十分简单，不在此赘述。
-配置自己的openshift可以通过几种方式，比如web端，命令行。web端适合刚刚接触的新手，建议新用户多点点链接，熟悉一下大体的使用方法和功能。当准备好创建应用时即往下看。本文是介绍命令行下的配置，毕竟修改代码什么的都需要在本地修改后再提交。而openshift的客户端就是基于命令行的。</p>
-
-<h3>安装</h3>
-
-<h5>安装命令行客户端</h5>
-
-<p><code>
-sudo yum install rubygem-rhc -y
-</code></p>
-
-<h5>初始化设置</h5>
-
-<p><code>
-sudo rhc setup
-</code>
-此时需要输入帐号和密码，即为自己在openshift注册时的帐号。</p>
-
-<p>令人费解的是使用我的本地账户运行<code>rhc</code>显示找不到命令，切换为root运行也是如此。只能使用<code>sudo rhc</code>的方式，后面运行<code>git push</code>也是如此，必须是<code>sudo git push</code>。如果你知道原因，烦请不吝赐教。</p>
-
-<h5>使用gem更新rhc</h5>
-
-<p><code>
-sudo gem update rhc
-</code>
-然后看看自己的账户
-<code>
-sudo rhc account
-</code>
-在安装rhc的时候本地用户已和云端绑定，ssh公钥也导入了，因此之后的操作一般不需要再作验证。</p>
-
-<h5>查看自己的app</h5>
-
-<p><code>
-sudo rhc apps
-</code>
-可以看到自己账户下有多少个app（免费账户最多3个），应用名，git仓库地址，主机地址，绑定的域名，以及模块，数据库版本，数据库用户和密码等等。比如我的wordpress（数据库账户和密码被我屏蔽）。
-```</p>
-
-<h2>blog @ <a href="http://blog-grunmin.rhcloud.com/">http://blog-grunmin.rhcloud.com/</a> (uuid: 5325520fe0b8cd3a830009ff)</h2>
-
-<p>  Domain:          grunmin
-  Created:         3:26 PM
-  Gears:           1 (defaults to small)
-  Git URL:         ssh://5325520fe0b8cd3a830009ff@blog-grunmin.rhcloud.com/~/git/blog.git/
-  Initial Git URL: <a href="https://github.com/openshift/wordpress-example.git">https://github.com/openshift/wordpress-example.git</a>
-  SSH:             5325520<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#x66;&#101;&#48;&#98;&#x38;&#99;&#x64;&#51;&#97;&#56;&#x33;&#48;&#48;&#x30;&#57;&#102;&#102;&#64;&#x62;&#108;&#x6f;&#103;&#x2d;&#x67;&#x72;&#x75;&#110;&#x6d;&#x69;&#110;&#46;&#114;&#104;&#99;&#x6c;&#x6f;&#x75;&#100;&#x2e;&#x63;&#111;&#x6d;">&#x66;&#101;&#48;&#x62;&#x38;&#99;&#x64;&#51;&#97;&#56;&#51;&#x30;&#48;&#48;&#x39;&#102;&#x66;&#64;&#98;&#x6c;&#111;&#103;&#45;&#x67;&#114;&#x75;&#x6e;&#x6d;&#105;&#x6e;&#46;&#114;&#104;&#99;&#x6c;&#x6f;&#x75;&#x64;&#x2e;&#x63;&#x6f;&#109;</a>
-  Deployment:      auto (on git push)
-  Aliases:         wp.guorunmin.cn</p>
-
-<p>  mysql-5.1 (MySQL 5.1)</p>
-
-<hr />
-
-<pre><code>Gears:          Located with php-5.3
-Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
-Database Name:  blog
-Password:       ********
-Username:       ******
-</code></pre>
-
-<p>  php-5.3 (PHP 5.3)</p>
-
-<hr />
-
-<pre><code>Gears: Located with mysql-5.1
-</code></pre>
-
-<p>```</p>
-
-<h3>创建应用</h3>
-
-<h5>创建</h5>
-
-<p>看别人的东西干过瘾，不如自己创建一个，创建的方法也很简单，只需一个命令
-<code>
-sudo rhc app create AppName
-</code>
-Openshift 支持Java，Ruby，Node.js，PHP，Perl和Python，在AppName 后面可以加其他参数，例如php应用是：
-<code>
-sudo rhc app create AppName php-5.4
-</code>
-有一种是diy模式，即自行搭建语言环境的，面对一台陌生的机器，我没有任何信心能完成这样的工作^_^。刚开始的时候，我找不到CI框架的环境（有ZF），所以选择新建空应用，以为我自己的代码可以在服务器上运行，想想还是比较天真哈哈哈
-如果是安装环境了，改代码的之前需要将仓库克隆到本地。如果新建空应用，那么rhc会自动将仓库克隆下来。</p>
-
-<p>更多参数可以参见<a href="https://access.redhat.com/site/documentation/en-US/OpenShift_Online/2.0/html/User_Guide/Creating_an_Application5.html">官方文档</a>，不用担心看不懂英文，我翻了一遍，文档大体都能看懂。</p>
-
-<h5>添加mysql和phpmyadmin模块</h5>
-
-<p>既然是php应用，mysql和phpmyadmin怎么能少呢！让我们添加一下
-<code>
-sudo rhc cartridge add mysql-5.1 -a AppName
-sudo rhc cartridge add phpmyadmin -a AppName
-</code>
-此时新建的应用信息大概就是你看到的上面那个。建议保存一下有用的信息，比如phpmyadmin的地址，用户名和密码，尤其是使用web端创建的同学*_*</p>
-
-<p><em>安装wordpress后还需登陆网站添加安装配置信息</em></p>
-
-<p>如果要删除应用，执行
-<code>
-sudo rhc app delete AppName
-</code></p>
-
-<h3>开始码字</h3>
-
-<p>如果安装的是wordpress这些成熟的应用，因为它提供了管理界面，大概不用去修改代码。如果是自己开发的应用呢？Openshift支持git的方式修改云端上的代码。大体流程应该是这样：
-克隆代码到本地->进入应用目录->进入代码目录->修改代码->git add,commit,push->服务器上的应用关闭->一系列编译布置->应用重启->完成</p>
-
-<p>克隆操作
-<code>
-sudo rhc git-clone AppName
-</code>
-或者知道仓库地址，像这样
-<code>
-sudo git clone ssh://53257e56e0b8cd671500019b@app-grunmin.rhcloud.com/~/git/app.git/
-</code>
-php应用根目录下默认有两个文件夹，.git和.openshift。（安装wordpress时候还有另外三个目录：libs,misc,php，但是我找不到wordpress的代码）.openshift目录的作用官网的说明挺详细，我只知道是存放git动作触发的脚本文件，没有深入研究。根目录下还有index.php文件，就是登陆AppName-AccountName.rhcloud.com时看到的页面。这样的设计应该很明朗了，我们直接将代码放在应用根目录下即可。或许你可以写个测试文件看看php的环境，比如"welcome.php"
-```
-&lt;?php</p>
-
-<pre><code>     phpinfo();
-</code></pre>
-
-<p>?>
-```</p>
-
-<p>另外我们可以ssh进去主机看看里面的文件。如果想了解的话还是自己找找资料吧，比如<a href="http://www.dashashi.com/index.php/2013/01/1435">openshift用ssh登陆后的目录结构</a>。</p>
-
-<h3>访问</h3>
-
-<p>虽说是否被墙是判断一个服务好坏的标准，不过眼看着这么好的服务被墙还是挺让人窝火。因此我也希望我们能够好好利用openshift，不要见缝插针，浪费资源。</p>
-
-<p>如果是博客，那么有一个自己的域名当然比较好。如果不是的话，为了避免被墙，建议也绑定一个，虽然不一定能起作用。绑定域名，也是一个命令搞定：
-<code>
-sudo rhc alias add AppName YourDomain
-</code>
-当然，你需要在域名提供商那里添加一个CNAME记录，指向你的openshift域名。
-<em>因为缓存的原因，域名解析不会立刻生效。</em></p>
-
-<p>或者使用https的方式访问。</p>
-
-<p>其他跨栏的姿势很多，不赘述。</p>
-
-<p>参考：
-<a href="http://www.live-in.org/archives/1818.html">openshift使用方法介绍</a></p>
-
-<p><a href="http://www.live-in.org/archives/1818.html">openshift用ssh登陆后的目录结构</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android 下用脚本备份文件到dropbox的实现]]></title>
-    <link href="http://grunmin.github.io/blog/2014/03/15/android-xia-yong-jiao-ben-bei-fen-wen-jian-dao-dropboxde-shi-xian/"/>
-    <updated>2014-03-15T23:28:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2014/03/15/android-xia-yong-jiao-ben-bei-fen-wen-jian-dao-dropboxde-shi-xian</id>
-    <content type="html"><![CDATA[<p>前些日子寻找linux下上传文件到云的脚本，以实现远程服务器上资料的云端备份。</p>
-
-<!-- more -->
-
-
-<p>国内的网盘虽说正逐渐在开放API，但是到实现方便个人云存储应该还需一定的时间，百度云的pcs接口也关闭了（现在重新开放）。这方面国外的Dropbox做得不错，已经有一些相对成熟的应用。比如脚本<a href="https://github.com/andreafabrizi/Dropbox-Uploader">Dropbox-Uploader</a>。</p>
-
-<blockquote><p>Dropbox Uploader is a BASH script which can be used to upload, download, delete, list files (and more!) from Dropbox, an online file sharing, synchronization and backup service.</p>
-
-<p>It&rsquo;s written in BASH scripting language and only needs cURL.</p></blockquote>
-
-<p>Dropbox Uploader 是一个bash脚本，提供上传，下载，移动网盘上的文件等功能。通过学习已经实现了远程服务器上的云端备份（2G空间已塞满……准备转投百度云）。</p>
-
-<p>既然是bash脚本，那么怀着linux心的android系统应该也可以使用。虽然现在各种云app充斥眼球，但是相对而言它们都太庞大了。比如百度云app，安装后大小有20+M。我只需要一个能提供上传下载的app，而不是一个集社交，防盗为一体，还总是要后台运行的臃肿app。因此开始着手如何将Dropbox Uploader用在手机上。</p>
-
-<p>我们知道，android下的shell是不完整的，默认是ash。因此我主要做的工作是弄出一个bash的环境，没有什么技术含量，纯粹是一时兴起。</p>
-
-<p>那就开始吧。</p>
-
-<p>1、手机提权</p>
-
-<p>就是root了，关于root的教程网上都有。没有取得root权限，后面的操作都无法执行。对我来说，自己的手机不root就不像是自己的手机。</p>
-
-<p>2、安装busybox，终端模拟器</p>
-
-<p>可以在谷歌市场下载<a href="https://play.google.com/store/apps/details?id=stericson.busybox&amp;hl=zh_CN">busybox</a>和<a href="https://play.google.com/store/apps/details?id=jackpal.androidterm&amp;hl=zh_CN">终端模拟器</a>。busybox提供了bash下的一系列常用的命令。比系统自带的强。安装需要root权限，正常安装即可。终端模拟器用来输入命令，也可用<a href="https://play.google.com/store/apps/details?id=os.tools.scriptmanager">脚本管理器</a>。</p>
-
-<p>3、下载bash，curl，dropbox_uploader.sh</p>
-
-<p>下载<a href="http://pan.baidu.com/s/1i3mhTyd">bash</a>，<a href="http://pan.baidu.com/s/1lGkZ8">curl</a>，到/system/bin/目录下。在终端模拟器下输入<code>bash</code>应该能进入bash。dropbox_uploader.sh即为Dropbox Uploader的文件名，也放在/system/bin/目录下。</p>
-
-<p>4、其他准备</p>
-
-<p>首先修改Dropbox Uploader文件的第一行，将其sh改为/system/bin/bash，然后新建一个文件夹/tmp,<code>mkdir /tmp</code>。</p>
-
-<p>5、创建dropbox应用</p>
-
-<p>使用Dropbox Uploader前需要在Dropbox上创建应用，让该应用具有文件修改权限。具体如何实现可参考<a href="http://teddysun.com/178.html">Dropbox Uploader的使用教程</a>
-Dropbox Uploader的数据传输是加密的，前面的那些设置并没有包含这些。(当时没有找到方法，现在也没有去折腾。因此在使用Dropbox Uploader时需加 <code>-k</code>参数，不检查ssl证书。)</p>
-
-<p>6、使用</p>
-
-<p>按照上面的方法设置后，应该就可以用Dropbox Uploader上传文件了。因为在手机上敲打命令不易，因此我们可以另外写个脚本，比如：
-```</p>
-
-<h1>!/system/bin/bash</h1>
-
-<p>/system/bin/dropbox_uploader.sh -k -s upload $1
-```
-将脚本命名为u，打开终端模拟器，键入u filename即可将文件上传到dropbox。下载也是一样。</p>
-
-<p><strong>后记</strong></p>
-
-<p>这是我寒假在家没有电脑的消遣之举，现在看来这东西实在非常鸡肋，但是当时弄了一个晚上。终于弄成功时那种喜悦难以言表，因此打算回校写篇教程。本文言尽于此，后续不再完善存在的问题。因为我已经找到了完美的替代品，<a href="https://play.google.com/store/apps/details?id=com.damiapp.softdatacable&amp;hl=zh_CN">软件数据线</a>。</p>
-
-<p>参考引用：
-<a href="http://teddysun.com/178.html">备份利器Dropbox Uploader</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[fedora 下调节外放音量和屏幕亮度]]></title>
-    <link href="http://grunmin.github.io/blog/2014/03/13/fedora-xia-diao-jie-wai-fang-yin-liang-he-ping-mu-liang-du/"/>
-    <updated>2014-03-13T00:43:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2014/03/13/fedora-xia-diao-jie-wai-fang-yin-liang-he-ping-mu-liang-du</id>
-    <content type="html"><![CDATA[<h3>声音</h3>
-
-<p>fedora系统下笔记本外放功能可能有受到一些限制。接耳机的时候声音是正常的，但是拔下耳机后电脑并不能外放声音。网上搜到的方法是：</p>
-
-<!-- more -->
-
-
-<p>终端运行alsamixer->按F6键，选中对应硬件，应该会出现这样的画面<img src="https://lh4.googleusercontent.com/-Pj4Qb92Mz3M/UyCOC4GBLFI/AAAAAAAAAJ0/IZSLgP3Xxqs/w614-h346-no/2014-03-13-002941_614x346_scrot.png" alt="" />，调高第三条的音量即可实现外放。</p>
-
-<h3>显示</h3>
-
-<p>1、可用命令行<code>xgamma -gamma X</code>暂时调节笔记本的屏幕亮度,X的值在1以下。</p>
-
-<p>2、如果用英特尔集成显卡，则<code>/sys/class/backlight/intel_backlight/brightness</code>是调节屏幕亮度的，文件中的数字即代表亮度。
-用vim编辑器改是不可以的，因此用重定向的方法：
-```</p>
-
-<h1>echo 100 > /sys/class/backlight/intel_backlight/brightness</h1>
-
-<p>```
-数值大概在100到200之间（我的默认是187,后改为100）。</p>
-
-<p>如果用NVIDIA显卡，则存在<code>/sys/class/backlight/acpi_video0/brightness</code>这个文件，更改方法如上。</p>
-
-<p>这两个方法都不能永久性地更改亮度。不过我们可以通过脚本的方式，让计算机启动的时候执行这些命令，以达到开机即调整亮度的需求。</p>
-
-<p>在/etc/rc.d/init.d/目录下，新建一脚本，比如命名为brightness，写入以下内容
-```</p>
-
-<h1>add for chkconfig</h1>
-
-<h1>chkconfig:2345 70 30</h1>
-
-<h1>description:modify brightness</h1>
-
-<h1>processname:brightness</h1>
-
-<p>xgamma -gamma 0.7
-echo 50 > /sys/class/backlight/intel_backlight/brightness
-echo 50 > /sys/class/backlight/acpi_video0/brightness
-```
-其中2345表示脚本在哪一运行级别生效，70和30表示开机/关机时启动/关闭的顺序，数字越大越靠后。processname即为服务的名称，作标识用。</p>
-
-<p>给脚本可执行权限
-<code>
-chmod +x brightness
-</code>
-将脚本添加入服务控制列表
-<code>
-chkconfig --add brightness
-</code>
-此时用<code>chkconfig --list</code>可查看brightness服务在2345运行级别里是默认开启的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[wamp apache无法启动的解决方法]]></title>
-    <link href="http://grunmin.github.io/blog/2014/03/12/wamp-apachewu-fa-qi-dong-de-jie-jue-fang-fa/"/>
-    <updated>2014-03-12T22:48:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2014/03/12/wamp-apachewu-fa-qi-dong-de-jie-jue-fang-fa</id>
-    <content type="html"><![CDATA[<p>如题，近日在安装wamp的时候出现了apache无法启动的情况。wamp图标一直显示橙色。网上搜索了许多资料都无效，最后还是我自己发现问题并予以解决了。</p>
-
-<!-- more -->
-
-
-<h3>VC的问题？</h3>
-
-<p>我的电脑是新装的win8.1企业版。因此我怀疑是VC2008和2010没有安装的缘故，因此上官网下载了这两个安装包安装，结果如故。</p>
-
-<h3>没有安装服务？</h3>
-
-<p>直接<code>apache-&gt;service-&gt;remove service</code>，再install service ，重新打开wamp，结果如故。</p>
-
-<h3>80端口被占用？</h3>
-
-<p>用apache里service的test port 80，显示<code>Your port 80 is not actually used</code>。在cmd里用netstat -an 查找，没有一个软件占用80端口。为保险起见修改httpd.conf文件，修改其端口为8080，重启，结果如故。</p>
-
-<h3>netbios解析失败？</h3>
-
-<p>打开网络共享中心，点击<code>本地连接-&gt;属性-&gt;Internet协议版本-&gt;属性-&gt;高级-&gt;WINS</code>，勾掉<code>启用LMHOST</code>查找。重启服务，结果如故。</p>
-
-<h3>httpd.conf修改后语法错误？</h3>
-
-<p>新装的wamp，初始的配置文件怎么可能有语法错误……</p>
-
-<p>于是把wamp卸了又装装了又卸，问题得不到解决。</p>
-
-<p>换另一种方法，自己分开安装wamp。</p>
-
-<h3>失败！</h3>
-
-<p>在安装apache的时候显示找不到***文件，请检查路径之类的问题，安装程序出错，此举以失败告终。</p>
-
-<p>因此我再装一次wamp，查看httpd.conf，在其中看到的路径中包含了中文名。是不是因为名称的问题导致的呢？我不敢确定，因为同样是中文路径，mysqld服务可以成功启动。</p>
-
-<h3>成功！</h3>
-
-<p>接下来的事就简单了，不过也比较刺激。因为为了解决这个问题我搜索了两天，真的只是该死的中文路径名的问题。</p>
-
-<p>这次问题的解决再次提醒我注意之前多次遇到的问题，即windows下中文路径名的问题。即使转移到windows下，也不要忘了linux下良好的命名习惯呀。</p>
 ]]></content>
   </entry>
   

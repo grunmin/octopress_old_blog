@@ -83,6 +83,338 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke/">用马克飞象写博客</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-23T15:46:00+08:00" pubdate data-updated="true">Nov 23<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/23/yong-ma-ke-fei-xiang-xie-bo-ke/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>用octopress搭建博客之后，大爱markdown的简约，因此我对云笔记的要求又多了一项：支持markdown格式编辑和保存。</p>
+
+<p>应该说每一种云笔记都有自己的特点。为知笔记在知识管理方面有独到之处，它的网页剪辑功能强大，支持无限制分级，且全平台支持，可作为PKM工具。印象笔记界面清爽，多种应用接入，逐步打造成完整的生态系统。而现在，为知笔记和印象笔记都支持markdown了，诸君可以试用看哪一种好。本文只谈技术，不贸然推荐。</p>
+
+<p>在写octopress博客的时候，我先在为知笔记上写好纯文本格式的正文，将其复制到stackedit上用markdown语法进行处理，确认无误后写进octopress的文件中。这样的问题是，更新博文后笔记和博客的内容就不一样了。再说，笔记上纯文本格式的正文也十分难看。 （这是写在为知笔记还不支持markdown时候的情况，事实上自从它支持后就不用那么麻烦了。）</p>
+
+<p>今天在chrome商店上看到了一个应用，据称是专为印象笔记打造的markdown编辑器，叫马克飞象。这是图标<br/>
+<img src="https://lh5.googleusercontent.com/-hOEvL1TOB-o/UpBepDGUAhI/AAAAAAAAAGY/WHZ5qubwNeE/s0/2013-11-23-151125_118x133_scrot.png" title="2013-11-23-151125_118x133_scrot.png" alt="enter image description here" /></p>
+
+<p>绑定笔记帐号后在上面编辑md格式文件可以实时查看效果，并将处理后的笔记保存到印象笔记中。这是编辑界面:</p>
+
+<p><img src="https://lh6.googleusercontent.com/-aipDbqSYjS0/UpBe_0jaxzI/AAAAAAAAAGw/giigXjHPP2A/s0/2013-11-23-153132_937x329_scrot.png" title="2013-11-23-153132_937x329_scrot.png" alt="enter image description here" /></p>
+
+<p>用马克飞象编辑的文章保存到笔记中是经markdown渲染的（笔记不会显示源代码），这样保存下来的笔记比纯文本格式或者markdown源代码格式的好看多了。</p>
+
+<p>相对于stackedit与谷歌云端硬盘的优势也是十分明显的，它可以直接在印象笔记中查看。</p>
+
+<p>马克飞象支持将所编辑的笔记分类和加标签，使用<code>@(categories)[tags|tags]</code>即可，同一文章中只能出现一次，且必须与其他内容隔一些距离。</p>
+
+<p>如果要修改笔记内容怎么办？不用担心，用马克飞象编辑的笔记在右上角会显示一个链接（如下图），点击链接后会用启用马克飞象编辑文章，因此不用担心后续更新的问题。</p>
+
+<p><img src="https://lh6.googleusercontent.com/-N6XlKlK81F8/UpBe4QtcpWI/AAAAAAAAAGk/GtCzYl-__PY/s0/2013-11-23-153122_422x354_scrot.png" title="2013-11-23-153122_422x354_scrot.png" alt="enter image description here" /></p>
+
+<p>我用马克飞象写的这篇博文，感觉非常不错，不过有两点需要注意：</p>
+
+<ul>
+<li>图片显示<br/>
+直接写<code>![][]</code>这样插入图片的语法能够生效，但是在编辑器上无法看到预览。要看到预览，请点击右上角<code>功能</code>里插入图片的选项。</li>
+<li>兼容问题
+由于md语言有多种扩展，将马克飞象已显示无问题的源码直接拷贝到octopress里可能并不能达到预想的效果。</li>
+</ul>
+
+
+<p>总体来说马克飞象还是十分实用的，特别是对程序员，用马克飞象记录代码如虎添翼。</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi/">我的gvim安装和配置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-17T17:14:00+08:00" pubdate data-updated="true">Nov 17<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我将自己正在学习的小东西放到了github上，想要充分发挥云端服务器的优势，希望在其他windows电脑也能coding，因此草草配置了一下gvim。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/17/wo-de-gviman-zhuang-he-pei-zhi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/15/yan-gong-da-tie-ji/">广工打铁记</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-15T21:30:00+08:00" pubdate data-updated="true">Nov 15<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/15/yan-gong-da-tie-ji/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h3>day1</h3>
+
+<p>广工的老师与华师的老师的一个比较大的区别是，华师的老师讲课时比较幽默风趣，广工的老师则不是很爱笑。也许这跟专业环境和学生群体有关。老师们说话很有条理，充分体现理工科的思维优势，我很喜欢。因为这跟我很像。当我讲技术的时候，我只讲技术，力争将其讲清楚，而不会去追求其他。不过也确实，纯手熟的专业，没有多少技巧性艺术性可言，只要愿意去做，都会懂的。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/15/yan-gong-da-tie-ji/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Octopress博客搭建和个性化配置</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-04T15:02:00+08:00" pubdate data-updated="true">Nov 4<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用octopress搭建博客的人，大概都会喜欢写关于如何搭建配置octopress的文章。因为它的高定制性，为极客们带来很多乐趣。从首页的配置，到分类，评论，个人信息，社会化分享等的配置，内容繁多。而且这是我第二次搭建octopress环境了，发现上一次的配置有一部分不能clone到本机上。因此，把配置的过程记录下来是十分有必要的。<br/>
+我的意愿是记录配置的过程，顺便整理大牛们关于这方面的一些说明。网络上相关资料有很多，没有实践过的没有摘录在这里。所有的代码实现都是直接引用前辈们的。另外，本博的配置环境是linux fedora 18.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/03/rhce-note-9/">RHCE Note 9</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-03T23:20:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/03/rhce-note-9/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/03/rhce-note-9/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/03/rhce-note-1/">RHCE Note 1</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-03T02:07:00+08:00" pubdate data-updated="true">Nov 3<span>rd</span>, 2013</time>
+        
+         | <a href="/blog/2013/11/03/rhce-note-1/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"></div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/11/03/rhce-note-1/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/">关于知道不知道的几点理解</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-05T11:24:00+08:00" pubdate data-updated="true">Aug 5<span>th</span>, 2013</time>
+        
+         | <a href="/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>关于大学学习的四个层次:<br/>
+<strong>不知道自己不知道</strong><br/>
+<strong>知道自己不知道</strong><br/>
+<strong>不知道自己知道</strong><br/>
+<strong>知道自己知道</strong></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/08/05/guan-yu-zhi-dao-bu-zhi-dao-de-ji-dian-li-jie/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/08/02/fedora-an-zhuang-zend-frame-bi-ji/">Linux安装 Zend Frame 笔记</a></h1>
     
     
@@ -218,51 +550,9 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/">为知笔记使用笔记(1)-启动方式</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-21T10:40:00+08:00" pubdate data-updated="true">Jul 21<span>st</span>, 2013</time>
-        
-         | <a href="/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>linux下软件的启动方式有多种，双击快捷方式对为知笔记这个软件并不管用，因此我们寻求其他更有linux风格的方式。<br/>
-文中的方法对于所有应用程序都是通用的。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/07/21/wei-zhi-bi-ji-shi-yong-bi-ji-1-qi-dong-fang-shi/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/4/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -277,21 +567,21 @@
   <ul class="tag-cloud">
     <a style="font-size: 90%" href="/tags/lamp/">lamp</a>
 <a style="font-size: 210%" href="/tags/linux/">linux</a>
-<a style="font-size: 90%" href="/tags/mysql/">mysql</a>
 <a style="font-size: 90%" href="/tags/octopress/">octopress</a>
-<a style="font-size: 145%" href="/tags/php/">php</a>
-<a style="font-size: 125%" href="/tags/rhce/">rhce</a>
-<a style="font-size: 145%" href="/tags/windows/">windows</a>
-<a style="font-size: 145%" href="/tags/da-xue/">大学</a>
-<a style="font-size: 194%" href="/tags/gong-ju/">工具</a>
-<a style="font-size: 145%" href="/tags/shi/">诗</a>
+<a style="font-size: 139%" href="/tags/php/">php</a>
+<a style="font-size: 121%" href="/tags/rhce/">rhce</a>
+<a style="font-size: 90%" href="/tags/vim/">vim</a>
+<a style="font-size: 139%" href="/tags/windows/">windows</a>
+<a style="font-size: 151%" href="/tags/da-xue/">大学</a>
+<a style="font-size: 182%" href="/tags/gong-ju/">工具</a>
+<a style="font-size: 139%" href="/tags/shi/">诗</a>
 
   </ul>
 </section>
 
 <section>
   <h1>Tag Cloud</h1>
-    <span id="tag-cloud"><embed type='application/x-shockwave-flash' src='/javascripts/tagcloud.swf'width='100%' height='250' bgcolor='#f2f2f2' id='tagcloudflash' name='tagcloudflash' quality='high' allowscriptaccess='always'flashvars="tcolor=0x333333&amp;tcolor2=0x333333&amp;hicolor=0x000000&amp;tspeed=100&amp;distr=true&amp;mode=tags&amp;tagcloud=%3Ctags%3E%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fsi-kao%27+style%3D%27font-size%3A+19.411764705882355%25%27%3E%E6%80%9D%E8%80%83%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fji-zhu%27+style%3D%27font-size%3A+50.0%25%27%3E%E6%8A%80%E6%9C%AF%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fwen-zi%27+style%3D%27font-size%3A+19.411764705882355%25%27%3E%E6%96%87%E5%AD%97%3C%2Fa%3E+%3C%2Ftags%3E"></span>
+    <span id="tag-cloud"><embed type='application/x-shockwave-flash' src='/javascripts/tagcloud.swf'width='100%' height='250' bgcolor='#f2f2f2' id='tagcloudflash' name='tagcloudflash' quality='high' allowscriptaccess='always'flashvars="tcolor=0x333333&amp;tcolor2=0x333333&amp;hicolor=0x000000&amp;tspeed=100&amp;distr=true&amp;mode=tags&amp;tagcloud=%3Ctags%3E%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fsi-kao%27+style%3D%27font-size%3A+21.42857142857143%25%27%3E%E6%80%9D%E8%80%83%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fji-zhu%27+style%3D%27font-size%3A+50.0%25%27%3E%E6%8A%80%E6%9C%AF%3C%2Fa%3E+%3Ca+href%3D%27http%3A%2F%2Fgrunmin.github.io%2Fblog%2Fcategories%2Fwen-zi%27+style%3D%27font-size%3A+19.523809523809526%25%27%3E%E6%96%87%E5%AD%97%3C%2Fa%3E+%3C%2Ftags%3E"></span>
 </section>
 
 <section>
@@ -299,23 +589,23 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2014/04/08/mao-dun-ti-1/">矛盾体(1)</a>
+        <a href="/blog/2014/11/13/wo-de-fedoraying-yong-lie-biao/">我的fedora应用列表</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/04/08/shi-mian/">失眠</a>
+        <a href="/blog/2014/11/13/xia-che-%2Cguan-yu-yi-shi-de-lian-xu/">瞎扯，关于意识的连续</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/04/08/ji-zhu-gai-bian-sheng-huo-1/">技术改变生活(1)</a>
+        <a href="/blog/2014/11/13/%3C%3Cmu-yang-shao-nian-qi-huan-zhi-lu-%3E%3E/">《牧羊少年奇幻之旅》</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/03/16/openshift-an-zhuang-shi-yong-jiao-cheng/">Openshift 安装使用教程</a>
+        <a href="/blog/2014/11/13/fedora-xia-an-zhuang-jin-shan-kuai-pan-tong-bu-pan/">Fedora 下安装金山快盘同步盘</a>
       </li>
     
       <li class="post">
-        <a href="/blog/2014/03/15/android-xia-yong-jiao-ben-bei-fen-wen-jian-dao-dropboxde-shi-xian/">Android 下用脚本备份文件到dropbox的实现</a>
+        <a href="/blog/2014/11/13/linuxfu-wu-qi-ben-di-he-bai-du-yun-bei-fen-jiao-ben-xiao-shi/">Linux服务器本地和百度云备份脚本小试</a>
       </li>
     
   </ul>

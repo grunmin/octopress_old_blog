@@ -4,7 +4,7 @@
   <title><![CDATA[Tag: linux | 郭润民的博客]]></title>
   <link href="http://grunmin.github.io/tags/linux/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-04-30T14:37:26+08:00</updated>
+  <updated>2014-11-13T23:18:07+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -12,6 +12,369 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[我的fedora应用列表]]></title>
+    <link href="http://grunmin.github.io/blog/2014/11/13/wo-de-fedoraying-yong-lie-biao/"/>
+    <updated>2014-11-13T23:11:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/11/13/wo-de-fedoraying-yong-lie-biao</id>
+    <content type="html"><![CDATA[<p>用fedora也有接近两年时间了，现在将自己所用的应用都列出来供参考。</p>
+
+<!--more-->
+
+
+<h3>文档处理</h3>
+
+<p>wps(金山公司推出的文档处理软件，类似软件还有永中office，libreoffer等)
+evolution（系统自带，处理邮件，联系人，日历，任务等）
+wiznote（为知笔记，适合做个人知识库）
+haroopad（markdown编辑器）
+sublime text (代码编辑器)</p>
+
+<h3>即时通讯</h3>
+
+<p>pidgin（系统自带)
+empathy(系统自带)</p>
+
+<h3>互联网</h3>
+
+<p>chrome
+firefox
+bcloud（百度云客户端）</p>
+
+<h3>shell extention</h3>
+
+<p>drop down terminal
+hide top bar
+systemmonitor
+taskbar
+todo.txt
+toggle terminal</p>
+
+<h3>其他</h3>
+
+<p>smplayer（小而全的播放器，带youtube资源播放器）
+quake（个性化的shell终端）
+fcitx+搜狗输入法（完美解决linux下中文输入问题）
+vbox（虚拟机软件）
+scrot（命令行形式的截图软件）
+axel（多线程下载器）</p>
+
+<p>以及安卓，ruby，lamp，c开发环境。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Fedora 下安装金山快盘同步盘]]></title>
+    <link href="http://grunmin.github.io/blog/2014/11/13/fedora-xia-an-zhuang-jin-shan-kuai-pan-tong-bu-pan/"/>
+    <updated>2014-11-13T23:07:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/11/13/fedora-xia-an-zhuang-jin-shan-kuai-pan-tong-bu-pan</id>
+    <content type="html"><![CDATA[<p>金山快盘推出了linux系统下的同步盘客户端，但是很遗憾没有红帽系的rpm安装包。尽管如此，我们可以通过一些操作在fedora下安装（mate桌面）（其他红帽系的没有尝试）</p>
+
+<!--more-->
+
+
+<ul>
+<li>进入<a href="http://www.ubuntukylin.com/applications/showimg.php?lang=cn&amp;id=21">官网</a> 下载ubuntu版本的客户端（注意系统位数）</li>
+<li>解压deb包，可看到<code>DEBIAN</code>,<code>etc</code>,<code>usr</code>,<code>opt</code>这几个文件夹（如只看到data.tar压缩包，则解压这个压缩包，可看到这几个文件夹）</li>
+<li>进入解压后文件夹根目录，将<code>usr</code>,<code>opt</code>文件夹复制到系统根目录下
+```
+
+<h1>cp -r usr /</h1>
+
+<h1>cp -r opt /</h1>
+
+<p>```</p></li>
+<li><p>安装库文件
+```</p>
+
+<h1>yum install libqxt</h1>
+
+<h1>yum install boost-iostreams</h1>
+
+<p>```
+需要什么库文件可以通过在终端启动快盘时显示的错误信息排查。如果不是这两个的话也是正常情况。</p></li>
+<li><p>创建链接
+```</p>
+
+<h1>ln /usr/bin/kuaipan4uk /home/yourhomedirectory/anywhereyoulike</h1>
+
+<p>```
+此时双击该链接即可启动快盘</p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[linux服务器本地和百度云备份脚本小试]]></title>
+    <link href="http://grunmin.github.io/blog/2014/11/13/linuxfu-wu-qi-ben-di-he-bai-du-yun-bei-fen-jiao-ben-xiao-shi/"/>
+    <updated>2014-11-13T23:06:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/11/13/linuxfu-wu-qi-ben-di-he-bai-du-yun-bei-fen-jiao-ben-xiao-shi</id>
+    <content type="html"><![CDATA[<h3>本地单文件上传脚本，命名uf</h3>
+
+<p>这是在本机上做的测试，利用<code>bpcs_uploader</code>脚本实现，只是进行简单的封装，自动完善云端文件路径。
+技术要点：使用<code>dirname</code>获取文件所在目录，使用<code>pwd</code>获取文件完整路径，并作为云端文件路径。</p>
+
+<!--more-->
+
+
+<p>```</p>
+
+<h1>!/bin/bash</h1>
+
+<p>cur_dir=$(cd &ldquo;$(dirname &rdquo;$1")&ldquo;; pwd)
+name=$(basename &rdquo;$1")
+/home/grm/bin/bpcs_uploader/bpcs_uploader.php upload $1 AWIN$cur_dir/$name
+```</p>
+
+<h3>本地文件夹上传脚本，命名ud</h3>
+
+<p><code>bpcs_uploader</code>脚本只能实现单个文件上传，用此脚本可以实现目录批量上传。
+技术要点：通过<code>find</code>命令输出目录下所有文件，用<code>xargs -t -n1</code>实现单个输出，从而可以遍历目录下所有文件，并作为参数逐次赋予脚本<code>uf</code>，通过不断调用脚本<code>uf</code>实现批量上传。
+```</p>
+
+<h1>!/bin/bash</h1>
+
+<p>find $1 -name &lsquo;<em>.</em>&rsquo; |xargs -t -n1 /home/grm/bin/uf
+```</p>
+
+<h3>服务器数据库每日备份脚本，命名backupday.sh(改自鸟哥的linux私房菜)</h3>
+
+<p>技术要点：基本都是常规操作，注意<code>find</code>命令<code>-mtime</code>参数的使用
+```</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>=========================================================</h1>
+
+<h1>请输入，你想让备份数据放置到那个独立的目录去</h1>
+
+<p>basedir=/backup/daily/</p>
+
+<h1>=========================================================</h1>
+
+<p>PATH=/bin:/usr/bin:/sbin:/usr/sbin; export PATH
+export LANG=C
+basefile1=$basedir/mysql.$(date +%Y-%m-%d).tar.bz2
+basefile2=$basedir/cgi-bin.$(date +%Y-%m-%d).tar.bz2
+[ ! -d &ldquo;$basedir&rdquo; ] &amp;&amp; mkdir $basedir</p>
+
+<h1>1. MysQL (数据库目录在 /var/lib/mysql)</h1>
+
+<p>cd /var/lib
+  tar -jpc -f $basefile1 mysql</p>
+
+<h1>2. 定期删除旧备份</h1>
+
+<p>DAYS=30
+find $basedir -name &ldquo;mysql*&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+```</p>
+
+<h3>代码及其他配置每周备份脚本，命名为backupweek.sh</h3>
+
+<p>```</p>
+
+<h1>!/bin/bash</h1>
+
+<h1>====================================================================</h1>
+
+<h1>使用者参数输入位置：</h1>
+
+<h1>basedir=你用来储存此脚本所预计备份的数据之目录(请独立文件系统)</h1>
+
+<p>basedir=/backup/weekly</p>
+
+<h1>====================================================================</h1>
+
+<h1>底下请不要修改了！用默认值即可！</h1>
+
+<p>PATH=/bin:/usr/bin:/sbin:/usr/sbin; export PATH
+export LANG=C</p>
+
+<p>D=$(date +&ldquo;%Y-%m-%d&rdquo;)</p>
+
+<h1>配置要备份的服务的配置档，以及备份的目录</h1>
+
+<p>postfixd=$basedir/postfix
+vsftpd=$basedir/vsftp
+sshd=$basedir/ssh
+wwwd=$basedir/www
+others=$basedir/others
+userinfod=$basedir/userinfo</p>
+
+<h1>判断目录是否存在，若不存在则予以创建。</h1>
+
+<p>for dirs in $postfixd $vsftpd $sshd $wwwd $others $userinfod
+do</p>
+
+<pre><code>[ ! -d "$dirs" ] &amp;&amp; mkdir -p $dirs
+</code></pre>
+
+<p>done</p>
+
+<h1>1. 将系统主要的服务之配置档分别备份下来，同时也备份 /etc 全部。</h1>
+
+<p>cd /etc/</p>
+
+<pre><code>tar -jpc -f $vsftpd/vsftpd.$D.tar.bz2 vsftpd
+</code></pre>
+
+<p>cd /etc/</p>
+
+<pre><code>tar -jpc -f $sshd/sshd.$D.tar.bz2 sshd ssh
+</code></pre>
+
+<p>cd /etc/</p>
+
+<pre><code>tar -jpc -f $wwwd/httpd.$D.tar.bz2 httpd
+</code></pre>
+
+<p>cd /var/www
+  tar -jpc -f $wwwd/html.$D.tar.bz2    html
+cd /
+  tar -jpc -f $others/etc.$D.tar.bz2   etc</p>
+
+<h1>2. 关於使用者参数方面</h1>
+
+<p>cp -a /etc/{passwd,shadow,group}    $userinfod
+cd /var/spool
+  tar -jpc -f $userinfod/mail.$D.tar.bz2   mail
+cd /
+  tar -jpc -f $userinfod/home.$D.tar.bz2   home
+cd /var/spool
+  tar -jpc -f $userinfod/cron.$D.tar.bz2   cron at</p>
+
+<h1>3. 定期删除旧备份</h1>
+
+<p>DAYS=30
+find $vsftpd -name &ldquo;vsftpd<em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $sshd -name &ldquo;sshd</em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $wwwd -name &ldquo;ht<em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $others -name &ldquo;etc</em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $userinfod -name &ldquo;cron<em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $userinfod -name &ldquo;home</em>&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+find $userinfod -name &ldquo;mail*&rdquo; -type f -mtime +$DAYS -exec rm {} \;
+```</p>
+
+<h3>自动上传脚本auto_upload_daily.sh</h3>
+
+<p>其中upload.sh的代码与本地脚本<code>uf</code>相同。简言之，脚本<code>uf</code>是云备份的基础。
+```</p>
+
+<h1>!/bin/bash</h1>
+
+<p>LOCAL_DATA=/backup/daily
+MYSQL_BACKUP=mysql.$(date +&ldquo;%Y-%m-%d&rdquo;).tar.bz2</p>
+
+<p>upload.sh $LOCAL_DATA/$MYSQL_BACKUP
+```</p>
+
+<h3>自动上传脚本auto_upload_weekly.sh</h3>
+
+<p>```</p>
+
+<h1>!/bin/bash</h1>
+
+<p>LOCAL_DATA=/backup/weekly
+D=$(date +&ldquo;%Y-%m-%d&rdquo;)</p>
+
+<p>HTTP=www/httpd.$D.tar.bz2
+HTML=www/html.$D.tar.bz2
+ETC=others/etc.$D.tar.bz2
+HOM=userinfo/home.$D.tar.bz2
+MAIL=userinfo/mail.$D.tar.bz2
+PASSWD=userinfo/passwd.$D.tar.bz2
+SHADOW=userinfo/shadow.$D.tar.bz2
+SSHD=ssh/sshd.$D.tar.bz2
+VSFTPD=vsftpd/vsftpd.$D.tar.bz2
+CRONA=userinfo/cron.$D.tar.bz2</p>
+
+<p>upload.sh $LOCAL_DATA/$HTTP
+upload.sh $LOCAL_DATA/$HTML
+upload.sh $LOCAL_DATA/$ETC
+upload.sh $LOCAL_DATA/$HOM
+upload.sh $LOCAL_DATA/$MAIL
+upload.sh $LOCAL_DATA/$PASSWD
+upload.sh $LOCAL_DATA/$SHADOW
+upload.sh $LOCAL_DATA/$CRONA
+upload.sh $LOCAL_DATA/$SSHD
+upload.sh $LOCAL_DATA/$VSFTPD
+```</p>
+
+<h3>最后，再启动定时任务</h3>
+
+<p>为防止网络出现问题导致上传失败，重复了3次上传操作
+```</p>
+
+<h1>crontab -l</h1>
+
+<p>01 1 * * * /bin/backupday.sh 2>>/backup/errors.log
+20 1 * * 0 /bin/backupwk.sh 2>>/backup/errors.log
+01 2 * * * /bin/auto_upload_daily.sh 2>>/backup/errors.log
+01 4 * * * /bin/auto_upload_daily.sh 2>>/backup/errors.log
+01 6 * * * /bin/auto_upload_daily.sh 2>>/backup/errors.log
+20 2 * * 0 /bin/auto_upload_weekly.sh 2>>/backup/errors.log
+20 4 * * 0 /bin/auto_upload_weekly.sh 2>>/backup/errors.log
+20 6 * * 0 /bin/auto_upload_weekly.sh 2>>/backup/errors.log
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[双系统下修复grub2引导]]></title>
+    <link href="http://grunmin.github.io/blog/2014/11/13/shuang-xi-tong-xia-xiu-fu-grub2yin-dao/"/>
+    <updated>2014-11-13T22:28:00+08:00</updated>
+    <id>http://grunmin.github.io/blog/2014/11/13/shuang-xi-tong-xia-xiu-fu-grub2yin-dao</id>
+    <content type="html"><![CDATA[<p>我的电脑上装有fedora和windows两个系统。一般装系统的时候windows先装而linxu后装，因为linux能够查找windows系统并为其提供启动引导，而windows不能。因此当需要重装windows的时候需要修复grub2引导。</p>
+
+<!-- more -->
+
+
+<p><strong>工具</strong>
+fedora的livecd，即安装fedora时使用的安装U盘</p>
+
+<h2>步骤</h2>
+
+<h3>调整bios启动顺序，进入livecd</h3>
+
+<h3>挂载硬盘</h3>
+
+<ul>
+<li>使用<code>fdisk -l</code>查找/boot分区所在硬盘，比如我的是/dev/sda8。（在此之前需要运行<code>su</code>命令）</li>
+<li>挂载根分区<code>mount /dev/mapper/fedora-root /mnt</code></li>
+<li>挂载/boot分区<code>mount /dev/sda8 /mnt/boot</code></li>
+<li>挂载/dev分区<code>mount --bind /dev /mnt/dev</code></li>
+</ul>
+
+
+<h3>修改根目录</h3>
+
+<p><code>chroot /mnt</code></p>
+
+<h3>修复grub2</h3>
+
+<ul>
+<li><code>grub2-install /dev/sda</code></li>
+<li><code>grub2-install /dev/sda --recheck</code></li>
+</ul>
+
+
+<h3>更新引导项</h3>
+
+<p><code>grub2-mkconfig -o /boot/grub2/grub.cfg</code></p>
+
+<p>若不执行更新引导项，则启动的时候会显示过去存在的操作系统（此时并不会显示新的操作系统）</p>
+
+<p>进入fedora后，再次执行<code>grub2-mkconfig -o /boot/grub2/grub.cfg</code>，则引导项修复正常。</p>
+
+<h3>更改默认引导项</h3>
+
+<p>可以通过在<code>/boot/grub2/grub.cfg</code>添加<code>set default=X</code>（X为数字）来更改默认引导项。X从0开始，例如windows在引导菜单的第4行，则可以设置<code>set default=3</code></p>
+
+<p>但是，这样的修改方法是不推荐的。因为每次执行<code>grub2-mkconfig -o /boot/grub2/grub.cfg</code>都会更新<code>grub.cfg</code>这个文件。正确的方法是执行<code>grub2-set-default &lt;标题或名称&gt;</code>。其中，&lt;标题或名称>用命令<code>grep menuentry /boot/grub2/grub.cfg</code>找到，即menuentry后引号内的内容。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Openshift 安装使用教程]]></title>
@@ -76,7 +439,7 @@ sudo rhc apps
   Gears:           1 (defaults to small)
   Git URL:         ssh://5325520fe0b8cd3a830009ff@blog-grunmin.rhcloud.com/~/git/blog.git/
   Initial Git URL: <a href="https://github.com/openshift/wordpress-example.git">https://github.com/openshift/wordpress-example.git</a>
-  SSH:             5325520<a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x66;&#x65;&#x30;&#98;&#x38;&#99;&#x64;&#x33;&#x61;&#56;&#51;&#x30;&#x30;&#x30;&#x39;&#x66;&#x66;&#x40;&#98;&#x6c;&#111;&#x67;&#x2d;&#103;&#114;&#x75;&#x6e;&#x6d;&#105;&#110;&#46;&#114;&#x68;&#99;&#108;&#x6f;&#117;&#x64;&#46;&#x63;&#x6f;&#109;">&#x66;&#101;&#x30;&#98;&#x38;&#x63;&#x64;&#x33;&#97;&#56;&#x33;&#x30;&#48;&#x30;&#57;&#x66;&#102;&#x40;&#x62;&#108;&#x6f;&#x67;&#45;&#x67;&#114;&#117;&#110;&#109;&#105;&#x6e;&#x2e;&#x72;&#x68;&#99;&#x6c;&#111;&#x75;&#x64;&#x2e;&#x63;&#x6f;&#109;</a>
+  SSH:             5325520<a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#111;&#x3a;&#x66;&#101;&#48;&#98;&#x38;&#99;&#100;&#x33;&#97;&#x38;&#x33;&#x30;&#48;&#x30;&#57;&#x66;&#102;&#64;&#98;&#108;&#x6f;&#x67;&#45;&#103;&#114;&#117;&#x6e;&#x6d;&#105;&#x6e;&#46;&#x72;&#104;&#x63;&#x6c;&#x6f;&#x75;&#x64;&#x2e;&#x63;&#111;&#109;">&#102;&#x65;&#x30;&#98;&#56;&#99;&#100;&#51;&#97;&#x38;&#x33;&#48;&#x30;&#48;&#57;&#x66;&#x66;&#64;&#98;&#108;&#x6f;&#103;&#x2d;&#x67;&#114;&#117;&#110;&#x6d;&#x69;&#x6e;&#x2e;&#x72;&#104;&#99;&#108;&#111;&#117;&#100;&#46;&#x63;&#111;&#109;</a>
   Deployment:      auto (on git push)
   Aliases:         wp.guorunmin.cn</p>
 
@@ -177,449 +540,6 @@ sudo rhc alias add AppName YourDomain
 <a href="http://www.live-in.org/archives/1818.html">openshift使用方法介绍</a></p>
 
 <p><a href="http://www.live-in.org/archives/1818.html">openshift用ssh登陆后的目录结构</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[android 下用脚本备份文件到dropbox的实现]]></title>
-    <link href="http://grunmin.github.io/blog/2014/03/15/android-xia-yong-jiao-ben-bei-fen-wen-jian-dao-dropboxde-shi-xian/"/>
-    <updated>2014-03-15T23:28:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2014/03/15/android-xia-yong-jiao-ben-bei-fen-wen-jian-dao-dropboxde-shi-xian</id>
-    <content type="html"><![CDATA[<p>前些日子寻找linux下上传文件到云的脚本，以实现远程服务器上资料的云端备份。</p>
-
-<!-- more -->
-
-
-<p>国内的网盘虽说正逐渐在开放API，但是到实现方便个人云存储应该还需一定的时间，百度云的pcs接口也关闭了（现在重新开放）。这方面国外的Dropbox做得不错，已经有一些相对成熟的应用。比如脚本<a href="https://github.com/andreafabrizi/Dropbox-Uploader">Dropbox-Uploader</a>。</p>
-
-<blockquote><p>Dropbox Uploader is a BASH script which can be used to upload, download, delete, list files (and more!) from Dropbox, an online file sharing, synchronization and backup service.</p>
-
-<p>It&rsquo;s written in BASH scripting language and only needs cURL.</p></blockquote>
-
-<p>Dropbox Uploader 是一个bash脚本，提供上传，下载，移动网盘上的文件等功能。通过学习已经实现了远程服务器上的云端备份（2G空间已塞满……准备转投百度云）。</p>
-
-<p>既然是bash脚本，那么怀着linux心的android系统应该也可以使用。虽然现在各种云app充斥眼球，但是相对而言它们都太庞大了。比如百度云app，安装后大小有20+M。我只需要一个能提供上传下载的app，而不是一个集社交，防盗为一体，还总是要后台运行的臃肿app。因此开始着手如何将Dropbox Uploader用在手机上。</p>
-
-<p>我们知道，android下的shell是不完整的，默认是ash。因此我主要做的工作是弄出一个bash的环境，没有什么技术含量，纯粹是一时兴起。</p>
-
-<p>那就开始吧。</p>
-
-<p>1、手机提权</p>
-
-<p>就是root了，关于root的教程网上都有。没有取得root权限，后面的操作都无法执行。对我来说，自己的手机不root就不像是自己的手机。</p>
-
-<p>2、安装busybox，终端模拟器</p>
-
-<p>可以在谷歌市场下载<a href="https://play.google.com/store/apps/details?id=stericson.busybox&amp;hl=zh_CN">busybox</a>和<a href="https://play.google.com/store/apps/details?id=jackpal.androidterm&amp;hl=zh_CN">终端模拟器</a>。busybox提供了bash下的一系列常用的命令。比系统自带的强。安装需要root权限，正常安装即可。终端模拟器用来输入命令，也可用<a href="https://play.google.com/store/apps/details?id=os.tools.scriptmanager">脚本管理器</a>。</p>
-
-<p>3、下载bash，curl，dropbox_uploader.sh</p>
-
-<p>下载<a href="http://pan.baidu.com/s/1i3mhTyd">bash</a>，<a href="http://pan.baidu.com/s/1lGkZ8">curl</a>，到/system/bin/目录下。在终端模拟器下输入<code>bash</code>应该能进入bash。dropbox_uploader.sh即为Dropbox Uploader的文件名，也放在/system/bin/目录下。</p>
-
-<p>4、其他准备</p>
-
-<p>首先修改Dropbox Uploader文件的第一行，将其sh改为/system/bin/bash，然后新建一个文件夹/tmp,<code>mkdir /tmp</code>。</p>
-
-<p>5、创建dropbox应用</p>
-
-<p>使用Dropbox Uploader前需要在Dropbox上创建应用，让该应用具有文件修改权限。具体如何实现可参考<a href="http://teddysun.com/178.html">Dropbox Uploader的使用教程</a>
-Dropbox Uploader的数据传输是加密的，前面的那些设置并没有包含这些。(当时没有找到方法，现在也没有去折腾。因此在使用Dropbox Uploader时需加 <code>-k</code>参数，不检查ssl证书。)</p>
-
-<p>6、使用</p>
-
-<p>按照上面的方法设置后，应该就可以用Dropbox Uploader上传文件了。因为在手机上敲打命令不易，因此我们可以另外写个脚本，比如：
-```</p>
-
-<h1>!/system/bin/bash</h1>
-
-<p>/system/bin/dropbox_uploader.sh -k -s upload $1
-```
-将脚本命名为u，打开终端模拟器，键入u filename即可将文件上传到dropbox。下载也是一样。</p>
-
-<p><strong>后记</strong></p>
-
-<p>这是我寒假在家没有电脑的消遣之举，现在看来这东西实在非常鸡肋，但是当时弄了一个晚上。终于弄成功时那种喜悦难以言表，因此打算回校写篇教程。本文言尽于此，后续不再完善存在的问题。因为我已经找到了完美的替代品，<a href="https://play.google.com/store/apps/details?id=com.damiapp.softdatacable&amp;hl=zh_CN">软件数据线</a>。</p>
-
-<p>参考引用：
-<a href="http://teddysun.com/178.html">备份利器Dropbox Uploader</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[fedora 下调节外放音量和屏幕亮度]]></title>
-    <link href="http://grunmin.github.io/blog/2014/03/13/fedora-xia-diao-jie-wai-fang-yin-liang-he-ping-mu-liang-du/"/>
-    <updated>2014-03-13T00:43:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2014/03/13/fedora-xia-diao-jie-wai-fang-yin-liang-he-ping-mu-liang-du</id>
-    <content type="html"><![CDATA[<h3>声音</h3>
-
-<p>fedora系统下笔记本外放功能可能有受到一些限制。接耳机的时候声音是正常的，但是拔下耳机后电脑并不能外放声音。网上搜到的方法是：</p>
-
-<!-- more -->
-
-
-<p>终端运行alsamixer->按F6键，选中对应硬件，应该会出现这样的画面<img src="https://lh4.googleusercontent.com/-Pj4Qb92Mz3M/UyCOC4GBLFI/AAAAAAAAAJ0/IZSLgP3Xxqs/w614-h346-no/2014-03-13-002941_614x346_scrot.png" alt="" />，调高第三条的音量即可实现外放。</p>
-
-<h3>显示</h3>
-
-<p>1、可用命令行<code>xgamma -gamma X</code>暂时调节笔记本的屏幕亮度,X的值在1以下。</p>
-
-<p>2、如果用英特尔集成显卡，则<code>/sys/class/backlight/intel_backlight/brightness</code>是调节屏幕亮度的，文件中的数字即代表亮度。
-用vim编辑器改是不可以的，因此用重定向的方法：
-```</p>
-
-<h1>echo 100 > /sys/class/backlight/intel_backlight/brightness</h1>
-
-<p>```
-数值大概在100到200之间（我的默认是187,后改为100）。</p>
-
-<p>如果用NVIDIA显卡，则存在<code>/sys/class/backlight/acpi_video0/brightness</code>这个文件，更改方法如上。</p>
-
-<p>这两个方法都不能永久性地更改亮度。不过我们可以通过脚本的方式，让计算机启动的时候执行这些命令，以达到开机即调整亮度的需求。</p>
-
-<p>在/etc/rc.d/init.d/目录下，新建一脚本，比如命名为brightness，写入以下内容
-```</p>
-
-<h1>add for chkconfig</h1>
-
-<h1>chkconfig:2345 70 30</h1>
-
-<h1>description:modify brightness</h1>
-
-<h1>processname:brightness</h1>
-
-<p>xgamma -gamma 0.7
-echo 50 > /sys/class/backlight/intel_backlight/brightness
-echo 50 > /sys/class/backlight/acpi_video0/brightness
-```
-其中2345表示脚本在哪一运行级别生效，70和30表示开机/关机时启动/关闭的顺序，数字越大越靠后。processname即为服务的名称，作标识用。</p>
-
-<p>给脚本可执行权限
-<code>
-chmod +x brightness
-</code>
-将脚本添加入服务控制列表
-<code>
-chkconfig --add brightness
-</code>
-此时用<code>chkconfig --list</code>可查看brightness服务在2345运行级别里是默认开启的。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[apache服务器个人主页的设置]]></title>
-    <link href="http://grunmin.github.io/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi/"/>
-    <updated>2014-01-02T16:16:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2014/01/02/apachefu-wu-qi-ge-ren-zhu-ye-de-she-zhi</id>
-    <content type="html"><![CDATA[<ul>
-<li>查看apache版本
-<code>
-httpd -v
-</code>
-我的版本是2.4.6，个人主页相关的配置文件在<br/>
-<code>/etc/httpd/conf.modules.d/00-base.conf</code><br/>
-和
-<code>etc/httpd/conf.d/userdir.conf</code></li>
-</ul>
-
-
-<!--more-->
-
-
-<ul>
-<li><p>查看<code>/etc/httpd/conf.modules.d/00-base.conf</code>，必须有<code>userdir_module</code>模块，如：
-<code>
-$ cat /etc/httpd/conf.modules.d/00-base.conf | grep userdir
-LoadModule userdir_module modules/mod_userdir.so
-</code></p></li>
-<li><p>进入<code>/etc/httpd/conf.d/userdir.conf</code>设置，将第17行的<code>UserDir disabled</code>加上注释并取消24行<code>UserDir public</code>的注释(可以更改UserDir后面文件夹的名字，比如<code>UserDir www</code>)</p></li>
-<li><p>进入个人家目录，创建一个文件夹www和测试页面
-<code>
-mkdir ~/www
-cd ~/www
-echo "Test home dir" &gt;&gt; index.html
-</code></p></li>
-<li>重启服务器，用浏览器打开<code>http://localhost/~username</code>，应该会出现403页面。
-<code>
-client denied by server configuration
-</code></li>
-</ul>
-
-
-<p>将selinux关闭，查看是否可以访问。</p>
-
-<ul>
-<li>如果不能访问，添加下面的代码到<code>/etc/httpd/conf/httpd.conf</code>文件中</li>
-</ul>
-
-
-<p>```
- #将name和username按情况替换掉
-<Directory "/home/username/www"></p>
-
-<pre><code>AllowOverride None
-Options Indexes FollowSymLinks
-Require all granted
-</code></pre>
-
-<p></Directory>
-```</p>
-
-<p>这里要注意的是，apache2.4版本已经取消了
-```</p>
-
-<pre><code>Order Deny,Allow
-Allow from All
-</code></pre>
-
-<p><code>
-的使用，而采用
-</code></p>
-
-<pre><code>Require all granted
-</code></pre>
-
-<p>```
-来设置对目录的访问。</p>
-
-<ul>
-<li>设置别名
-<code>
-Alias /name/ "/home/usename/www/"
-</code>
-到此个人目录可以使用，将代码放到~/www目录下吧^_^。</li>
-</ul>
-
-
-<blockquote><p>如果服务器总是显示403的话，检查以下你的家目录是否具有执行权限，修改为755即可。</p></blockquote>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[octopress博客搭建和个性化配置]]></title>
-    <link href="http://grunmin.github.io/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi/"/>
-    <updated>2013-11-04T15:02:00+08:00</updated>
-    <id>http://grunmin.github.io/blog/2013/11/04/octopressda-jian-he-ge-xing-hua-pei-zhi</id>
-    <content type="html"><![CDATA[<p>使用octopress搭建博客的人，大概都会喜欢写关于如何搭建配置octopress的文章。因为它的高定制性，为极客们带来很多乐趣。从首页的配置，到分类，评论，个人信息，社会化分享等的配置，内容繁多。而且这是我第二次搭建octopress环境了，发现上一次的配置有一部分不能clone到本机上。因此，把配置的过程记录下来是十分有必要的。<br/>
-我的意愿是记录配置的过程，顺便整理大牛们关于这方面的一些说明。网络上相关资料有很多，没有实践过的没有摘录在这里。所有的代码实现都是直接引用前辈们的。另外，本博的配置环境是linux fedora 18.</p>
-
-<!-- more -->
-
-
-<h4><a href="http://octopress.org/">octopress官方网站</a></h4>
-
-<p>octopress的配置都可以在官网上找到。事实上，遇到问题查询官网文档是最有效率的方法。</p>
-
-<h3>github的设置</h3>
-
-<h4>创建仓库</h4>
-
-<p>登陆github网站，注册一个用户，假设为grunmin。<br/>
-创建一个仓库，命名为username.github.com，例如<code>grunmin.github.com</code></p>
-
-<h4>使用密钥登陆github</h4>
-
-<p><code>
-[[ -f ~/.ssh/id_rsa.pub ]] || ssh-keygen -t rsa     #生成密钥对
-</code>
-按默认一直确认即可。<br/>
-在github帐号设置里找到ssh的设置，添加一个ssh key。<br/>
-进入~/.ssh/找到id_rsa.pub文件，把里面的内容填到key里，title不填。<br/>
-这样做的好处是之后push到仓库上时可以不用输入密码。</p>
-
-<h3>安装ruby</h3>
-
-<p>查看ruby版本<br/>
-<code>
-ruby --version  # 必须显示1.9.3
-</code>
-安装方法：
-<code>
-curl -L https://get.rvm.io | bash -s stable --ruby
-rvm install 1.9.3
-rvm use 1.9.3
-rvm rubygems latest
-</code>
-若有显示命名未找到，直接下载安装即可。</p>
-
-<h3>安装octopress</h3>
-
-<p>在安装octopress之前，确保已安装git。
-<code>
-git clone git://github.com/imathis/octopress.git octopress
-cd octopress
-gem install bundler
-bundle install
-rake install
-</code>
-这里容易出现三个问题：<br/>
-1、已安装rvm和bundler，但显示找不到命令。</p>
-
-<p>用绝对路径：<code>/home/username/.rvm/bin/rvm</code>
-<code>/home/username/.rvm/bin/bundler</code><br/>
-2、执行bundler install时显示：GemfileNotFound error?</p>
-
-<p>可能在安装的过程中退出了octopress目录，进入后执行即可。<br/>
-3、执行rake install时显示<br/>
-<code>
-rake aborted!
-No Rakefile found (looking for: rakefile, Rakefile, rakefile.rb, Rakefile.rb)
-</code>
-同理，进入安装目录即可。</p>
-
-<h3>将博客部署到github上</h3>
-
-<p><code>
-rake setup_github_pages
-</code>
-此时会要求输入仓库的url，可以在github仓库内容业的右下角找到。<br/>
-例如我的是<code>git@github.com:grunmin/grunmin.github.com.git</code><br/>
-成功后即可用
-<code>
-rake new_post["title"]
-</code>
-生成新文章，文章在source/_post/目录下，文件名构成为时间和标题的拼音。之后执行<br/>
-<code>
-rake generate
-rake preview   
-</code>
-此时可以预览(浏览器打开localhost:4000可看到效果。）如果没有问题，则执行
-<code>
-rake deploy
-git add .
-git comment -m "comment"
-git push origin source
-</code>
-保存到仓库。<br/>
-需要注意的是执行git命令时应处于octopress目录，并且checkout到source分支，
-<code>
-cd octopress
-git checkout source
-git add .
-git commit -m "comment"
-git push origin souce
-</code></p>
-
-<h3>octopress博客的个性化配置</h3>
-
-<h4>添加文章分类（category)</h4>
-
-<p>1、增加category_list插件<br/>
-将下面的代码写到<code>plugins/category_list_tag.rb</code>
-```
-module Jekyll
-  class CategoryListTag &lt; Liquid::Tag</p>
-
-<pre><code>def render(context)
-  html = ""
-  categories = context.registers[:site].categories.keys
-  categories.sort.each do |category|
-    posts_in_category = context.registers[:site].categories[category].size
-    category_dir = context.registers[:site].config['category_dir']
-    category_url = File.join(category_dir, category.gsub(/_|\P{Word}/, '-').gsub(/-{2,}/, '-').downcase)
-    html &lt;&lt; "&lt;li class='category'&gt;&lt;a href='http://grunmin.github.io/#{category_url}/'&gt;#{category} (#{posts_in_category})&lt;/a&gt;&lt;/li&gt;\n"
-  end
-  html
-end
-</code></pre>
-
-<p>  end
-end</p>
-
-<p>Liquid::Template.register_tag(&lsquo;category_list&rsquo;, Jekyll::CategoryListTag)
-```</p>
-
-<p>2、增加侧边栏<br/>
-将下面的代码写到<code>source/_includes/asides/category_list.html</code>
-```
-<section>
-  <h1>Categories</h1>
-  <ul id="categories"></p>
-
-<pre><code>{% category_list %} 
-</code></pre>
-
-<p>  </ul>
-</section>
-```</p>
-
-<p>修改_config.yml文件，找到<code>default_asides:</code><br/>
-在中括号内添加
-<code>asides/category_list.html</code></p>
-
-<p>添加的位置决定在页面显示的位置，注意用逗号隔开。<br/>
-用vim编辑器粘贴的话可能会自动缩进，启用粘贴模式或用其他编辑器即可。</p>
-
-<h4>添加社会化评论</h4>
-
-<p>octopress 产生静态网页，不支持评论功能，所以我们用第三方评论系统。好消息是octopress已为我们配置好了Disqus，我们只需要稍微填写以下信息即可。<br/>
-1、首先在<a href="http://www.disqus.com/">Disqus</a> 注册一个帐号，点击添加到我的网页，添加站点信息，比如我的<code>grunmin.github.io</code><br/>
-2、修改_config.yml文件，找到这一段：
-```</p>
-
-<h1>Disqus Comments</h1>
-
-<p>disqus_short_name:
-disqus_show_comment_count: false
-```
-添加你的disqus用户名，并把false修改成true即可。注意冒号后面有空格。<br/>
-此外，可以用国内的多说系统，速度较快，且比较符合景德镇村民的需要。之前我用的就是这个，但是没有记录配置过程，这次克隆时多说系统没有成功启动，因此不折腾了，有需要的话可以自行谷歌。</p>
-
-<h4>导航栏设置</h4>
-
-<p>导航栏的设置在<code>source\_includes\custom\navigation.html</code><br/>
-我们可以将Blog和Archives修改为首页和归档，也可以在此添加一个标签页，此时应使用命令<code>rake new_page['about']</code>创建一个页面，页面路径为<code>source\about\index.markdown</code>;<br/>
-修改后的文件如下：
-```</p>
-
-<ul class="main-navigation"> 
-  <li><a href="/">首页</a></li> 
-  <li><a href="/blog/archives">归档</a></li> 
-  <li><a href="/about">关于</a></li> 
-</ul>
-
-
-<p>```</p>
-
-<h3>从新电脑上恢复博客内容：</h3>
-
-<p>如果电脑重装了系统，或者要在另一台电脑编写博客，可以这样设置。
-找到博客仓库的url，执行
-<code>
-git clone -b source (url) octopress   #把source 克隆到本地octopress目录上
-</code>
-<code>
-cd octopress
-git clone (url) _deploy   #克隆master分支，它存放着博客内容。
-</code>
-<code>
-gem install bundler
-bundle install
-rake install
-rake setup_github_pages
-</code>
-之后操作同上，有问题照葫芦画瓢。</p>
-
-<h3>其他问题</h3>
-
-<p>如果不能生成或者推送博客了，可以采取下述措施：</p>
-
-<ul>
-<li>在命令行输入<code>/bin/bash --login</code>，重试</li>
-<li>查看ruby的版本，如果不是1.9.3的话，执行<code>rvm use 1.9.3</code></li>
-</ul>
-
-
-<p><strong>持续更新…………</strong></p>
-
-<h4>参考文章：</h4>
-
-<p><a href="http://beyondvincent.com/blog/2013/08/03/108-creating-a-github-blog-using-octopress/">利用Octopress搭建一个Github博客</a></p>
-
-<p><a href="http://www.yangzhiping.com/tech/octopress.html">Ruby开源项目介绍(1)：octopress——像黑客一样写博客</a></p>
-
-<p><a href="http://codemacro.com/2012/07/18/add-category-list-to-octopress/">为octopress添加分类(category)列表</a></p>
-
-<p><a href="http://www.cnblogs.com/oec2003/archive/2013/05/31/3109577.html">冯威的学习专栏&mdash;-记录工作学习点滴</a></p>
 ]]></content>
   </entry>
   
