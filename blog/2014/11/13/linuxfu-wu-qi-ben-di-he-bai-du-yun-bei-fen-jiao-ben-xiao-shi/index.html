@@ -9,8 +9,7 @@
   <meta name="author" content="Grunmin">
 
   
-  <meta name="description" content="本地单文件上传脚本，命名uf 这是在本机上做的测试，利用bpcs_uploader脚本实现，只是进行简单的封装，自动完善云端文件路径。
-技术要点：使用dirname获取文件所在目录，使用pwd获取文件完整路径，并作为云端文件路径。 1
+  <meta name="description" content="本地单文件上传脚本，命名uf 这是在本机上做的测试，利用bpcs_uploader脚本实现，只是进行简单的封装，自动完善云端文件路径。 技术要点：使用dirname获取文件所在目录，使用pwd获取文件完整路径，并作为云端文件路径。 1
 2
 3
 4
@@ -113,8 +112,9 @@ cur_dir=$(cd &hellip;">
 
 <div class="entry-content"><h3>本地单文件上传脚本，命名uf</h3>
 
-<p>这是在本机上做的测试，利用<code>bpcs_uploader</code>脚本实现，只是进行简单的封装，自动完善云端文件路径。
-技术要点：使用<code>dirname</code>获取文件所在目录，使用<code>pwd</code>获取文件完整路径，并作为云端文件路径。</p>
+<p>这是在本机上做的测试，利用<code>bpcs_uploader</code>脚本实现，只是进行简单的封装，自动完善云端文件路径。</p>
+
+<p>技术要点：使用<code>dirname</code>获取文件所在目录，使用<code>pwd</code>获取文件完整路径，并作为云端文件路径。</p>
 
 <!--more-->
 
@@ -133,8 +133,9 @@ cur_dir=$(cd &hellip;">
 
 <h3>本地文件夹上传脚本，命名ud</h3>
 
-<p><code>bpcs_uploader</code>脚本只能实现单个文件上传，用此脚本可以实现目录批量上传。
-技术要点：通过<code>find</code>命令输出目录下所有文件，用<code>xargs -t -n1</code>实现单个输出，从而可以遍历目录下所有文件，并作为参数逐次赋予脚本<code>uf</code>，通过不断调用脚本<code>uf</code>实现批量上传。</p>
+<p><code>bpcs_uploader</code>脚本只能实现单个文件上传，用此脚本可以实现目录批量上传。</p>
+
+<p>技术要点：通过<code>find</code>命令输出目录下所有文件，用<code>xargs -t -n1</code>实现单个输出，从而可以遍历目录下所有文件，并作为参数逐次赋予脚本<code>uf</code>，通过不断调用脚本<code>uf</code>实现批量上传。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
