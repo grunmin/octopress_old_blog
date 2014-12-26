@@ -82,6 +82,7 @@ $ ll -Z ~/  #查看家目录下各目录上下文
 然后，开启服务器个人主页权限
 ```
 # setsebool -P httpd_enable_homedirs on #-P选项使该值永久生效
+# setsebool -P httpd_read_user_content on
 ```
 到此个人目录可以使用，将代码放到~/www目录下吧^_^。
 
