@@ -229,7 +229,9 @@ etc/httpd/conf.d/userdir.conf 查看/etc/httpd/conf.modules.d &hellip;">
 <p>然后，开启服务器个人主页权限</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># setsebool -P httpd_enable_homedirs on #-P选项使该值永久生效</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># setsebool -P httpd_enable_homedirs on #-P选项使该值永久生效
+</span><span class='line'># setsebool -P httpd_read_user_content on</span></code></pre></td></tr></table></div></figure>
 
 
 <p>到此个人目录可以使用，将代码放到~/www目录下吧^_^。</p>

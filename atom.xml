@@ -4,7 +4,7 @@
   <title><![CDATA[郭润民的博客]]></title>
   <link href="http://grunmin.github.io/atom.xml" rel="self"/>
   <link href="http://grunmin.github.io/"/>
-  <updated>2014-12-26T16:49:21+08:00</updated>
+  <updated>2014-12-26T17:09:16+08:00</updated>
   <id>http://grunmin.github.io/</id>
   <author>
     <name><![CDATA[Grunmin]]></name>
@@ -1450,7 +1450,9 @@ Dropbox Uploader的数据传输是加密的，前面的那些设置并没有包�
 <p>然后，开启服务器个人主页权限</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># setsebool -P httpd_enable_homedirs on #-P选项使该值永久生效</span></code></pre></td></tr></table></div></figure>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># setsebool -P httpd_enable_homedirs on #-P选项使该值永久生效
+</span><span class='line'># setsebool -P httpd_read_user_content on</span></code></pre></td></tr></table></div></figure>
 
 
 <p>到此个人目录可以使用，将代码放到~/www目录下吧^_^。</p>
